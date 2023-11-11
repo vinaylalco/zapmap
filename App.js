@@ -10,6 +10,8 @@ import DrawerContent from './src/components/DrawerContent'
 import GlobalFeedContent from './src/components/GlobalFeedContent'
 import MapMarkers from './src/components/MapMarkers' 
 import tileLayer from "./src/components/tileLayer"
+import LocationReviewForm from "./src/components/LocationReviewForm"
+import LocationReviewList from "./src/components/LocationReviewList"
 import {CommonStyles} from './src/styles/CommonStyles'
 import {locationDetails,CurrentLocation} from './src/functions/mapFunctions'
 import { GetEvents, setRelayListArray, connectNDK } from "./src/functions/usefulFunctions"
@@ -23,7 +25,7 @@ import GeolocationSearch from './src/components/GeolocationSearch'
 import './src/styles/App.css'
 import backButton from './assets/backButton.svg'
 import GoToCurrentLocationButton from './src/components/GoToCurrentLocationButton'
-import btcYellow from "./src/styles/btcYellow.js";
+import btcYellow from "./src/styles/btcYellow.js"
 import {HomeScreenStyles} from './src/styles/HomeScreenStyles'
 
 const RelayList = setRelayListArray();
@@ -34,7 +36,7 @@ connectNDK(ndk)
 const Tab = createBottomTabNavigator();
 const MenuStack = createBottomTabNavigator();
 const mapstrpublickey = "a72863a4abfd79e340f736f3a6b967a0a0d992a6243d8edbebaead1f37586c4a"
-window.live = false 
+window.live = true 
 
 function HomeScreen({route, navigation}) {
     
@@ -50,7 +52,21 @@ function HomeScreen({route, navigation}) {
     const [map, setMap] = React.useState()
     const [thirdPartyLink, setThirdPartyLink] = React.useState(null)
     const [HasNoListings, setHasNoListings] = React.useState(null)
-    
+    const [GlobalFeed, setGlobalFeed] = React.useState(false)
+    const [GlobalButtonBck, setGlobalButtonBck] = React.useState('#1d1a1a')
+    const [LocalButtonBck, setLocalButtonBck] = React.useState(btcYellow['BTC'])
+
+    function PressedGlobalButton(){
+        setGlobalFeed(true)
+        setGlobalButtonBck(btcYellow['BTC'])
+        setLocalButtonBck('#1d1a1a')
+    }
+    function PressedLocalButton(){
+        setGlobalFeed(false)
+        setGlobalButtonBck('#1d1a1a')
+        setLocalButtonBck(btcYellow['BTC'])
+    }
+
     return (
         false ?
         <Text>Loading...</Text> :
@@ -124,19 +140,49 @@ function HomeScreen({route, navigation}) {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{backgroundColor: "#1d1a1a"}}
                 >   
-                    <DrawerContent 
-                        navigation={navigation}
-                        ndk={ndk}
-                        mapstrpublickey={mapstrpublickey}
-                        loadSite={loadSite}
-                        setLoadSite={setLoadSite}
-                        locations={locations}
-                        map={map}
-                        CurrentLat={CurrentLat}
-                        CurrentLng={CurrentLng}
-                        HasNoListings={HasNoListings}
-                        setHasNoListings={setHasNoListings}
-                    />
+                    <View style={[styles.feedControl]} >
+                        <Pressable onPress={PressedGlobalButton} style={[HomeScreenStyles.GlobalButton(GlobalButtonBck)]} 
+                        >
+                            <Text style={[CommonStyles.paragraphText]} >Global</Text>
+                        </Pressable>
+                        <Pressable onPress={PressedLocalButton} style={[HomeScreenStyles.LocalButton(LocalButtonBck)]}
+                        >
+                            <Text style={[CommonStyles.paragraphText]} >Local</Text>
+                        </Pressable>
+                    </View>
+
+                    {
+                        GlobalFeed ?
+                        <View style={{flexGrow: 1,backgroundColor: "#1d1a1a", paddingTop: '1em'}} >
+                            <GlobalFeedContent
+                                navigation={navigation}
+                                ndk={ndk}
+                                mapstrpublickey={mapstrpublickey}
+                                loadSite={loadSite}
+                                setLoadSite={setLoadSite}
+                                locations={locations}
+                                map={map}
+                                CurrentLat={CurrentLat}
+                                CurrentLng={CurrentLng}
+                                HasNoListings={HasNoListings}
+                                setHasNoListings={setHasNoListings}
+                            />
+                        </View>
+                         :
+                        <DrawerContent 
+                            navigation={navigation}
+                            ndk={ndk}
+                            mapstrpublickey={mapstrpublickey}
+                            loadSite={loadSite}
+                            setLoadSite={setLoadSite}
+                            locations={locations}
+                            map={map}
+                            CurrentLat={CurrentLat}
+                            CurrentLng={CurrentLng}
+                            HasNoListings={HasNoListings}
+                            setHasNoListings={setHasNoListings}
+                        />
+                    }
                     
                 </ScrollView>
             </Suspense>
@@ -165,6 +211,27 @@ function LocationScreen({ route, navigation }){
                     <Text style={[CommonStyles.paragraphText]} >
                         {route.params.params.tags.subject ? route.params.params.tags.subject : ''}
                     </Text>
+                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                        <LocationReviewForm 
+                            ndk={ndk}
+                            user={route.params.user}
+                            mapstrpublickey={mapstrpublickey}
+                            titleProp={route.params.params.title}
+                            latProp={route.params.params.lat}
+                            lngProp={route.params.params.lng}
+                        />
+                    </Suspense>
+
+                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                        <LocationReviewList
+                            ScrollId={route.params.params.ScrollId}
+                            mapstrpublickey={mapstrpublickey}
+                            ndk={ndk}
+                            navigation={navigation}
+                            lat={route.params.params.lat}
+                            lng={route.params.params.lng}
+                        />
+                    </Suspense>
                 </ScrollView>
             </ScrollView>
         </Suspense>

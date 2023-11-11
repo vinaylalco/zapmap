@@ -35,6 +35,8 @@ export default function GoToCurrentLocationButton({
             const overpassLocales = queryOverpass(
                         '[out:json];'+
                         '('+
+                            'node["amenity"~"cafe|restaurant|bar|pub"][name](around:'+radiusOSM+','+CurrentLat+', '+CurrentLng+');'+
+                            'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+CurrentLat+', '+CurrentLng+');'+
                             'node[name]["currency:XBT"="yes"](around:'+radius+','+CurrentLat+', '+CurrentLng+');'+
                         ')'+
                         ';out center;')

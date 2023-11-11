@@ -38,6 +38,8 @@ export default function GeolocationSearch({setLocations, setLoadSite, mapstrpubl
 		            const overpassLocales = queryOverpass(
                         '[out:json];'+
                         '('+
+							'node["amenity"~"cafe|restaurant|bar|pub"][name](around:'+radiusOSM+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
+                        	'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
                             'node[name]["currency:XBT"="yes"](around:'+radius+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
                         ')'+
                         ';out center;')
