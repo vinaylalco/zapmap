@@ -51,7 +51,7 @@ export default function MapMarkers({
                 const overpassLocales = queryOverpass(
                         '[out:json];'+
                         '('+
-                            'node["amenity"~"cafe|restaurant|bar|pub"][name](around:'+radiusOSM+','+lat+', '+lng+');'+
+                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radiusOSM+','+lat+', '+lng+');'+
                             'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+lat+', '+lng+');'+
                             'node[name]["currency:XBT"="yes"](around:'+radius+','+lat+', '+lng+');'+
                         ')'+
@@ -90,7 +90,7 @@ export default function MapMarkers({
                     const overpassLocales = queryOverpass(
                         '[out:json];'+
                         '('+
-                            'node["amenity"~"cafe|restaurant|bar|pub"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
                             'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
                             'node[name]["currency:XBT"="yes"](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
                         ')'+
