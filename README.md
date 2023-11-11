@@ -8,10 +8,10 @@ Clone repository into a local or development server using GIT eg git clone https
 
 # Run:
 
-# Local
+Local
 'expo start' in project root to run project locally. NB: Its based on Expo so you'll need an Expo environment set up locally to do this. Select 'Web' and Expo will pop up a browser to view the site.
 
-# On Server
+On Server
 
 Use 'expo build:web' in project root folder to create a build version of the project. Website files will then be available in 'web-build' folder. You can then upload these via FTP or SSH as you wish to your domain of choice.
 
