@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import {Text,View } from "react-native"
 import MapstrListingCard from "./MapstrListingCard.js"
-import {CommonStyles} from '../styles/CommonStyles.js'
 import { GetReviewEventsByLocation } from "../functions/usefulFunctions";
 
 // todo: hook rules 
@@ -55,7 +54,7 @@ export default function LocationReviewList({
         <View>
             {
                 reviewListLoading ? 
-                <Text style={CommonStyles.paragraphText}>Be the first to review this place!</Text> :
+                <Text>Be the first to review this place!</Text> :
                 SpecificReviews.map((card, index) => (
                     <MapstrListingCard
                         title={card.title}

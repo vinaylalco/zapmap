@@ -2,10 +2,8 @@ import React from "react";
 import {
     Text,
     View,
-    Pressable,
-    StyleSheet
-} from "react-native";
-import {CommonStyles} from '../styles/CommonStyles.js'
+    Pressable
+} from "react-native"
 import CopyToClipboard from "react-copy-to-clipboard";
 
 export default function ProfileAndLogout({UserStateSettings, setUserStateSettings, UserStateNecSettings, nsec}) {
@@ -17,16 +15,12 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
     const [CopyPrivateKeyHex, setCopyPrivateKeyHex] = React.useState("Copy Private Key (Hex)");
 
     return (
-        <View style={[CommonStyles.contentContainer]}>
-                <Text
-                    style={[CommonStyles.wrappedParagraphText]}
-                >
+        <View>
+                <Text>
                     You're logged in with Public Key (npub):
                 </Text>
 
-                <Text
-                    style={[CommonStyles.wrappedParagraphText]}
-                >
+                <Text>
                     {UserStateSettings}
                 </Text>
                 
@@ -37,9 +31,7 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
                             text={UserStateNecSettings}
                             onCopy={() => setCopyPrivateKeyHex("Copied")}
                     >
-                        <button
-                            style={CommonStyles.pressable}
-                        >
+                        <button>
                             {CopyPrivateKeyHex}
                         </button>
 
@@ -49,9 +41,7 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
                 <Pressable
                     onPress={handleLogout}
                 >
-                    <Text
-                        style={[CommonStyles.pressable]}
-                    >
+                    <Text>
                         Logout
                     </Text>
                 </Pressable>

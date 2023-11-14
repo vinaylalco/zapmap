@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import btcYellow from "../styles/btcYellow.js";
 import { Pressable, View, Text, Image, StyleSheet } from "react-native";
 import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../functions/usefulFunctions";
-import {locationDetails} from "../functions/mapFunctions";
-import { CommonStyles} from '../styles/CommonStyles.js'
+import {locationDetails} from "../functions/mapFunctions"
 import locationPin from '../../assets/locationPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
 
@@ -45,7 +43,6 @@ export default function MapstrListingCard({
                 onPress={onClick}
             >
                 <Image
-                    style={[CommonStyles.SVGImageInListing]}
                     source={locationPin}
                 />
             </Pressable>
@@ -90,46 +87,44 @@ export default function MapstrListingCard({
     return (
 
         <View
-            style={ !showLocationScreenButton ? styles.listingCardInListing(mediaQueryWidth, mediaQueryMarginCard) : styles.listingCard(mediaQueryWidth, mediaQueryMarginCard) }
             id={id}
             className={ScrollId}
         >
             {
                 type === "node" ?
-                    <View style={[styles.profileAreaWrapper]}>
-                        <View style={[styles.profileInnerWrapper]}>
-                            <Text style={[styles.profileParagraph]} >
-                                <Text style={[CommonStyles.bold]}>
+                    <View>
+                        <View >
+                            <Text >
+                                <Text>
                                     {title}
                                 </Text>
                             </Text>
                             {
                                 tags['currency:XBT'] === "yes" ?
-                                <Text style={[styles.acceptBTC]} >(Accepts BTC)</Text> :
+                                <Text>(Accepts BTC)</Text> :
                                 null
                             }
                         </View>
                     </View>
                 :
-                    <View style={[styles.profileAreaWrapper]}>
+                    <View>
                         <Image
-                            style={styles.profileImage}
                             source={userProfileImage}
                         />
-                        <View style={[styles.profileInnerWrapper]}>
-                            <Text style={[styles.profileParagraph]} >
-                                <Text style={[CommonStyles.bold]}>{userProfileDisplayName}</Text> was at <Text style={[CommonStyles.bold]}>{title}</Text>
+                        <View>
+                            <Text>
+                                <Text>{userProfileDisplayName}</Text> was at <Text>{title}</Text>
                             </Text>
-                            <Text style={[styles.profileSubHeading]} >{formatedDate}</Text>
+                            <Text>{formatedDate}</Text>
                         </View>
                     </View>
             }
 
-            <Text style={[styles.formatNoteContent]} >
+            <Text>
                 { locationDetails(content, tags.subject, tags.amenity) }
             </Text>
             
-            <View style={[styles.iconWrapper]}>
+            <View>
                 
                 {
                     type !== "node" ?
@@ -145,7 +140,6 @@ export default function MapstrListingCard({
                             }
                         >
                             <Image
-                                style={[CommonStyles.SVGImageInListing]}
                                 source={lightningPayment}
                             />
                         </Pressable> 
@@ -168,7 +162,6 @@ export default function MapstrListingCard({
 
             {   showLocationScreenButton ?
                     <Pressable
-                        style={[styles.listingCardPressable('100%')]}
                         onPress={
                             () =>   navigation.navigate('LocationScreen', {
                                         screen: 'LocationScreen',
@@ -186,7 +179,7 @@ export default function MapstrListingCard({
                                     })
                         }
                     >
-                        <Text style={[styles.profileParagraph]} >{title}</Text>
+                        <Text>{title}</Text>
                     </Pressable>
                 :
                     null
@@ -195,96 +188,3 @@ export default function MapstrListingCard({
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    iconWrapper:{
-        flexDirection:'row-reverse',
-    },
-    icon:{
-        // paddingRight: '1em',
-        paddingLeft: '2em'
-    },
-    listingCardInListing: (mediaQueryWidth,mediaQueryMarginCard) => ({
-        boxShadow: "none",
-        backgroundColor: "#2a2424",
-        color: "#fff",
-        padding: '1em',
-        marginLeft: '1em',
-        marginRight: '1em',
-        marginBottom: '1em'
-    }),
-    listingCard: (mediaQueryWidth,mediaQueryMarginCard) => ({
-        boxShadow: "none",
-        backgroundColor: "#2a2424",
-        color: "#fff",
-        padding: '1em',
-        marginLeft: '1em',
-        marginRight: '1em',
-        marginBottom: '1em'
-    }),
-    profileAreaWrapper:{
-        flexDirection:'row', 
-        alignItems:'center'
-    },
-    profileInnerWrapper:{
-        flexDirection:'col', 
-        alignItems:'left'
-    },
-    profileImage:{
-        width: 50,
-        height: 50,
-        borderRadius: '50%',
-        marginRight: '1em'
-    },
-    formatNoteContent:{
-        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-        fontSize: "1em",
-        color: "#fff",
-        textAlign: 'left',
-        marginTop: '1em',
-        marginBottom: '1em'
-    },
-    profileParagraph:{
-        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-        fontSize: "1em",
-        color: "#fff",
-        textAlign: 'left'
-    },
-    profileSubHeading:{
-        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-        fontSize: "0.618em",
-        color: "#fff",
-        marginBottom: '1em',
-        textAlign: 'left'
-    },
-    listingCardPressable: mediaQueryWidth => ({
-        width: mediaQueryWidth,
-        color: "#fff",
-        padding: '1em',
-        borderWidth: 1,
-        borderColor: '#fff',
-        textAlign: "center",
-        backgroundColor: "#1d1a1a",
-        fontFamily:
-            '"Roboto","Helvetica","Arial",sans-serif',
-        fontWeight: 600,
-        fontSize: "1em",
-        letterSpacing: "0.01681em",
-        marginTop: '1em'
-    }),
-    navIcon: {
-        color: '#fff',
-        fontSize: '2em',
-        paddingLeft: '1em',
-
-    },
-    btcIcon: {
-        color: btcYellow['BTC'],
-        fontSize: '2em',
-        paddingLeft: '1em',
-    },
-    acceptBTC:{
-        color: btcYellow['BTC'],
-        fontWeight: 600
-    }
-})

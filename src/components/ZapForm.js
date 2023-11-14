@@ -9,8 +9,7 @@ import {
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { generateInvoice } from "../functions/LightningFunctions";
-import { CommonStyles } from '../styles/CommonStyles.js'
+import { generateInvoice } from "../functions/LightningFunctions"
  
 export default function ZapForm({
     id,
@@ -49,7 +48,6 @@ export default function ZapForm({
             return (
                 <>
                     <Text
-                        style={[CommonStyles.paragraphText]}
                         id="transition-modal-description"
                         sx={{ mt: 2 }}
                     >
@@ -60,9 +58,7 @@ export default function ZapForm({
                         text={lnInvoice}
                         onCopy={() => setLnInvoiceCopyText("Copied")}
                     >
-                        <button
-                            style={CommonStyles.pressable}
-                        >
+                        <button>
                             {lnInvoiceCopyText}
                         </button>
                     </CopyToClipboard>
@@ -71,9 +67,7 @@ export default function ZapForm({
         } else {
             return (
                 <>
-                    <Text
-                        style={[CommonStyles.paragraphText]}
-                        id="transition-modal-description"
+                    <Text id="transition-modal-description"
                         sx={{ mt: 2 }}
                     >
                         {lnInvoice}
@@ -84,10 +78,10 @@ export default function ZapForm({
     }
 
     return (
-        <ScrollView contentContainerStyle={[CommonStyles.contentContainer]} >
+        <ScrollView>
             <ScrollView>
-                <Text style={CommonStyles.paragraphText}>Send BTC to the user who created this review or location directly.</Text>
-                <Text style={CommonStyles.paragraphText}>Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
+                <Text>Send BTC to the user who created this review or location directly.</Text>
+                <Text>Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
                 <Formik
                     validationSchema={createValidationSchema}
                     initialValues={{
@@ -121,7 +115,7 @@ export default function ZapForm({
                         <View>
                             <TextInput
                                 keyboardType="numeric"
-                                style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                                // style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                                 name="amount"
                                 placeholder="Amount (Sats)"
                                 value={values.amount}
@@ -130,7 +124,6 @@ export default function ZapForm({
                             />
 
                             <TextInput
-                                style={[CommonStyles.inputField]}
                                 multiline="true"
                                 rows={5}
                                 id="note"
@@ -142,9 +135,7 @@ export default function ZapForm({
                             />
 
                             <Pressable onPress={handleSubmit} disabled={!isValid}>
-                                <Text
-                                    style={[CommonStyles.pressable]}
-                                >
+                                <Text>
                                     Get Lightning Invoice
                                 </Text>
                             </Pressable>

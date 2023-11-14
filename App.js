@@ -12,7 +12,6 @@ import MapMarkers from './src/components/MapMarkers'
 import tileLayer from "./src/components/tileLayer"
 import LocationReviewForm from "./src/components/LocationReviewForm"
 import LocationReviewList from "./src/components/LocationReviewList"
-import {CommonStyles} from './src/styles/CommonStyles'
 import {locationDetails,CurrentLocation} from './src/functions/mapFunctions'
 import { GetEvents, setRelayListArray, connectNDK } from "./src/functions/usefulFunctions"
 import NDK from "@nostr-dev-kit/ndk"
@@ -22,11 +21,8 @@ import CreateLocationForm from './src/components/CreateLocationForm'
 import RelayManagement from './src/components/RelayManagement'
 import UserProfile from './src/components/UserProfile'
 import GeolocationSearch from './src/components/GeolocationSearch'
-import './src/styles/App.css'
 import backButton from './assets/backButton.svg'
 import GoToCurrentLocationButton from './src/components/GoToCurrentLocationButton'
-import btcYellow from "./src/styles/btcYellow.js"
-import {HomeScreenStyles} from './src/styles/HomeScreenStyles'
 
 const RelayList = setRelayListArray();
 const ndk = new NDK({
@@ -54,24 +50,24 @@ function HomeScreen({route, navigation}) {
     const [HasNoListings, setHasNoListings] = React.useState(null)
     const [GlobalFeed, setGlobalFeed] = React.useState(false)
     const [GlobalButtonBck, setGlobalButtonBck] = React.useState('#1d1a1a')
-    const [LocalButtonBck, setLocalButtonBck] = React.useState(btcYellow['BTC'])
+    const [LocalButtonBck, setLocalButtonBck] = React.useState(null)
 
     function PressedGlobalButton(){
         setGlobalFeed(true)
-        setGlobalButtonBck(btcYellow['BTC'])
+        setGlobalButtonBck(null)
         setLocalButtonBck('#1d1a1a')
     }
     function PressedLocalButton(){
         setGlobalFeed(false)
         setGlobalButtonBck('#1d1a1a')
-        setLocalButtonBck(btcYellow['BTC'])
+        setLocalButtonBck(null)
     }
 
     return (
         false ?
         <Text>Loading...</Text> :
         <>
-            <View style={[styles.mapScreenContainer]}>
+            <View>
                 <MapContainer 
                     center={[MapLatitude,MapLongitude]} 
                     zoom={zoom} 
@@ -82,10 +78,10 @@ function HomeScreen({route, navigation}) {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <CurrentLocation CurrentLat={CurrentLat} CurrentLng={CurrentLng} />
                     </Suspense>
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <MapMarkers
                             setThirdPartyLink={setThirdPartyLink}
                             thirdPartyLink={thirdPartyLink}
@@ -105,7 +101,7 @@ function HomeScreen({route, navigation}) {
                             setCurrentLng={setCurrentLng}
                         />
                     </Suspense>
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <GeolocationSearch 
                             setLocations={setLocations} 
                             setLoadSite={setLoadSite} 
@@ -116,7 +112,7 @@ function HomeScreen({route, navigation}) {
                         />
                     </Suspense>
 
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <GoToCurrentLocationButton 
                             CurrentLat={CurrentLat} 
                             CurrentLng={CurrentLng}
@@ -134,26 +130,23 @@ function HomeScreen({route, navigation}) {
                 </MapContainer>
             </View>
 
-            <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+            <Suspense fallback={<Text>Loading...</Text>}>
 
                 <ScrollView 
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{backgroundColor: "#1d1a1a"}}
                 >   
-                    <View style={[styles.feedControl]} >
-                        <Pressable onPress={PressedGlobalButton} style={[HomeScreenStyles.GlobalButton(GlobalButtonBck)]} 
-                        >
-                            <Text style={[CommonStyles.paragraphText]} >Global</Text>
+                    <View>
+                        <Pressable onPress={PressedGlobalButton}>
+                            <Text >Global</Text>
                         </Pressable>
-                        <Pressable onPress={PressedLocalButton} style={[HomeScreenStyles.LocalButton(LocalButtonBck)]}
-                        >
-                            <Text style={[CommonStyles.paragraphText]} >Local</Text>
+                        <Pressable onPress={PressedLocalButton}>
+                            <Text>Local</Text>
                         </Pressable>
                     </View>
 
                     {
                         GlobalFeed ?
-                        <View style={{flexGrow: 1,backgroundColor: "#1d1a1a", paddingTop: '1em'}} >
+                        <View>
                             <GlobalFeedContent
                                 navigation={navigation}
                                 ndk={ndk}
@@ -198,20 +191,20 @@ function LocationScreen({ route, navigation }){
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
 
     return(
-        <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.LocationListingContainer]} >
+        <Suspense fallback={<Text>Loading...</Text>}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.LocationListingInner]} >
-                    <Text style={[CommonStyles.formHeading]} >
+                <ScrollView showsVerticalScrollIndicator={false} >
+                    <Text>
                         {route.params.params.title} 
                     </Text>
-                    <Text style={[CommonStyles.paragraphText]} >
+                    <Text>
                         {locationDetails(route.params.params.content, route.params.params.tags.subject, route.params.params.tags.amenity)}
                     </Text>
-                    <Text style={[CommonStyles.paragraphText]} >
+                    <Text>
                         {route.params.params.tags.subject ? route.params.params.tags.subject : ''}
                     </Text>
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <LocationReviewForm 
                             ndk={ndk}
                             user={route.params.user}
@@ -222,7 +215,7 @@ function LocationScreen({ route, navigation }){
                         />
                     </Suspense>
 
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                    <Suspense fallback={<Text>Loading...</Text>}>
                         <LocationReviewList
                             ScrollId={route.params.params.ScrollId}
                             mapstrpublickey={mapstrpublickey}
@@ -246,7 +239,7 @@ function ZapFormScreen( { route, navigation } ){
     const [nsecStateZapForm, setnnsecStateZapForm] = React.useState(nsecZapForm)
 
     return(
-        <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+        <Suspense fallback={<Text>Loading...</Text>}>
             <ZapForm
                 id={route.params.params.id}
                 npub={route.params.params.npub}
@@ -266,7 +259,7 @@ function SettingsScreen({route, navigation}) {
 
     const Menu = () => {
         return (
-            <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+            <Suspense fallback={<Text>Loading...</Text>}>
                 <MenuButtons 
                     navigation={navigation}
                     UserStateSettings={UserStateSettings}
@@ -279,15 +272,13 @@ function SettingsScreen({route, navigation}) {
 
         return(
             <>
-                <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                <Suspense fallback={<Text>Loading...</Text>}>
                     <Pressable
                         onPress={() => navigation.navigate('Menu', {
                                             screen: 'SettingsScreen'
                                         })}
-                        style={[CommonStyles.backButton]}
                     >
                         <Image
-                            style={[CommonStyles.SVGImage]}
                             source={backButton}
                         />
                     </Pressable>
@@ -308,16 +299,14 @@ function SettingsScreen({route, navigation}) {
 
         return(
             
-            <ScrollView contentContainerStyle={[CommonStyles.contentContainer]} showsVerticalScrollIndicator={false} >
-                <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+            <ScrollView showsVerticalScrollIndicator={false} >
+                <Suspense fallback={<Text>Loading...</Text>}>
                     <Pressable
                         onPress={() => navigation.navigate('Menu', {
                                             screen: 'SettingsScreen'
                                         })}
-                        style={[CommonStyles.backButton]}
                     >
                         <Image
-                            style={[CommonStyles.SVGImage]}
                             source={backButton}
                         />
                     </Pressable>
@@ -339,15 +328,13 @@ function SettingsScreen({route, navigation}) {
     const MapstrRelays = () => {
         return(
             <>
-                <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
+                <Suspense fallback={<Text>Loading...</Text>}>
                     <Pressable
                         onPress={() => navigation.navigate('Menu', {
                                             screen: 'SettingsScreen'
                                         })}
-                        style={[CommonStyles.backButton]}
                     >
                         <Image
-                            style={[CommonStyles.SVGImage]}
                             source={backButton}
                         />
                     </Pressable>
@@ -432,26 +419,5 @@ const styles = StyleSheet.create({
     mapWrapper: {
         height: "50vh", 
         width: "100%"
-    },
-    drawerWrapper: {
-        flex: 1,
-        background: "#1d1a1a"
-    },
-    LocationListingContainer: {
-        flex: 1,
-        backgroundColor: "#1d1a1a",
-        padding: '1em',
-        flexWrap: "flex-wrap",
-        justifyContent: "center"
-    },
-    LocationListingInner: {
-        width:'100%'
-    },
-    feedControl:{
-        paddingTop: '1em', 
-        paddingLeft: '1em', 
-        paddingRight: '1em', 
-        flexDirection:"row", 
-        justifyContent: "space-evenly"
     }
 })

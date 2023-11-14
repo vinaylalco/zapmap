@@ -3,8 +3,7 @@ import {
     View,
     Pressable,
     Text
-} from "react-native";
-import {CommonStyles} from '../styles/CommonStyles.js'
+} from "react-native"
 import NDK, { NDKNip07Signer } from "@nostr-dev-kit/ndk"
 
 export default function LoginWithExtension({ setUserStateSettings, setUserStateNecSettings }) { 
@@ -27,18 +26,18 @@ export default function LoginWithExtension({ setUserStateSettings, setUserStateN
 
     return (
         <View>
-            <Text style={[CommonStyles.formHeading]} >
+            <Text>
                 Login With Extension
             </Text>
 
-            <Text style={[CommonStyles.paragraphText]} >
-                <Text style={[CommonStyles.bold]} >NB:</Text> Logging in with a browser extension is the safest way to login to ZapMap or any NOSTR client. If you don't already have an extension this option won't work for you yet. Install Alby or Nostr2x before attempting to login with this method.
+            <Text>
+                <Text>NB:</Text> Logging in with a browser extension is the safest way to login to ZapMap or any NOSTR client. If you don't already have an extension this option won't work for you yet. Install Alby or Nostr2x before attempting to login with this method.
             </Text>
 
             <Pressable
                 onPress={loginWithBrowserExtension}
             >
-                <Text style={[CommonStyles.pressable]} >
+                <Text>
                     Login with Extension
                 </Text>
             </Pressable>

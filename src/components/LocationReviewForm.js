@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Pressable, ScrollView, TextInput, StyleSheet } from "react-native";
+import { Text, View, Pressable, ScrollView, TextInput } from "react-native";
 import { Formik, Field, Form } from "formik";
 import { createReviewEvent } from "../functions/usefulFunctions.js";
 import NDK, {
@@ -7,9 +7,7 @@ import NDK, {
     NDKNip07Signer,
     NDKEvent,
 } from "@nostr-dev-kit/ndk";
-import * as yup from "yup";
-import btcYellow from "../styles/btcYellow.js";
-import {CommonStyles} from '../styles/CommonStyles.js'
+import * as yup from "yup"
 
 function LocationReviewForm({
     ndk,
@@ -22,9 +20,7 @@ function LocationReviewForm({
 }) {
     
     const [reviewFormMessage, setReviewFormMessage] = React.useState(null);
-    const [reviewFormMessageColor, setReviewFormMessageColor] = React.useState(
-        btcYellow["BTC"]
-    );
+    const [reviewFormMessageColor, setReviewFormMessageColor] = React.useState(null);
 
     let mapRef = React.useRef();
     const validationSchema = yup.object().shape({
@@ -35,9 +31,9 @@ function LocationReviewForm({
     });
 
     return (    
-        <ScrollView contentContainerStyle={[styles.writeReviewContainer]} >
+        <ScrollView >
 
-            <Text style={[CommonStyles.formHeading]}>Write a Review</Text>
+            <Text>Write a Review</Text>
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{
@@ -82,7 +78,7 @@ function LocationReviewForm({
                     <View>
 
                         <TextInput
-                            style={ errors.content === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            // style={ errors.content === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             multiline="true"
                             rows={5}
                             id="content"
@@ -94,16 +90,12 @@ function LocationReviewForm({
                         />
 
                         <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Create
                             </Text>
                         </Pressable>
 
-                        <Text
-                            style={[CommonStyles.userMessage(reviewFormMessageColor)]}
-                        >
+                        <Text>
                             {reviewFormMessage}
                         </Text>
                     </View>
@@ -114,9 +106,3 @@ function LocationReviewForm({
 }
 
 export default LocationReviewForm;
-
-const styles = StyleSheet.create({
-        writeReviewContainer:{
-        paddingTop: '1em'
-    }
-})

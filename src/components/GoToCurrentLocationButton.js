@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { Pressable,Image } from "react-native";
 import {GetEvents} from '../functions/usefulFunctions'
 const queryOverpass = require('@derhuerst/query-overpass')
-import {CommonStyles} from '../styles/CommonStyles'
 import goToLocation from '../../assets/goToLocation.svg'
 import {useMap,useMapEvents} from "react-leaflet"
 
@@ -66,7 +65,6 @@ export default function GoToCurrentLocationButton({
                     onPress={onClick}
                 >
                 <Image
-                    style={[CommonStyles.SVGImage]}
                     source={goToLocation}
                 />
                 </Pressable>

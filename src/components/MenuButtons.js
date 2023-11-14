@@ -3,48 +3,39 @@ import {
     Text,
     View,
     Pressable
-} from "react-native";
-import {CommonStyles} from '../styles/CommonStyles.js'
+} from "react-native"
 
 export default function MenuButtons({navigation, UserStateSettings}){
 
         return(
             UserStateSettings ?
-                <View style={[CommonStyles.contentContainer]}>
+                <View>
                     <Pressable
                         onPress={() => navigation.navigate('Create Location')}
                     >
-                        <Text
-                            style={[CommonStyles.pressable]}
-                        >
+                        <Text>
                             Create a new location</Text>
                     </Pressable>
                     <Pressable
                         onPress={() => navigation.navigate('User Profile')
                                 }
                     >
-                        <Text
-                            style={[CommonStyles.pressable]}
-                        >
+                        <Text>
                             Login / Profile</Text>
                     </Pressable>
                     <Pressable
                         onPress={() => navigation.navigate('Relays')}
                     >
-                        <Text
-                            style={[CommonStyles.pressable]}
-                        >
+                        <Text>
                             Manage Relays</Text>
                     </Pressable>
                 </View>
             :
-                <View style={[CommonStyles.contentContainer]}>
+                <View>
                     <Pressable
                         onPress={() => navigation.navigate('User Profile')}
                     >
-                        <Text
-                            style={[CommonStyles.pressable]}
-                        >
+                        <Text>
                             Login / Profile</Text>
                     </Pressable>
                 </View>

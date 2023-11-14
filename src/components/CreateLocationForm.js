@@ -10,9 +10,7 @@ import { Formik, Field, Form } from "formik"
 import { createEventMarker } from "../functions/usefulFunctions.js"
 import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
-import btcYellow from "../styles/btcYellow.js"
 import { check_lat_lon } from "../functions/usefulFunctions"
-import {CommonStyles} from '../styles/CommonStyles.js'
 import Geolocation from "@react-native-community/geolocation"
 
 function CreateLocationForm({
@@ -27,9 +25,7 @@ function CreateLocationForm({
     nsec
 }) {
     const [userMessage, setUserMessage] = React.useState(null);
-    const [userMessageColor, setUserMessageColor] = React.useState(
-        btcYellow["BTC"]
-    );
+    const [userMessageColor, setUserMessageColor] = React.useState(null);
 
     let mapRef = React.useRef();
     const [dynamicCoords, setDynamicCoords] = React.useState('');
@@ -70,10 +66,8 @@ function CreateLocationForm({
         setDynamicCoords('')
     }
 
-    // <Field type="checkbox" name="UseCurrentCoordsField" />
-
     return (
-        <ScrollView contentContainerStyle={[CommonStyles.contentContainer]}>
+        <ScrollView>
             <Formik
                 enableReinitialize={true}
                 validationSchema={createValidationSchema}
@@ -119,7 +113,7 @@ function CreateLocationForm({
                 }) => (
                     <View>
                         <TextInput
-                            style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            // style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="title"
                             placeholder="Name of the location"
                             value={values.title}
@@ -131,7 +125,6 @@ function CreateLocationForm({
                         />
 
                         <select
-                            style={ errors.category === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="category"
                             placeholder="Category of the location"
                             value={values.category}
@@ -174,7 +167,6 @@ function CreateLocationForm({
                         </select>
 
                         <TextInput
-                            style={ errors.content === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             multiline="true"
                             rows={5}
                             id="content"
@@ -189,23 +181,18 @@ function CreateLocationForm({
                         />
 
                         <Pressable onPress={useCurrentCoords}>
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Use Current Coordinates
                             </Text>
                         </Pressable>
 
                         <Pressable onPress={resetCoords}>
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Reset Coordinates
                             </Text>
                         </Pressable>
 
                         <TextInput
-                            style={ errors.coords === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             id="coords"
                             name="coords"
                             placeholder={ FindingCoords ? "Wait please..." : "Coords eg, 16.12345,104.12345" }
@@ -218,16 +205,12 @@ function CreateLocationForm({
                         />
 
                         <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Create
                             </Text>
                         </Pressable>
 
-                        <Text
-                            style={[CommonStyles.userMessage(userMessageColor)]}
-                        >
+                        <Text>
                             {userMessage}
                         </Text>
                     </View>

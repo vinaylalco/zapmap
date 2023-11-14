@@ -5,16 +5,13 @@ import {
     Pressable,
     TextInput,
     FlatList,
-    ScrollView,
-    StyleSheet
+    ScrollView
 } from "react-native";
 
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import NDK from "@nostr-dev-kit/ndk";
 import {addRelay, removeRelay} from '../functions/usefulFunctions'
-import {CommonStyles} from '../styles/CommonStyles.js'
-import btcYellow from "../styles/btcYellow.js";
 
 async function connectNDK(ndk){
     return await ndk.connect();
@@ -27,11 +24,10 @@ export default function RelayManagement({ RelayList }){
     type ItemProps = {title: string};
     const Item = ({title}: ItemProps) => (
         
-        <View style={[styles.relayItem]}>
-            <Text style={[styles.relayList]}>{title}</Text>
+        <View>
+            <Text>{title}</Text>
             <Text 
                 onPress={ () => removeRelay(title, RelayListState, setRelayListState) }
-                style={[styles.relayRemove]}
             >
                 Remove
             </Text>
@@ -53,10 +49,9 @@ export default function RelayManagement({ RelayList }){
     });
  
     return(
-        <ScrollView contentContainerStyle={[CommonStyles.contentContainer]}>
+        <ScrollView>
 
             <FlatList
-                style={[styles.relayList]} 
                 data={RelayListState}
                 renderItem={({item}) => <Item title={item} />}
                 keyExtractor={item => Math.random()}
@@ -82,7 +77,7 @@ export default function RelayManagement({ RelayList }){
                 }) => (
                     <View>
                         <TextInput
-                            style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            // style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="newRelayName"
                             placeholder="URL eg wss://relay.address"
                             value={values.newRelayName}
@@ -91,9 +86,7 @@ export default function RelayManagement({ RelayList }){
                         />
 
                         <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Add New Relay
                             </Text>
                         </Pressable>
@@ -103,29 +96,3 @@ export default function RelayManagement({ RelayList }){
         </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    relayItem: {
-        textAlign: 'center',
-        padding:'1em'
-    },
-    relayList: {
-        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-        fontWeight: 600,
-        fontSize: "1em",
-        letterSpacing: "0.01681em",
-        color: '#fff',
-        display: 'inline-block',
-        textAlign: 'center',
-        flexGrow: 0
-    },
-    relayRemove: {
-        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-        fontWeight: 600,
-        fontSize: "1em",
-        letterSpacing: "0.01681em",
-        color: btcYellow['BTC'],
-        display: 'inline-block',
-        textAlign: 'center'
-    }
-})

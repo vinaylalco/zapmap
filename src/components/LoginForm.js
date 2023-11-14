@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import {getPublicKey} from "nostr-tools";
 import {
-    StyleSheet,
     Text,
     View,
     Pressable,
@@ -10,8 +9,7 @@ import {
 } from "react-native";
 
 import NDK from "@nostr-dev-kit/ndk";
-import * as yup from "yup";
-import {CommonStyles} from '../styles/CommonStyles.js'
+import * as yup from "yup"
 
 function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
 
@@ -64,14 +62,12 @@ function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
                     isValid,
                 }) => (
                     <>
-                        <Text
-                            style={[CommonStyles.formHeading]}
-                        >
+                        <Text>
                             Login With Private Key
                         </Text>
                         
                         <TextInput
-                            style={ errors.privateKey === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            // style={ errors.privateKey === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="privateKey"
                             placeholder="Private Key HEX"
                             value={values.privateKey}
@@ -83,9 +79,7 @@ function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
                             onPress={handleSubmit}
                             disabled={!isValid}
                         >
-                            <Text
-                                style={[CommonStyles.pressable]}
-                            >
+                            <Text>
                                 Login
                             </Text>
                         </Pressable>

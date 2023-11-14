@@ -3,8 +3,7 @@ import { View, Pressable, Text, ScrollView, ScrollIntoView, FlatList } from "rea
 import LoginForm from "./LoginForm";
 import LoginWithExtension from "./LoginWithExtension";
 import CreateNewAccount from "./CreateNewAccount";
-import ProfileAndLogout from "./ProfileAndLogout.js";
-import {CommonStyles} from '../styles/CommonStyles.js'
+import ProfileAndLogout from "./ProfileAndLogout.js"
 
 export default function UserProfile({ 
     UserStateSettings, 
@@ -23,7 +22,7 @@ export default function UserProfile({
     if (UserStateSettings) {
         
         return (
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[CommonStyles.contentContainer]}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <ProfileAndLogout 
                     UserStateSettings={UserStateSettings}
                     setUserStateSettings={setUserStateSettings}
@@ -37,8 +36,8 @@ export default function UserProfile({
 
         return (
             <ScrollView showsVerticalScrollIndicator={false} >
-                <Text style={CommonStyles.paragraphText} >
-                    What does ZapMap do with your data? <Text onClick={scrollToDataPolicy} style={CommonStyles.link} >Read before logging in.</Text>
+                <Text >
+                    What does ZapMap do with your data? <Text onClick={scrollToDataPolicy} >Read before logging in.</Text>
                 </Text>
                 <LoginWithExtension 
                     setUserStateSettings={setUserStateSettings}
@@ -54,7 +53,7 @@ export default function UserProfile({
                     setUserStateSettings={setUserStateSettings}
                 />
 
-                <Text ref={dataPolicy} style={CommonStyles.formHeading} >
+                <Text ref={dataPolicy} >
                     What do does ZapMap with location data?
                 </Text>
 
@@ -66,15 +65,14 @@ export default function UserProfile({
                         "3. While NOSTR can be used anonymously if you are concerned with associating location data with your public and private keys then ZapMap is potentially not for you. One way around this is to create a new and different set of keys that you use only with ZapMap and not with any of your other sets of keys used with other NOSTR clients.",
                         "4. Your public key (npub) is also saved to the NOSTR note for any new location or review you make. Your private key (nSec) is not saved to these notes. See more below."
                     ]}
-                    renderItem={({item, index}) => <Text key={index} style={CommonStyles.paragraphText} >{item}</Text>}
+                    renderItem={({item, index}) => <Text key={index} >{item}</Text>}
                 />
 
-                <Text style={CommonStyles.formHeading} >
+                <Text >
                     What does ZapMap do with your keys?
                 </Text>
 
-                <Text
-                    style={CommonStyles.paragraphText}>
+                <Text>
                     Best Practice login procedure with any NOSTR client, for eg ZapMap, 
                     is to login with a Broswer Extension (like Alby or Nos2x). These extensions 
                     mean that your public and private keys are not required to be saved to local 
@@ -84,8 +82,7 @@ export default function UserProfile({
                     and login using that method.
                 </Text>
 
-                <Text
-                    style={CommonStyles.paragraphText}>
+                <Text>
                     Public Key: Your Public Key (nPub) is, as stated above, saved to each new 
                     location and review note (event) created via ZapMap. This is how you are 
                     able to 'own' them and receive Zaps for your efforts. If you login with your 
@@ -96,8 +93,7 @@ export default function UserProfile({
                     key or you create a new account.
                 </Text>
 
-                <Text
-                    style={CommonStyles.paragraphText}>
+                <Text>
                     Private key: Your Private Key (nSec) is treated in a similar way as your 
                     Public Key except it IS NOT saved to the note (event) when you create a new 
                     location or review. It IS saved to local storage if you login with your 
