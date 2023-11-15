@@ -8,7 +8,7 @@ import SettingsTabBar from './src/components/SettingsTabBar'
 import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
 import DrawerContent from './src/components/DrawerContent'
 import GlobalFeedContent from './src/components/GlobalFeedContent'
-import MapMarkers from './src/components/MapMarkers' 
+import MapMarkers from './screens/Home/components/MapMarkers' 
 import tileLayer from "./src/components/tileLayer"
 import LocationReviewForm from "./src/components/LocationReviewForm"
 import LocationReviewList from "./src/components/LocationReviewList"
@@ -20,7 +20,7 @@ import MenuButtons from './src/components/MenuButtons'
 import CreateLocationForm from './src/components/CreateLocationForm'
 import RelayManagement from './src/components/RelayManagement'
 import UserProfile from './src/components/UserProfile'
-import GeolocationSearch from './src/components/GeolocationSearch'
+import GeolocationSearch from './screens/Home/components/GeolocationSearch'
 import backButton from './assets/backButton.svg'
 import GoToCurrentLocationButton from './src/components/GoToCurrentLocationButton'
 
@@ -384,11 +384,12 @@ function SettingsScreen({route, navigation}) {
     );
 }
 
+//  tabBar={props => <TabBar {...props} />}
 export default function App() {
 
     return (
         <NavigationContainer>
-            <Tab.Navigator tabBar={props => <TabBar {...props} />} >
+            <Tab.Navigator >
                 <Tab.Screen 
                     name="Home" 
                     component={HomeScreen}

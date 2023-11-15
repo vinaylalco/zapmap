@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { Marker,Circle,useMap,useMapEvents } from "react-leaflet";
-import {preparelocationUniqueIdentifier} from '../functions/usefulFunctions'
+import {preparelocationUniqueIdentifier, GetEvents} from '../../../src/functions/usefulFunctions'
 import Geohash from "latlon-geohash";
 const queryOverpass = require('@derhuerst/query-overpass')
-import { markerActions, Icon } from "../functions/MapFunctions.js";
+import { markerActions, Icon } from "../../../src/functions/MapFunctions.js";
 import Geolocation from "@react-native-community/geolocation"
-import { GetEvents } from "../functions/usefulFunctions"
-
+ 
 export default function MapMarkers({ 
     setThirdPartyLink,
     thirdPartyLink, 
