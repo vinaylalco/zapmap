@@ -182,7 +182,7 @@ function SettingsScreen({route, navigation}) {
                         />
                     </Pressable>
                     <RelayManagement 
-                        RelayList={RelayList} 
+                        RelayList={setRelayListArray} 
                     />
                 </Suspense>
             </>
