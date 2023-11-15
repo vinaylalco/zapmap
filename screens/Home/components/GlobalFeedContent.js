@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import {View, Text, ScrollView} from "react-native";
+import {View, StyleSheet, Text, ScrollView} from "react-native";
 import MapstrListingCard from "./MapstrListingCard.js";
-import { preparelocationUniqueIdentifier,GetGlobalEvents } from "../../../src/functions/usefulFunctions.js";
+import { preparelocationUniqueIdentifier, GetGlobalEvents } from "../../../src/functions/usefulFunctions.js";
 import Geohash from "latlon-geohash";
 import LoadingText from "./LoadingText"
 
@@ -38,7 +38,9 @@ export default function GlobalFeedContent({
     });
 
     return(
-		<View>	
+		<View
+			style={{flexGrow: 1,backgroundColor: "#1d1a1a"}}
+		>	
 			{
 				GlobalHasNoListings ? 
 				<LoadingText /> :

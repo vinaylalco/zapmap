@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import {View, StyleSheet, Text, ScrollView} from "react-native";
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from "react-leaflet";
+import React, { useEffect } from "react"
+import {View, Text, ScrollView} from "react-native"
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from "react-leaflet"
+// import btcYellow from "../styles/btcYellow.js"
 import btcPin from '../../assets/btcPin.svg'
 import nostrPin from '../../assets/nostrPin.svg'
 import osmPin from '../../assets/osmPin.svg'
@@ -11,7 +12,7 @@ export function locationDetails(content, subject, amenity){
     }else if(subject){
         return <Text>Categorised as <Text>{subject}</Text> by ZapMap</Text>
     }else if(content ){
-        return <Text >{content}</Text>
+        return <Text>{content}</Text>
     }
 }
 

@@ -65,6 +65,7 @@ export default function GoToCurrentLocationButton({
                     onPress={onClick}
                 >
                 <Image
+                    // style={[CommonStyles.SVGImage]}
                     source={goToLocation}
                 />
                 </Pressable>
