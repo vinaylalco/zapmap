@@ -1,194 +1,26 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { StatusBar } from 'expo-status-bar' 
+// import { StatusBar } from 'expo-status-bar' 
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import TabBar from './src/components/TabBar'
 import SettingsTabBar from './src/components/SettingsTabBar'
-import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
-import DrawerContent from './src/components/DrawerContent'
-import GlobalFeedContent from './src/components/GlobalFeedContent'
-import MapMarkers from './src/components/MapMarkers' 
 import tileLayer from "./src/components/tileLayer"
 import LocationReviewForm from "./src/components/LocationReviewForm"
 import LocationReviewList from "./src/components/LocationReviewList"
-import {CommonStyles} from './src/styles/CommonStyles'
-import {locationDetails,CurrentLocation} from './src/functions/mapFunctions'
+import {locationDetails} from './src/functions/mapFunctions'
 import { GetEvents, setRelayListArray, connectNDK } from "./src/functions/usefulFunctions"
-import NDK from "@nostr-dev-kit/ndk"
 import ZapForm from "./src/components/ZapForm"
 import MenuButtons from './src/components/MenuButtons'
 import CreateLocationForm from './src/components/CreateLocationForm'
 import RelayManagement from './src/components/RelayManagement'
 import UserProfile from './src/components/UserProfile'
-import GeolocationSearch from './src/components/GeolocationSearch'
-import './src/styles/App.css'
+import {mapstrpublickey,ndk} from './api/constants.js'
 import backButton from './assets/backButton.svg'
-import GoToCurrentLocationButton from './src/components/GoToCurrentLocationButton'
-import btcYellow from "./src/styles/btcYellow.js"
-import {HomeScreenStyles} from './src/styles/HomeScreenStyles'
-
-const RelayList = setRelayListArray();
-const ndk = new NDK({
-    explicitRelayUrls: RelayList
-});
-connectNDK(ndk)
+import HomeScreen from './screens/Home/HomeScreen.js'
 const Tab = createBottomTabNavigator();
 const MenuStack = createBottomTabNavigator();
-const mapstrpublickey = "a72863a4abfd79e340f736f3a6b967a0a0d992a6243d8edbebaead1f37586c4a"
-window.live = true 
-
-function HomeScreen({route, navigation}) {
-    
-    const [MapLatitude, setMapLatitude] = React.useState(29.97913478858854)
-    const [MapLongitude, setMapLongitude] = React.useState(31.13417616605723)
-    const [CurrentLat, setCurrentLat] = React.useState(29.97913478858854)
-    const [CurrentLng, setCurrentLng] = React.useState(31.13417616605723)
-    const [zoom, setZoom] = React.useState(18)
-    const [locations, setLocations] = React.useState(null)
-    const [radius, setRadius] = React.useState(104160) // 4*16.18 miles in meters
-    const [radiusOSM, setRadiusOSM] = React.useState(800) 
-    const [loadSite, setLoadSite] = React.useState(false)
-    const [map, setMap] = React.useState()
-    const [thirdPartyLink, setThirdPartyLink] = React.useState(null)
-    const [HasNoListings, setHasNoListings] = React.useState(null)
-    const [GlobalFeed, setGlobalFeed] = React.useState(false)
-    const [GlobalButtonBck, setGlobalButtonBck] = React.useState('#1d1a1a')
-    const [LocalButtonBck, setLocalButtonBck] = React.useState(btcYellow['BTC'])
-
-    function PressedGlobalButton(){
-        setGlobalFeed(true)
-        setGlobalButtonBck(btcYellow['BTC'])
-        setLocalButtonBck('#1d1a1a')
-    }
-    function PressedLocalButton(){
-        setGlobalFeed(false)
-        setGlobalButtonBck('#1d1a1a')
-        setLocalButtonBck(btcYellow['BTC'])
-    }
-
-    return (
-        false ?
-        <Text>Loading...</Text> :
-        <>
-            <View style={[styles.mapScreenContainer]}>
-                <MapContainer 
-                    center={[MapLatitude,MapLongitude]} 
-                    zoom={zoom} 
-                    scrollWheelZoom={false}
-                    style={styles.mapWrapper}
-                >
-                    <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-                        <CurrentLocation CurrentLat={CurrentLat} CurrentLng={CurrentLng} />
-                    </Suspense>
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-                        <MapMarkers
-                            setThirdPartyLink={setThirdPartyLink}
-                            thirdPartyLink={thirdPartyLink}
-                            navigation={navigation}
-                            loading={loadSite}
-                            setLoading={setLoadSite}
-                            localPoints={locations}
-                            mapstrpublickey={mapstrpublickey}
-                            zoom={zoom}
-                            radius={radius}
-                            radiusOSM={radiusOSM}
-                            setLocations={setLocations}
-                            setLoadSite={setLoadSite}
-                            ndk={ndk}
-                            setMap={setMap}
-                            setCurrentLat={setCurrentLat}
-                            setCurrentLng={setCurrentLng}
-                        />
-                    </Suspense>
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-                        <GeolocationSearch 
-                            setLocations={setLocations} 
-                            setLoadSite={setLoadSite} 
-                            mapstrpublickey={mapstrpublickey}
-                            ndk={ndk}
-                            radius={radius}
-                            radiusOSM={radiusOSM}
-                        />
-                    </Suspense>
-
-                    <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-                        <GoToCurrentLocationButton 
-                            CurrentLat={CurrentLat} 
-                            CurrentLng={CurrentLng}
-                            zoom={zoom}
-                            mapstrpublickey={mapstrpublickey}
-                            ndk={ndk}
-                            setLocations={setLocations}
-                            setLoadSite={setLoadSite}
-                            radius={radius}
-                            radiusOSM={radiusOSM}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
-                    </Suspense>
-                </MapContainer>
-            </View>
-
-            <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
-
-                <ScrollView 
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{backgroundColor: "#1d1a1a"}}
-                >   
-                    <View style={[styles.feedControl]} >
-                        <Pressable onPress={PressedGlobalButton} style={[HomeScreenStyles.GlobalButton(GlobalButtonBck)]} 
-                        >
-                            <Text style={[CommonStyles.paragraphText]} >Global</Text>
-                        </Pressable>
-                        <Pressable onPress={PressedLocalButton} style={[HomeScreenStyles.LocalButton(LocalButtonBck)]}
-                        >
-                            <Text style={[CommonStyles.paragraphText]} >Local</Text>
-                        </Pressable>
-                    </View>
-
-                    {
-                        GlobalFeed ?
-                        <View style={{flexGrow: 1,backgroundColor: "#1d1a1a", paddingTop: '1em'}} >
-                            <GlobalFeedContent
-                                navigation={navigation}
-                                ndk={ndk}
-                                mapstrpublickey={mapstrpublickey}
-                                loadSite={loadSite}
-                                setLoadSite={setLoadSite}
-                                locations={locations}
-                                map={map}
-                                CurrentLat={CurrentLat}
-                                CurrentLng={CurrentLng}
-                                HasNoListings={HasNoListings}
-                                setHasNoListings={setHasNoListings}
-                            />
-                        </View>
-                         :
-                        <DrawerContent 
-                            navigation={navigation}
-                            ndk={ndk}
-                            mapstrpublickey={mapstrpublickey}
-                            loadSite={loadSite}
-                            setLoadSite={setLoadSite}
-                            locations={locations}
-                            map={map}
-                            CurrentLat={CurrentLat}
-                            CurrentLng={CurrentLng}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
-                    }
-                    
-                </ScrollView>
-            </Suspense>
-        </>
-    );
-}
+window.live = true
 
 function LocationScreen({ route, navigation }){
 
@@ -196,7 +28,7 @@ function LocationScreen({ route, navigation }){
     const [UserStateLocation, setUserStateLocation] = React.useState(user)
     const nsecLocation = localStorage.getItem("privado")
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
-
+    console.log(route)
     return(
         <Suspense fallback={<Text style={CommonStyles.paragraphText} >Loading...</Text>}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.LocationListingContainer]} >
@@ -398,7 +230,7 @@ function SettingsScreen({route, navigation}) {
 }
 
 export default function App() {
-
+    // tabBar={props => <TabBar {...props} />}
     return (
         <NavigationContainer>
             <Tab.Navigator tabBar={props => <TabBar {...props} />} >
@@ -427,31 +259,3 @@ export default function App() {
         </NavigationContainer>
     )
 }
-
-const styles = StyleSheet.create({
-    mapWrapper: {
-        height: "50vh", 
-        width: "100%"
-    },
-    drawerWrapper: {
-        flex: 1,
-        background: "#1d1a1a"
-    },
-    LocationListingContainer: {
-        flex: 1,
-        backgroundColor: "#1d1a1a",
-        padding: '1em',
-        flexWrap: "flex-wrap",
-        justifyContent: "center"
-    },
-    LocationListingInner: {
-        width:'100%'
-    },
-    feedControl:{
-        paddingTop: '1em', 
-        paddingLeft: '1em', 
-        paddingRight: '1em', 
-        flexDirection:"row", 
-        justifyContent: "space-evenly"
-    }
-})

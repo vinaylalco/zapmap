@@ -4,7 +4,7 @@ import MapstrListingCard from "./MapstrListingCard.js";
 import { preparelocationUniqueIdentifier } from "../functions/usefulFunctions.js";
 import { CommonStyles} from '../styles/CommonStyles.js'
 import Geohash from "latlon-geohash";
-import {GetEvents} from "../functions/usefulFunctions.js";
+import {GetEvents} from "../src/functions/usefulFunctions.js";
 import LoadingText from "./LoadingText"
 
 export default function DrawerContent({ 
