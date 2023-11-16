@@ -1,9 +1,10 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
+import { Text, View, ScrollView, Pressable, Image } from 'react-native'
 import {locationDetails} from '../../hooks/map'
 import LocationReviewForm from "./LocationReviewForm"
 import LocationReviewList from "./LocationReviewList"
 import backButton from '../../assets/backButton.svg'
+import {ndk, mapstrpublickey} from '../../api/constants'
 
 export default function LocationScreen({ route, navigation }){
 
@@ -13,9 +14,9 @@ export default function LocationScreen({ route, navigation }){
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
     return(
         <Suspense fallback={<Text  >Loading...</Text>}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.LocationListingContainer]} >
+            <ScrollView showsVerticalScrollIndicator={false} >
                 
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.LocationListingInner]} >
+                <ScrollView showsVerticalScrollIndicator={false} >
                     <Text  >
                         {route.params.params.title} 
                     </Text>
