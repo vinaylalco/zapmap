@@ -1,13 +1,14 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
-import MapMarkers from './components/MapMarkers' 
-import GeolocationSearch from './components/GeolocationSearch'
-import GoToCurrentLocationButton from './components/GoToCurrentLocationButton'
-import DrawerContent from './components/DrawerContent'
-import GlobalFeedContent from './components/GlobalFeedContent'
-import {CurrentLocation} from '../../src/functions/mapFunctions'
+import MapMarkers from './MapMarkers' 
+import GeolocationSearch from './GeolocationSearch'
+import GoToCurrentLocationButton from './GoToCurrentLocationButton'
+import DrawerContent from './DrawerContent'
+import GlobalFeedContent from './GlobalFeedContent'
+import {CurrentLocation} from '../../hooks/map'
 import {mapstrpublickey,ndk} from '../../api/constants.js'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function HomeScreen({route, navigation}) {
     
@@ -121,21 +122,19 @@ export default function HomeScreen({route, navigation}) {
 
                     {
                         GlobalFeed ?
-                        <View>
-                            <GlobalFeedContent
-                                navigation={navigation}
-                                ndk={ndk}
-                                mapstrpublickey={mapstrpublickey}
-                                loadSite={loadSite}
-                                setLoadSite={setLoadSite}
-                                locations={locations}
-                                map={map}
-                                CurrentLat={CurrentLat}
-                                CurrentLng={CurrentLng}
-                                HasNoListings={HasNoListings}
-                                setHasNoListings={setHasNoListings}
-                            />
-                        </View>
+                        <GlobalFeedContent
+                            navigation={navigation}
+                            ndk={ndk}
+                            mapstrpublickey={mapstrpublickey}
+                            loadSite={loadSite}
+                            setLoadSite={setLoadSite}
+                            locations={locations}
+                            map={map}
+                            CurrentLat={CurrentLat}
+                            CurrentLng={CurrentLng}
+                            HasNoListings={HasNoListings}
+                            setHasNoListings={setHasNoListings}
+                        />
                          :
                         <DrawerContent 
                             navigation={navigation}

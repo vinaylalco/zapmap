@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, View, Text, Image, StyleSheet } from "react-native";
-import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../functions/usefulFunctions";
-import {locationDetails} from "../functions/mapFunctions"
+import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../../hooks/common";
+import {locationDetails} from "../../hooks/map"
 import locationPin from '../../assets/locationPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
 
@@ -38,6 +38,7 @@ export default function MapstrListingCard({
 
             map.setView([lat,lng])
         }
+        
         return (
             <Pressable
                 onPress={onClick}

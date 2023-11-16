@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import {View, Text, ScrollView} from "react-native";
+import {View, StyleSheet, Text, ScrollView} from "react-native";
 import MapstrListingCard from "./MapstrListingCard.js";
-import { preparelocationUniqueIdentifier } from "../functions/usefulFunctions.js";
+import { preparelocationUniqueIdentifier, GetGlobalEvents } from "../../hooks/common.js";
 import Geohash from "latlon-geohash";
-import { GetGlobalEvents } from "../functions/usefulFunctions.js";
 import LoadingText from "./LoadingText"
 
 export default function GlobalFeedContent({ 

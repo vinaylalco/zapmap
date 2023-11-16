@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Geohash from "latlon-geohash";
 import NDK, { NDKEvent, NDKFilter } from "@nostr-dev-kit/ndk";
 import Geolocation from "@react-native-community/geolocation";
-import MapstrListingCard from "../../screens/Home/components/MapstrListingCard";
+import MapstrListingCard from "../screens/home/MapstrListingCard";
 
 export async function GetGlobalEvents(mapstrpublickey, ndk){
 

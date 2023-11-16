@@ -1,14 +1,14 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
-import MenuButtons from '../../src/components/MenuButtons'
-import CreateLocationForm from '../../src/components/CreateLocationForm'
-import UserProfile from '../../src/components/UserProfile'
-import RelayManagement from '../../src/components/RelayManagement'
-import SettingsTabBar from '../../src/components/SettingsTabBar'
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import MenuButtons from './MenuButtons'
+import CreateLocationForm from './CreateNewLocation/CreateLocationForm'
+import UserProfile from './LoginProfile/UserProfile'
+import RelayManagement from './RelayManagement/RelayManagement.js'
+import SettingsTabBar from './SettingsTabBar'
 import backButton from '../../assets/backButton.svg'
-import {setRelayListArray} from "../../src/functions/usefulFunctions"
+import {setRelayListArray} from "../../hooks/common"
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 
 const MenuStack = createBottomTabNavigator();

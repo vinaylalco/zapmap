@@ -9,7 +9,7 @@ import {
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { generateInvoice } from "../functions/LightningFunctions"
+import { generateInvoice } from "../../hooks/lightning"
  
 export default function ZapForm({
     id,

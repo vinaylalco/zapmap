@@ -1,8 +1,8 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
-import {locationDetails} from '../../src/functions/mapFunctions'
-import LocationReviewForm from "../../src/components/LocationReviewForm"
-import LocationReviewList from "../../src/components/LocationReviewList"
+import {locationDetails} from '../../hooks/map'
+import LocationReviewForm from "./LocationReviewForm"
+import LocationReviewList from "./LocationReviewList"
 import backButton from '../../assets/backButton.svg'
 
 export default function LocationScreen({ route, navigation }){

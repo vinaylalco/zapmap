@@ -2,19 +2,19 @@ import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import TabBar from './src/components/TabBar'
-import tileLayer from "./src/components/tileLayer"
-import { GetEvents, connectNDK } from "./src/functions/usefulFunctions"
+import TabBar from './screens/home/TabBar'
+import tileLayer from "./screens/home/tileLayer"
+import { GetEvents, connectNDK } from "./hooks/common"
 import {mapstrpublickey,ndk} from './api/constants.js'
 import backButton from './assets/backButton.svg'
-import HomeScreen from './screens/Home/HomeScreen'
-import LocationScreen from './screens/Location/LocationScreen'
-import ZapFormScreen from './screens/Zap/ZapFormScreen'
-import SettingsScreen from './screens/Settings/SettingsScreen'
-
-const Tab = createBottomTabNavigator();
+import HomeScreen from './screens/home/HomeScreen'
+import LocationScreen from './screens/location/LocationScreen'
+import ZapFormScreen from './screens/zap/ZapFormScreen'
+import SettingsScreen from './screens/settings/SettingsScreen'
 
 export default function App() {
+
+    const Tab = createBottomTabNavigator();
     // tabBar={props => <TabBar {...props} />}
     return (
         <NavigationContainer>

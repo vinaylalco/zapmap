@@ -7,10 +7,9 @@ import {
     Pressable
 } from "react-native";
 import { Formik, Field, Form } from "formik"
-import { createEventMarker } from "../functions/usefulFunctions.js"
+import { createEventMarker,check_lat_lon } from "../../../hooks/common.js"
 import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
-import { check_lat_lon } from "../functions/usefulFunctions"
 import Geolocation from "@react-native-community/geolocation"
 
 function CreateLocationForm({

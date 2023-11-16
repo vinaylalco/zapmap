@@ -11,7 +11,7 @@ import {
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import NDK from "@nostr-dev-kit/ndk";
-import {addRelay, removeRelay} from '../functions/usefulFunctions'
+import {addRelay, removeRelay} from '../../../hooks/common'
 
 async function connectNDK(ndk){
     return await ndk.connect();

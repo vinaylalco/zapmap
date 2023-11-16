@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { Pressable,Image } from "react-native";
-import {GetEvents} from '../../../src/functions/usefulFunctions'
+import {GetEvents} from '../../hooks/common'
 const queryOverpass = require('@derhuerst/query-overpass')
-import goToLocation from '../../../assets/goToLocation.svg'
+import goToLocation from '../../assets/goToLocation.svg'
 import {useMap,useMapEvents} from "react-leaflet"
 
 export default function GoToCurrentLocationButton({ 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, Pressable, ScrollView, TextInput } from "react-native";
 import { Formik, Field, Form } from "formik";
-import { createReviewEvent } from "../functions/usefulFunctions.js";
+import { createReviewEvent } from "../../hooks/common.js";
 import NDK, {
     NDKPrivateKeySigner,
     NDKNip07Signer,

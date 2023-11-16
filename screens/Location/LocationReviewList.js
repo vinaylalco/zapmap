@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import {Text,View } from "react-native"
-import MapstrListingCard from "./MapstrListingCard.js"
-import { GetReviewEventsByLocation } from "../functions/usefulFunctions";
+import MapstrListingCard from "../home/MapstrListingCard.js"
+import { GetReviewEventsByLocation } from "../../hooks/common";
 
 // todo: hook rules 
 export default function LocationReviewList({ 

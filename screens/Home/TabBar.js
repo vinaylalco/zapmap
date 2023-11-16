@@ -1,7 +1,7 @@
 import {View, Text, Pressable, Image} from 'react-native'
 import world from '../../assets/world.svg'
 import menu from '../../assets/menu.svg'
-import Supercell from '../../assets/Supercell.svg'
+// import Supercell from '../../assets/Supercell.svg'
 
 // <Image
 // source={world}
