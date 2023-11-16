@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Marker,Circle,useMap,useMapEvents } from "react-leaflet";
-import {preparelocationUniqueIdentifier, GetEvents} from '../../hooks/common'
+import {preparelocationUniqueIdentifier} from '../../hooks/common'
+import {GetEvents} from '../../api/api'
 import Geohash from "latlon-geohash";
 const queryOverpass = require('@derhuerst/query-overpass')
 import { markerActions, Icon } from "../../hooks/map.js";

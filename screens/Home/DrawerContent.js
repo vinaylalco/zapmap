@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import {View, Text, ScrollView} from "react-native";
 import MapstrListingCard from "./MapstrListingCard";
-import { preparelocationUniqueIdentifier, GetEvents } from "../../hooks/common.js"
+import { preparelocationUniqueIdentifier } from "../../hooks/common.js"
+import { GetEvents } from "../../api/api.js"
 import Geohash from "latlon-geohash";
 import LoadingText from "./LoadingText"
 

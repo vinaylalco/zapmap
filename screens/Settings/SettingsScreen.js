@@ -8,7 +8,7 @@ import UserProfile from './LoginProfile/UserProfile'
 import RelayManagement from './RelayManagement/RelayManagement.js'
 import SettingsTabBar from './SettingsTabBar'
 import backButton from '../../assets/backButton.svg'
-import {setRelayListArray} from "../../hooks/common"
+import {setRelayListArray} from "../../api/api"
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 
 const MenuStack = createBottomTabNavigator();

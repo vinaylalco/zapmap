@@ -7,7 +7,8 @@ import {
     Pressable
 } from "react-native";
 import { Formik, Field, Form } from "formik"
-import { createEventMarker,check_lat_lon } from "../../../hooks/common.js"
+import { check_lat_lon } from "../../../hooks/common.js"
+import { createEventMarker } from "../../../api/api.js"
 import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
 import Geolocation from "@react-native-community/geolocation"

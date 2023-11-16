@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import TabBar from './screens/home/TabBar'
 import tileLayer from "./screens/home/tileLayer"
-import { GetEvents, connectNDK } from "./hooks/common"
+import { GetEvents, connectNDK } from "./api/api"
 import {mapstrpublickey,ndk} from './api/constants.js'
 import backButton from './assets/backButton.svg'
 import HomeScreen from './screens/home/HomeScreen'

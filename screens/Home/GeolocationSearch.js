@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {useMap} from "react-leaflet";
 import {OpenStreetMapProvider,GeoSearchControl,SearchControl,} from "leaflet-geosearch";
 import Geohash from "latlon-geohash";
-import {GetEvents} from '../../hooks/common'
+import {GetEvents} from '../../api/api'
 const queryOverpass = require('@derhuerst/query-overpass')
 
 // todo: this shouldn't be resetting setLoadSite as that would pop the black screen. Should pop the HasNoListings state that affects the drawer contents.
