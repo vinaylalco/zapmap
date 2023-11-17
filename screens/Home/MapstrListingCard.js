@@ -4,6 +4,8 @@ import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "..
 import {locationDetails} from "../../hooks/map"
 import locationPin from '../../assets/locationPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
+import MapstrColors from '../../assets/styles/MapstrColors'
+import {CommonStyles} from '../../assets/styles/CommonStyles'
 
 export default function MapstrListingCard({
     title,
@@ -77,46 +79,41 @@ export default function MapstrListingCard({
     const [mediaQueryTransform, setMediaQueryTransform] = React.useState(
         "translate(-3%, -4%)"
     );
-    const [mediaQueryMaxWidth, setMediaQueryMaxWidth] = React.useState("85%");
+    const [mediaQueryMaxWidth, setMediaQueryMaxWidth] = React.useState("85%")
     // miscellaneous
-    const formatedDate = new Date(dateCreated * 1000).toLocaleDateString();
-    const randomNumber = randomNumberInRange(1, 50);
-
-    // console.log(tags.subject)
-    // console.log(tags.amenity)
+    const formatedDate = new Date(dateCreated * 1000).toLocaleDateString()
+    const randomNumber = randomNumberInRange(1, 50)
 
     return (
 
         <View
             id={id}
             className={ScrollId}
+            style={[CardStyles.cardOuter]}
         >
             {
                 type === "node" ?
                     <View>
-                        <View >
-                            <Text >
-                                <Text>
-                                    {title}
-                                </Text>
-                            </Text>
-                            {
-                                tags['currency:XBT'] === "yes" ?
-                                <Text>(Accepts BTC)</Text> :
-                                null
-                            }
-                        </View>
+                        <Text style={[CommonStyles.bolded600Text]} >
+                            {title}
+                        </Text>
+                        {
+                            tags['currency:XBT'] === "yes" ?
+                            <Text style={[CommonStyles.bolded600Text]} >(Accepts BTC)</Text> :
+                            null
+                        }
                     </View>
                 :
-                    <View>
+                    <View style={{flexDirection: 'row'}} >
                         <Image
                             source={userProfileImage}
+                            style={[CardStyles.profileImage]}
                         />
-                        <View>
+                        <View style={[CardStyles.cardUserMeta]} >
                             <Text>
-                                <Text>{userProfileDisplayName}</Text> was at <Text>{title}</Text>
+                                <Text style={[CommonStyles.bolded600Text]} >{userProfileDisplayName}</Text> was at <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
                             </Text>
-                            <Text>{formatedDate}</Text>
+                            <Text style={[CardStyles.date]} >{formatedDate}</Text>
                         </View>
                     </View>
             }
@@ -130,6 +127,7 @@ export default function MapstrListingCard({
                 {
                     type !== "node" ?
                         <Pressable
+                            style={CardStyles.zapButton}
                             onPress={
                                 () =>   navigation.navigate('ZapFormScreen', {
                                             screen: 'ZapFormScreen',
@@ -140,9 +138,7 @@ export default function MapstrListingCard({
                                         })
                             }
                         >
-                            <Image
-                                source={lightningPayment}
-                            />
+                            <Text style={CardStyles.zapButtonInner}>Thanks</Text>
                         </Pressable> 
                     :
                         null
@@ -189,3 +185,35 @@ export default function MapstrListingCard({
         </View>
     );
 }
+
+const CardStyles = StyleSheet.create({
+    cardOuter:{
+        padding: '1em',
+        borderBottomWidth: '1px',
+        borderBottomColor: MapstrColors['lightGrey']
+    },
+    profileImage:{
+        height: '3em',
+        width: '3em',
+        borderRadius: '50%',
+        marginRight: '1em',
+        marginBottom: '1em'
+    },
+    cardUserMeta:{
+        width: 'fit-content'
+    },
+    date:{
+        fontSize: '0.618em'
+    },
+    zapButton:{
+        marginTop: '0.5em',
+        marginBottom: '0.5em',
+        padding: '0.5em',
+        borderRadius: '10px',
+        backgroundColor: MapstrColors['lightGrey']
+    },
+    zapButtonInner:{
+        textAlign: 'center'
+    }
+})
+

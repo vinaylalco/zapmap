@@ -1,48 +1,63 @@
-import {View, Text, Pressable, Image} from 'react-native'
+import {View, Text, Pressable, Image, StyleSheet} from 'react-native'
 import world from '../../assets/world.svg'
 import menu from '../../assets/menu.svg'
-// import Supercell from '../../assets/Supercell.svg'
-
-// <Image
-// source={world}
-// />   
+import moon from '../../assets/moon.svg'
+import MapstrColors from '../../assets/styles/MapstrColors'
 
 export default function MapstrTabBar({ route, navigation }) {
 
     return (
-        <View >
+        <View 
+            style={[TabStyles.TabWrapper]}
+        >
+            <Image
+                source={moon}
+                style={[TabStyles.Logo]}
+            />
 
             <Pressable
-                style={{    
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    zIndex: 1000000000000000000000,
-                    width: '100px',
-                    height: '40px'
-                }}
                 onPress={() => {
                         navigation.navigate('Settings');
                     }}
             >
-                <Text>Settings</Text>
+                <Image
+                    source={menu}
+                    style={[TabStyles.Icon]}
+                />   
             </Pressable>
             
             <Pressable
-                style={{    
-                    position: 'absolute',
-                    bottom: '0',
-                    right: 0,
-                    zIndex: 1000000000000000000000,
-                    width: '100px',
-                    height: '40px'
-                }}
                 onPress={() => {
                     navigation.navigate('Home');
                 }}
             >
-                <Text>Menu</Text>
+                <Image
+                    source={world}
+                    style={[TabStyles.Icon]}
+                /> 
             </Pressable>
         </View>
     );
 }
+
+const TabStyles = StyleSheet.create({
+    Logo: {
+        height: '2em', 
+        width: '2em'
+    },
+    TabWrapper:{    
+        position: 'absolute',
+        left: 0,
+        zIndex: 1000000,
+        height: '100vh',
+        backgroundColor: '#fff',
+        padding: '0.5em',
+        borderRightWidth: '1px',
+        borderRightColor: MapstrColors['lightGrey']
+    },
+    Icon: {
+        height: '2em', 
+        width: '2em',
+        marginTop: '0.5em'
+    }
+})

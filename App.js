@@ -18,7 +18,7 @@ export default function App() {
     // tabBar={props => <TabBar {...props} />}
     return (
         <NavigationContainer>
-            <Tab.Navigator >
+            <Tab.Navigator tabBar={props => <TabBar {...props} />} >
                 <Tab.Screen 
                     name="Home" 
                     component={HomeScreen}

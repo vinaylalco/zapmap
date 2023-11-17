@@ -1,5 +1,5 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
+import { Text, View, ScrollView, Pressable, Image } from 'react-native'
 import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
 import MapMarkers from './MapMarkers' 
 import GeolocationSearch from './GeolocationSearch'
@@ -9,6 +9,7 @@ import GlobalFeedContent from './GlobalFeedContent'
 import {CurrentLocation} from '../../hooks/map'
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import {HomeScreenStyles} from './HomeScreenStyles'
 
 export default function HomeScreen({route, navigation}) {
     
@@ -42,13 +43,78 @@ export default function HomeScreen({route, navigation}) {
     return (
         false ?
         <Text>Loading...</Text> :
-        <>
-            <View>
+        <View style={{flexDirection: 'row', backgroundColor: '#fff'}} >
+
+            <Suspense 
+                fallback={<Text>Loading...</Text>}
+            >
+                <ScrollView 
+                    showsVerticalScrollIndicator={false}
+                    style={[HomeScreenStyles.drawer]}
+                >   
+                    <View style={{flexDirection: 'row'}} >
+                        <Pressable 
+                            style={[HomeScreenStyles.feedButton]}
+                            onPress={PressedGlobalButton}
+                        >
+                            <Text 
+                                style={[HomeScreenStyles.feedButtonInner]} 
+                            >
+                                Global
+                            </Text>
+                        </Pressable>
+                        <Pressable 
+                            style={[HomeScreenStyles.feedButton]}
+                            onPress={PressedLocalButton}
+                        >
+                            <Text
+                                style={[HomeScreenStyles.feedButtonInner]} 
+                            >
+                                Local
+                            </Text>
+                        </Pressable>
+                    </View>
+
+                    {
+                        GlobalFeed ?
+                        <GlobalFeedContent
+                            navigation={navigation}
+                            ndk={ndk}
+                            mapstrpublickey={mapstrpublickey}
+                            loadSite={loadSite}
+                            setLoadSite={setLoadSite}
+                            locations={locations}
+                            map={map}
+                            CurrentLat={CurrentLat}
+                            CurrentLng={CurrentLng}
+                            HasNoListings={HasNoListings}
+                            setHasNoListings={setHasNoListings}
+                        />
+                         :
+                        <DrawerContent 
+                            navigation={navigation}
+                            ndk={ndk}
+                            mapstrpublickey={mapstrpublickey}
+                            loadSite={loadSite}
+                            setLoadSite={setLoadSite}
+                            locations={locations}
+                            map={map}
+                            CurrentLat={CurrentLat}
+                            CurrentLng={CurrentLng}
+                            HasNoListings={HasNoListings}
+                            setHasNoListings={setHasNoListings}
+                        />
+                    }
+                    
+                </ScrollView>
+            </Suspense>
+
+            <View style={[HomeScreenStyles.mapOuter]} >
                 <MapContainer 
                     center={[MapLatitude,MapLongitude]} 
                     zoom={zoom} 
                     scrollWheelZoom={false}
-                    style={{height: "50vh", width: "100%"}}
+                    style={HomeScreenStyles.mapInner}
                 >
                     <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -105,54 +171,6 @@ export default function HomeScreen({route, navigation}) {
                     </Suspense>
                 </MapContainer>
             </View>
-
-            <Suspense fallback={<Text>Loading...</Text>}>
-
-                <ScrollView 
-                    showsVerticalScrollIndicator={false}
-                >   
-                    <View>
-                        <Pressable onPress={PressedGlobalButton}>
-                            <Text >Global</Text>
-                        </Pressable>
-                        <Pressable onPress={PressedLocalButton}>
-                            <Text>Local</Text>
-                        </Pressable>
-                    </View>
-
-                    {
-                        GlobalFeed ?
-                        <GlobalFeedContent
-                            navigation={navigation}
-                            ndk={ndk}
-                            mapstrpublickey={mapstrpublickey}
-                            loadSite={loadSite}
-                            setLoadSite={setLoadSite}
-                            locations={locations}
-                            map={map}
-                            CurrentLat={CurrentLat}
-                            CurrentLng={CurrentLng}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
-                         :
-                        <DrawerContent 
-                            navigation={navigation}
-                            ndk={ndk}
-                            mapstrpublickey={mapstrpublickey}
-                            loadSite={loadSite}
-                            setLoadSite={setLoadSite}
-                            locations={locations}
-                            map={map}
-                            CurrentLat={CurrentLat}
-                            CurrentLng={CurrentLng}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
-                    }
-                    
-                </ScrollView>
-            </Suspense>
-        </>
+        </View>
     );
 }

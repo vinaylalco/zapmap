@@ -54,7 +54,7 @@ export default function DrawerContent({
     }, [LocalHasNoListings, setHasNoListings]);
 
     return(
-		<View>	
+		<ScrollView>	
 			{
 				HasNoListings ? 
 					<LoadingText />
@@ -81,6 +81,6 @@ export default function DrawerContent({
 	                />
 			    )) 
 			}
-		</View>
+		</ScrollView>
     )
 }
