@@ -4,7 +4,8 @@ import {
     View,
     Pressable,
     ScrollView,
-    TextInput
+    TextInput,
+    StyleSheet
 } from "react-native";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
@@ -78,8 +79,14 @@ export default function ZapForm({
     }
 
     return (
-        <ScrollView>
-            <ScrollView>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[zapFormStyles.wrapper]}
+        >
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[zapFormStyles.inner]}
+            >
                 <Text>Send BTC to the user who created this review or location directly.</Text>
                 <Text>Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
                 <Formik
@@ -148,3 +155,21 @@ export default function ZapForm({
         </ScrollView>
     );
 }
+
+const zapFormStyles = StyleSheet.create({
+    wrapper:{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(42, 36, 36, 0.5)',
+        borderWidth: '1px'
+    },
+    inner:{
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        marginTop: '25%'
+    }
+})

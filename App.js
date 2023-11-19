@@ -1,7 +1,7 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import TabBar from './screens/home/TabBar'
 import tileLayer from "./screens/home/tileLayer"
 import { GetEvents, connectNDK } from "./api/api"
@@ -11,36 +11,47 @@ import HomeScreen from './screens/home/HomeScreen'
 import LocationScreen from './screens/location/LocationScreen'
 import ZapFormScreen from './screens/zap/ZapFormScreen'
 import SettingsScreen from './screens/settings/SettingsScreen'
+import "./assets/styles/App.css"
+import { createStackNavigator } from '@react-navigation/stack';
 
 export default function App() {
 
-    const Tab = createBottomTabNavigator();
-    // tabBar={props => <TabBar {...props} />}
+    const Stack = createStackNavigator()
+
     return (
         <NavigationContainer>
-            <Tab.Navigator tabBar={props => <TabBar {...props} />} >
-                <Tab.Screen 
+            <Stack.Navigator >
+                <Stack.Screen 
                     name="Home" 
                     component={HomeScreen}
                     options={{ headerShown: false }}
                 />
-                <Tab.Screen 
+                <Stack.Screen 
                     name="Settings" 
                     component={SettingsScreen} 
-                    options={{ headerShown: false }}
+                    options={{
+                        headerShown: false,
+                        presentation: 'transparentModal'
+                    }}
                 />
-                <Tab.Screen 
+                <Stack.Screen 
                     name="LocationScreen" 
-                    component={LocationScreen} 
-                    options={{ headerShown: false }}
+                    component={LocationScreen}
+                    options={{
+                        headerShown: false,
+                        presentation: 'transparentModal'
+                    }}
                 />
-                <Tab.Screen 
+                <Stack.Screen 
                     name="ZapFormScreen" 
                     component={ZapFormScreen}
-                    options={{ headerShown: false }}
+                    options={{
+                        headerShown: false,
+                        presentation: 'transparentModal'
+                    }}
                 />
             
-          </Tab.Navigator>
+          </Stack.Navigator>
         </NavigationContainer>
     )
 }

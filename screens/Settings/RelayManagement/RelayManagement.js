@@ -5,13 +5,16 @@ import {
     Pressable,
     TextInput,
     FlatList,
-    ScrollView
+    ScrollView,
+    Image,
+    StyleSheet
 } from "react-native";
 
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import NDK from "@nostr-dev-kit/ndk";
 import {addRelay, removeRelay} from '../../../api/api'
+import {CommonStyles} from '../../../assets/styles/CommonStyles'
 
 export default function RelayManagement({ RelayList }){
 
@@ -21,8 +24,9 @@ export default function RelayManagement({ RelayList }){
     const Item = ({title}: ItemProps) => (
         
         <View>
-            <Text>{title}</Text>
+            <Text style={[CommonStyles.paragraph]} >{title}</Text>
             <Text 
+                style={[CommonStyles.bolded600Text]} 
                 onPress={ () => removeRelay(title, RelayListState, setRelayListState) }
             >
                 Remove
@@ -45,7 +49,7 @@ export default function RelayManagement({ RelayList }){
     });
  
     return(
-        <ScrollView>
+        <ScrollView contentContainerStyle={[RelayStyles.inner]} >
 
             <FlatList
                 data={RelayListState}
@@ -71,9 +75,9 @@ export default function RelayManagement({ RelayList }){
                     errors,
                     isValid,
                 }) => (
-                    <View>
+                    <>
                         <TextInput
-                            // style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="newRelayName"
                             placeholder="URL eg wss://relay.address"
                             value={values.newRelayName}
@@ -81,14 +85,30 @@ export default function RelayManagement({ RelayList }){
                             onBlur={handleBlur("newRelayName")}
                         />
 
-                        <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text>
+                        <Pressable 
+                            onPress={handleSubmit} 
+                            disabled={!isValid}
+                            style={[CommonStyles.submit]} 
+                        >
+                            <Text style={[CommonStyles.submitInner]} >
                                 Add New Relay
                             </Text>
                         </Pressable>
-                    </View>
+                    </>
                 )}
             </Formik>
         </ScrollView>
     )
 }
+
+const RelayStyles = StyleSheet.create({
+    inner:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: '1em',
+        height: '100%',
+        width: '100%'
+    }
+})

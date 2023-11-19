@@ -2,9 +2,11 @@ import React from "react";
 import {
     Text,
     View,
-    Pressable
+    Pressable,
+    StyleSheet
 } from "react-native"
 import CopyToClipboard from "react-copy-to-clipboard";
+import {CommonStyles} from '../../../assets/styles/CommonStyles'
 
 export default function ProfileAndLogout({UserStateSettings, setUserStateSettings, UserStateNecSettings, nsec}) {
     
@@ -15,12 +17,12 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
     const [CopyPrivateKeyHex, setCopyPrivateKeyHex] = React.useState("Copy Private Key (Hex)");
 
     return (
-        <View>
-                <Text>
+        <View style={[ProfileStyles.inner]}>
+                <Text style={[CommonStyles.paragraph]} >
                     You're logged in with Public Key (npub):
                 </Text>
 
-                <Text>
+                <Text style={[CommonStyles.paragraph]} >
                     {UserStateSettings}
                 </Text>
                 
@@ -28,8 +30,8 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
                     nsec == "undefined" ?
                     null :
                     <CopyToClipboard
-                            text={UserStateNecSettings}
-                            onCopy={() => setCopyPrivateKeyHex("Copied")}
+                        text={UserStateNecSettings}
+                        onCopy={() => setCopyPrivateKeyHex("Copied")}
                     >
                         <button>
                             {CopyPrivateKeyHex}
@@ -40,11 +42,26 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
 
                 <Pressable
                     onPress={handleLogout}
+                    style={[CommonStyles.submit]}
                 >
-                    <Text>
+                    <Text
+                        style={[CommonStyles.submitInner]}
+                    >
                         Logout
                     </Text>
                 </Pressable>
         </View>
     );
 }
+
+const ProfileStyles = StyleSheet.create({
+    inner:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: '1em',
+        height: '100vh',
+        width: '100%'
+    }
+})

@@ -1,5 +1,5 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { Text, View, ScrollView, Pressable, Image } from 'react-native'
+import { Text, View, ScrollView, Pressable, Image, StyleSheet } from 'react-native'
 import {locationDetails} from '../../hooks/map'
 import LocationReviewForm from "./LocationReviewForm"
 import LocationReviewList from "./LocationReviewList"
@@ -12,11 +12,18 @@ export default function LocationScreen({ route, navigation }){
     const [UserStateLocation, setUserStateLocation] = React.useState(user)
     const nsecLocation = localStorage.getItem("privado")
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
+    
     return(
         <Suspense fallback={<Text  >Loading...</Text>}>
-            <ScrollView showsVerticalScrollIndicator={false} >
+            <ScrollView 
+                showsVerticalScrollIndicator={false} 
+                contentContainerStyle={[LoadingScreenStyles.wrapper]}
+            >
                 
-                <ScrollView showsVerticalScrollIndicator={false} >
+                <ScrollView 
+                    showsVerticalScrollIndicator={false} 
+                    contentContainerStyle={[LoadingScreenStyles.inner]}
+                >
                     <Text  >
                         {route.params.params.title} 
                     </Text>
@@ -52,3 +59,20 @@ export default function LocationScreen({ route, navigation }){
         </Suspense>
     )    
 }
+
+const LoadingScreenStyles = StyleSheet.create({
+    wrapper:{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(42, 36, 36, 0.5)'
+    },
+    inner:{
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        marginTop: '25%'
+    }
+})

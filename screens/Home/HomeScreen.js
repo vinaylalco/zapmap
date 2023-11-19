@@ -43,8 +43,9 @@ export default function HomeScreen({route, navigation}) {
     return (
         false ?
         <Text>Loading...</Text> :
-        <View style={{flexDirection: 'row', backgroundColor: '#fff'}} >
-
+        <View 
+            style={[HomeScreenStyles.HomeScreenWrapper]} 
+        >
             <Suspense 
                 fallback={<Text>Loading...</Text>}
             >

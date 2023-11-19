@@ -1,6 +1,7 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import ZapForm from "./ZapForm"
+import {setRelayListArray} from '../../api/api'
 
 export default function ZapFormScreen( { route, navigation } ){
 
@@ -14,7 +15,7 @@ export default function ZapFormScreen( { route, navigation } ){
             <ZapForm
                 id={route.params.params.id}
                 npub={route.params.params.npub}
-                RelayList={RelayList}
+                RelayList={setRelayListArray}
                 nsecZapForm={nsecZapForm}
             />
         </Suspense>

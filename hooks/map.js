@@ -4,12 +4,13 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from "react-le
 import btcPin from '../assets/btcPin.svg'
 import nostrPin from '../assets/nostrPin.svg'
 import osmPin from '../assets/osmPin.svg'
+import {CommonStyles} from '../assets/styles/CommonStyles'
 
 export function locationDetails(content, subject, amenity){
     if( amenity ){
-        return <Text>Categorised as <Text>{amenity}</Text> by Open Street Maps</Text>
+        return <Text>Categorised as <Text style={[CommonStyles.bolded600Text]} >{amenity}</Text> by Open Street Maps</Text>
     }else if(subject){
-        return <Text>Categorised as <Text>{subject}</Text> by ZapMap</Text>
+        return <Text>Categorised as <Text style={[CommonStyles.bolded600Text]} >{subject}</Text> by ZapMap</Text>
     }else if(content ){
         return <Text>{content}</Text>
     }

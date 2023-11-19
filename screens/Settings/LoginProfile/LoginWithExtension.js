@@ -5,6 +5,7 @@ import {
     Text
 } from "react-native"
 import NDK, { NDKNip07Signer } from "@nostr-dev-kit/ndk"
+import {CommonStyles} from '../../../assets/styles/CommonStyles'
 
 export default function LoginWithExtension({ setUserStateSettings, setUserStateNecSettings }) { 
 
@@ -26,18 +27,21 @@ export default function LoginWithExtension({ setUserStateSettings, setUserStateN
 
     return (
         <View>
-            <Text>
+            <Text style={[CommonStyles.heading]} >
                 Login With Extension
             </Text>
 
-            <Text>
+            <Text style={[CommonStyles.paragraph]} >
                 <Text>NB:</Text> Logging in with a browser extension is the safest way to login to ZapMap or any NOSTR client. If you don't already have an extension this option won't work for you yet. Install Alby or Nostr2x before attempting to login with this method.
             </Text>
 
             <Pressable
+                style={[CommonStyles.submit]}
                 onPress={loginWithBrowserExtension}
             >
-                <Text>
+                <Text
+                    style={[CommonStyles.submitInner]}
+                >
                     Login with Extension
                 </Text>
             </Pressable>

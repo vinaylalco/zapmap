@@ -6,6 +6,7 @@ import locationPin from '../../assets/locationPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
 import MapstrColors from '../../assets/styles/MapstrColors'
 import {CommonStyles} from '../../assets/styles/CommonStyles'
+import zap from '../../assets/zap.svg'
 
 export default function MapstrListingCard({
     title,
@@ -57,7 +58,7 @@ export default function MapstrListingCard({
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     // User Profile
-    const [userProfileImage, setUserProfileImage] = React.useState("");
+    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/mapstr.png")
     const [userProfileDisplayName, setUserProfileDisplayName] =
         React.useState("");
     const userProfile = mapstrGetUserProfile(npub, ndk).then((profile) => {
@@ -94,25 +95,68 @@ export default function MapstrListingCard({
             {
                 type === "node" ?
                     <View>
-                        <Text style={[CommonStyles.bolded600Text]} >
-                            {title}
-                        </Text>
+                        
+                        <Pressable
+                            onPress={
+                                () =>   navigation.navigate('LocationScreen', {
+                                            screen: 'LocationScreen',
+                                            params: { 
+                                                title: title,
+                                                tags: tags,
+                                                content: content,
+                                                lat: lat,
+                                                lng: lng,
+                                                id: id,
+                                                npub: npub,
+                                                dateCreated: dateCreated,
+                                                ScrollId: ScrollId
+                                            }
+                                        })
+                            }
+                        >
+                            <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
+                        </Pressable>
                         {
                             tags['currency:XBT'] === "yes" ?
-                            <Text style={[CommonStyles.bolded600Text]} >(Accepts BTC)</Text> :
+                            <Text style={[CommonStyles.acceptBTC]} >(Accepts BTC)</Text> :
                             null
                         }
                     </View>
                 :
-                    <View style={{flexDirection: 'row'}} >
+                    <View style={[CardStyles.cardUserMetaWrapper]} >
                         <Image
                             source={userProfileImage}
                             style={[CardStyles.profileImage]}
                         />
                         <View style={[CardStyles.cardUserMeta]} >
-                            <Text>
-                                <Text style={[CommonStyles.bolded600Text]} >{userProfileDisplayName}</Text> was at <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
+                            <Text style={{overflowWrap: "break-word"}} >
+                                <Text style={[CommonStyles.bolded600Text]} >
+                                    {userProfileDisplayName}
+                                </Text>
+                                was at 
                             </Text>
+
+                            <Pressable
+                                onPress={
+                                    () =>   navigation.navigate('LocationScreen', {
+                                                screen: 'LocationScreen',
+                                                params: { 
+                                                    title: title,
+                                                    tags: tags,
+                                                    content: content,
+                                                    lat: lat,
+                                                    lng: lng,
+                                                    id: id,
+                                                    npub: npub,
+                                                    dateCreated: dateCreated,
+                                                    ScrollId: ScrollId
+                                                }
+                                            })
+                                }
+                            >
+                                <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
+                            </Pressable>
+
                             <Text style={[CardStyles.date]} >{formatedDate}</Text>
                         </View>
                     </View>
@@ -139,6 +183,10 @@ export default function MapstrListingCard({
                             }
                         >
                             <Text style={CardStyles.zapButtonInner}>Thanks</Text>
+                            <Image
+                                source={zap}
+                                style={[CardStyles.zapIcon]}
+                            />
                         </Pressable> 
                     :
                         null
@@ -156,32 +204,6 @@ export default function MapstrListingCard({
                 }
 
             </View>
-
-            {   showLocationScreenButton ?
-                    <Pressable
-                        onPress={
-                            () =>   navigation.navigate('LocationScreen', {
-                                        screen: 'LocationScreen',
-                                        params: { 
-                                            title: title,
-                                            tags: tags,
-                                            content: content,
-                                            lat: lat,
-                                            lng: lng,
-                                            id: id,
-                                            npub: npub,
-                                            dateCreated: dateCreated,
-                                            ScrollId: ScrollId
-                                        }
-                                    })
-                        }
-                    >
-                        <Text>{title}</Text>
-                    </Pressable>
-                :
-                    null
-            }
-
         </View>
     );
 }
@@ -190,7 +212,11 @@ const CardStyles = StyleSheet.create({
     cardOuter:{
         padding: '1em',
         borderBottomWidth: '1px',
-        borderBottomColor: MapstrColors['lightGrey']
+        borderBottomColor: MapstrColors['lightGrey'],
+        maxWidth: '100%'
+    },
+    cardUserMetaWrapper:{
+        flexDirection: 'row'
     },
     profileImage:{
         height: '3em',
@@ -206,6 +232,8 @@ const CardStyles = StyleSheet.create({
         fontSize: '0.618em'
     },
     zapButton:{
+        flexDirection: 'row',
+        justifyContent: 'center',
         marginTop: '0.5em',
         marginBottom: '0.5em',
         padding: '0.5em',
@@ -213,7 +241,21 @@ const CardStyles = StyleSheet.create({
         backgroundColor: MapstrColors['lightGrey']
     },
     zapButtonInner:{
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: '1em'
+    },
+    acceptBTC: {
+        fontWeight: 600,
+        fontSize: '1em',
+        padding: '0.168em',
+        color: MapstrColors['btc'],
+        wordBreak: 'anywhere'
+    },
+    zapIcon: {
+        height: '1em', 
+        width: '1em',
+        marginLeft: '1em',
+        fontSize: '1.2em'
     }
 })
 

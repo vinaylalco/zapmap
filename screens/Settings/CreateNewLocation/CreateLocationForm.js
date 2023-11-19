@@ -4,7 +4,8 @@ import {
     View,
     ScrollView,
     TextInput,
-    Pressable
+    Pressable,
+    StyleSheet
 } from "react-native";
 import { Formik, Field, Form } from "formik"
 import { check_lat_lon } from "../../../hooks/common.js"
@@ -12,6 +13,7 @@ import { createEventMarker } from "../../../api/api.js"
 import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
 import Geolocation from "@react-native-community/geolocation"
+import {CommonStyles} from '../../../assets/styles/CommonStyles'
 
 function CreateLocationForm({
     name,
@@ -24,15 +26,14 @@ function CreateLocationForm({
     navigation,
     nsec
 }) {
-    const [userMessage, setUserMessage] = React.useState(null);
-    const [userMessageColor, setUserMessageColor] = React.useState(null);
-
-    let mapRef = React.useRef();
-    const [dynamicCoords, setDynamicCoords] = React.useState('');
-    const [FindingCoords, setFindingCoords] = React.useState(false);
-    const [LocationTitle, setLocationTitle] = React.useState('');
-    const [category, setCategory] = React.useState('');
-    const [content, setContent] = React.useState('');
+    const [userMessage, setUserMessage] = React.useState(null)
+    const [userMessageColor, setUserMessageColor] = React.useState(null)
+    let mapRef = React.useRef()
+    const [dynamicCoords, setDynamicCoords] = React.useState('')
+    const [FindingCoords, setFindingCoords] = React.useState(false)
+    const [LocationTitle, setLocationTitle] = React.useState('')
+    const [category, setCategory] = React.useState('')
+    const [content, setContent] = React.useState('')
     const createValidationSchema = yup.object().shape({
 
         coords: yup
@@ -67,7 +68,7 @@ function CreateLocationForm({
     }
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false} >
             <Formik
                 enableReinitialize={true}
                 validationSchema={createValidationSchema}
@@ -75,8 +76,7 @@ function CreateLocationForm({
                     title: LocationTitle,
                     category: category,
                     coords: dynamicCoords,
-                    content: content,
-                    // UseCurrentCoordsField: false
+                    content: content
                 }}
                 onSubmit={(values, { resetForm }) => {
                     setUserMessage('Wait please...')
@@ -111,9 +111,11 @@ function CreateLocationForm({
                     isValid,
                     field
                 }) => (
-                    <View>
+                    <View
+                        style={[CreateLocationStyles.inner]}
+                    >
                         <TextInput
-                            // style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="title"
                             placeholder="Name of the location"
                             value={values.title}
@@ -125,6 +127,7 @@ function CreateLocationForm({
                         />
 
                         <select
+                            style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="category"
                             placeholder="Category of the location"
                             value={values.category}
@@ -167,6 +170,7 @@ function CreateLocationForm({
                         </select>
 
                         <TextInput
+                            style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             multiline="true"
                             rows={5}
                             id="content"
@@ -180,19 +184,30 @@ function CreateLocationForm({
                             }}
                         />
 
-                        <Pressable onPress={useCurrentCoords}>
-                            <Text>
+                        <Pressable 
+                            onPress={useCurrentCoords}
+                            style={[CommonStyles.pressable]}
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
                                 Use Current Coordinates
                             </Text>
                         </Pressable>
 
-                        <Pressable onPress={resetCoords}>
-                            <Text>
+                        <Pressable 
+                            onPress={resetCoords}
+                            style={[CommonStyles.pressable]}
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
                                 Reset Coordinates
                             </Text>
                         </Pressable>
 
                         <TextInput
+                            style={ errors.title === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             id="coords"
                             name="coords"
                             placeholder={ FindingCoords ? "Wait please..." : "Coords eg, 16.12345,104.12345" }
@@ -204,8 +219,14 @@ function CreateLocationForm({
                             }}
                         />
 
-                        <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text>
+                        <Pressable 
+                            onPress={handleSubmit} 
+                            disabled={!isValid}
+                            style={[CommonStyles.submit]}
+                        >
+                            <Text
+                                style={[CommonStyles.submitInner]}
+                            >
                                 Create
                             </Text>
                         </Pressable>
@@ -221,3 +242,14 @@ function CreateLocationForm({
 }
 
 export default CreateLocationForm;
+
+const CreateLocationStyles = StyleSheet.create({
+    inner:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: '1em',
+        height: '100vh'
+    }
+})

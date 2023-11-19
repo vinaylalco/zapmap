@@ -1,8 +1,9 @@
 const MapstrColors = {
     btc: "#FF9900",
     lightGrey: "#F4F4F5",
-    teal: "#0d9488",
+    primary: "#0d9488", //teal
     nostrPurple: "#8e30eb",
-    darkGrey: "#39393D"
+    darkGrey: "#39393D",
+    error: '#EF4444'
 };
 export default MapstrColors;

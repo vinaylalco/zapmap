@@ -10,6 +10,7 @@ import {
 
 import NDK from "@nostr-dev-kit/ndk";
 import * as yup from "yup"
+import {CommonStyles} from '../../../assets/styles/CommonStyles'
 
 function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
 
@@ -62,12 +63,12 @@ function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
                     isValid,
                 }) => (
                     <>
-                        <Text>
+                        <Text style={[CommonStyles.heading]} >
                             Login With Private Key
                         </Text>
                         
                         <TextInput
-                            // style={ errors.privateKey === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            style={ errors.privateKey === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             name="privateKey"
                             placeholder="Private Key HEX"
                             value={values.privateKey}
@@ -78,8 +79,11 @@ function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
                         <Pressable
                             onPress={handleSubmit}
                             disabled={!isValid}
+                            style={[CommonStyles.submit]}
                         >
-                            <Text>
+                            <Text
+                                style={[CommonStyles.submitInner]}
+                            >
                                 Login
                             </Text>
                         </Pressable>
