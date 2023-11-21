@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { Text, View, Pressable, ScrollView, TextInput } from "react-native";
+import { Text, View, Pressable, ScrollView, TextInput, StyleSheet } from "react-native";
 import { Formik, Field, Form } from "formik";
 import { createReviewEvent } from "../../api/api";
-import NDK, {
-    NDKPrivateKeySigner,
-    NDKNip07Signer,
-    NDKEvent,
-} from "@nostr-dev-kit/ndk";
+import NDK, { NDKPrivateKeySigner,NDKNip07Signer,NDKEvent } from "@nostr-dev-kit/ndk";
 import * as yup from "yup"
-
+import {CommonStyles} from '../../assets/styles/CommonStyles'
+import MapstrColors from '../../assets/styles/MapstrColors'
+ 
 function LocationReviewForm({
     ndk,
     UserStateLocation,
@@ -31,9 +29,9 @@ function LocationReviewForm({
     });
 
     return (    
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false} >
 
-            <Text>Write a Review</Text>
+            <Text style={[reviewStyles.heading]} >Write a Review</Text>
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{
@@ -78,7 +76,7 @@ function LocationReviewForm({
                     <View>
 
                         <TextInput
-                            // style={ errors.content === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                            style={ errors.content === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                             multiline="true"
                             rows={5}
                             id="content"
@@ -89,13 +87,17 @@ function LocationReviewForm({
                             onBlur={handleBlur("content")}
                         />
 
-                        <Pressable onPress={handleSubmit} disabled={!isValid}>
-                            <Text>
+                        <Pressable 
+                            onPress={handleSubmit} 
+                            disabled={!isValid}
+                            style={[CommonStyles.submit]}
+                        >
+                            <Text style={[CommonStyles.submitInner]} >
                                 Create
                             </Text>
                         </Pressable>
 
-                        <Text>
+                        <Text style={[reviewStyles.paragraph]} >
                             {reviewFormMessage}
                         </Text>
                     </View>
@@ -106,3 +108,24 @@ function LocationReviewForm({
 }
 
 export default LocationReviewForm;
+
+const reviewStyles = StyleSheet.create({
+    paragraph:{
+        fontSize: '1em',
+        margin: '0.168em',
+        padding: '0.168em',
+        overflowWrap: "break-word",
+        color: MapstrColors['darkGrey'],
+        textAlign: 'center'
+    },
+    heading:{
+        fontSize: '1.2em',
+        fontWeight: 600,
+        padding: '0.5em',
+        margin: '0.168em',
+        overflowWrap: "break-word",
+        color: MapstrColors['darkGrey'],
+        textAlign: 'center'
+    },
+})
+

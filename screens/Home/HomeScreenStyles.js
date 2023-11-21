@@ -2,26 +2,33 @@ import { StyleSheet } from 'react-native'
 import MapstrColors from '../../assets/styles/MapstrColors'
 
 export const HomeScreenStyles = StyleSheet.create({
-	HomeScreenWrapper:{
+	HomeWrapperDesktop:{
 		flexDirection: 'row', 
-		backgroundColor: '#fff'
+		backgroundColor: '#fff',
+		// flexDirection: 'flex-start'
 	},
-	mapOuter: {
+	HomeWrapperMobile:{
+		flexDirection: 'col', 
+		backgroundColor: '#fff',
+		flexDirection: 'column-reverse'
+	},
+	mapOuterDesktop: {
 		width: "75%"
 	},
-	mapInner: {
+	mapOuterMobile: {
+		width: "100%"
+	},
+	mapInnerMobile: {
+		height: "50vh"
+	},
+	mapInnerDesktop: {
 		height: "100vh"
 	},
-	drawer:{
-		width: "25%"
+	drawerDesktop:{
+		width: "25%"	
 	},
-	feedButton:{
-		width:'50%',
-		padding: '1em',
-        borderBottomWidth: '1px',
-        borderBottomColor: MapstrColors['lightGrey']
-	},
-	feedButtonInner:{
-		textAlign: 'center'
+	drawerMobile:{
+		width: "100%",
+		height: "50vh"	
 	}
 })

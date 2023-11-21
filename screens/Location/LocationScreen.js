@@ -5,10 +5,11 @@ import LocationReviewForm from "./LocationReviewForm"
 import LocationReviewList from "./LocationReviewList"
 import backButton from '../../assets/backButton.svg'
 import {ndk, mapstrpublickey} from '../../api/constants'
+import {CommonStyles} from '../../assets/styles/CommonStyles'
 
 export default function LocationScreen({ route, navigation }){
 
-    const user = localStorage.getItem("user")  // Basically same as npub value for user.
+    const user = localStorage.getItem("user")
     const [UserStateLocation, setUserStateLocation] = React.useState(user)
     const nsecLocation = localStorage.getItem("privado")
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
@@ -24,13 +25,13 @@ export default function LocationScreen({ route, navigation }){
                     showsVerticalScrollIndicator={false} 
                     contentContainerStyle={[LoadingScreenStyles.inner]}
                 >
-                    <Text  >
+                    <Text style={[CommonStyles.heading]} >
                         {route.params.params.title} 
                     </Text>
-                    <Text  >
+                    <Text style={[CommonStyles.paragraph]} >
                         {locationDetails(route.params.params.content, route.params.params.tags.subject, route.params.params.tags.amenity)}
                     </Text>
-                    <Text  >
+                    <Text style={[CommonStyles.paragraph]} >
                         {route.params.params.tags.subject ? route.params.params.tags.subject : ''}
                     </Text>
                     <Suspense fallback={<Text  >Loading...</Text>}>
@@ -73,6 +74,7 @@ const LoadingScreenStyles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: '10px',
         padding: '1em',
-        marginTop: '25%'
+        marginTop: '25%',
+        width: '25vw'
     }
 })

@@ -1,5 +1,5 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { Text, View, ScrollView, Pressable, Image } from 'react-native'
+import { Text, View, Pressable, Image } from 'react-native'
 import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
 import MapMarkers from './MapMarkers' 
 import GeolocationSearch from './GeolocationSearch'
@@ -29,93 +29,75 @@ export default function HomeScreen({route, navigation}) {
     const [GlobalButtonBck, setGlobalButtonBck] = React.useState('#1d1a1a')
     const [LocalButtonBck, setLocalButtonBck] = React.useState(null)
 
-    function PressedGlobalButton(){
-        setGlobalFeed(true)
-        setGlobalButtonBck(null)
-        setLocalButtonBck('#1d1a1a')
-    }
-    function PressedLocalButton(){
-        setGlobalFeed(false)
-        setGlobalButtonBck('#1d1a1a')
-        setLocalButtonBck(null)
-    }
-
     return (
         false ?
         <Text>Loading...</Text> :
         <View 
-            style={[HomeScreenStyles.HomeScreenWrapper]} 
+            style={ 
+                isMobile ? 
+                [HomeScreenStyles.HomeWrapperMobile] : 
+                [HomeScreenStyles.HomeWrapperDesktop] 
+            }
         >
-            <Suspense 
-                fallback={<Text>Loading...</Text>}
-            >
-                <ScrollView 
-                    showsVerticalScrollIndicator={false}
-                    style={[HomeScreenStyles.drawer]}
-                >   
-                    <View style={{flexDirection: 'row'}} >
-                        <Pressable 
-                            style={[HomeScreenStyles.feedButton]}
-                            onPress={PressedGlobalButton}
-                        >
-                            <Text 
-                                style={[HomeScreenStyles.feedButtonInner]} 
-                            >
-                                Global
-                            </Text>
-                        </Pressable>
-                        <Pressable 
-                            style={[HomeScreenStyles.feedButton]}
-                            onPress={PressedLocalButton}
-                        >
-                            <Text
-                                style={[HomeScreenStyles.feedButtonInner]} 
-                            >
-                                Local
-                            </Text>
-                        </Pressable>
-                    </View>
-
-                    {
-                        GlobalFeed ?
-                        <GlobalFeedContent
-                            navigation={navigation}
-                            ndk={ndk}
-                            mapstrpublickey={mapstrpublickey}
-                            loadSite={loadSite}
-                            setLoadSite={setLoadSite}
-                            locations={locations}
-                            map={map}
-                            CurrentLat={CurrentLat}
-                            CurrentLng={CurrentLng}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
-                         :
-                        <DrawerContent 
-                            navigation={navigation}
-                            ndk={ndk}
-                            mapstrpublickey={mapstrpublickey}
-                            loadSite={loadSite}
-                            setLoadSite={setLoadSite}
-                            locations={locations}
-                            map={map}
-                            CurrentLat={CurrentLat}
-                            CurrentLng={CurrentLng}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                        />
+            <View 
+                showsVerticalScrollIndicator={false}
+                style=
+                    { 
+                        isMobile ? 
+                        [HomeScreenStyles.drawerMobile] : 
+                        [HomeScreenStyles.drawerDesktop] 
                     }
-                    
-                </ScrollView>
-            </Suspense>
-
-            <View style={[HomeScreenStyles.mapOuter]} >
+            >   
+                {
+                    GlobalFeed ?
+                    <GlobalFeedContent
+                        navigation={navigation}
+                        ndk={ndk}
+                        mapstrpublickey={mapstrpublickey}
+                        loadSite={loadSite}
+                        setLoadSite={setLoadSite}
+                        locations={locations}
+                        map={map}
+                        CurrentLat={CurrentLat}
+                        CurrentLng={CurrentLng}
+                        HasNoListings={HasNoListings}
+                        setHasNoListings={setHasNoListings}
+                        setGlobalFeed={setGlobalFeed}
+                    />
+                     :
+                    <DrawerContent 
+                        navigation={navigation}
+                        ndk={ndk}
+                        mapstrpublickey={mapstrpublickey}
+                        loadSite={loadSite}
+                        setLoadSite={setLoadSite}
+                        locations={locations}
+                        map={map}
+                        CurrentLat={CurrentLat}
+                        CurrentLng={CurrentLng}
+                        HasNoListings={HasNoListings}
+                        setHasNoListings={setHasNoListings}
+                        setGlobalFeed={setGlobalFeed}
+                    />
+                }
+                
+            </View>
+            <View 
+                style={ 
+                    isMobile ? 
+                    [HomeScreenStyles.mapOuterMobile] : 
+                    [HomeScreenStyles.mapOuterDesktop] 
+                } 
+            >
                 <MapContainer 
                     center={[MapLatitude,MapLongitude]} 
                     zoom={zoom} 
                     scrollWheelZoom={false}
-                    style={HomeScreenStyles.mapInner}
+                    style={ 
+                        isMobile ? 
+                        HomeScreenStyles.mapInnerMobile : 
+                        HomeScreenStyles.mapInnerDesktop 
+                    }
                 >
                     <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

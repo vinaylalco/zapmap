@@ -49,7 +49,7 @@ export default function RelayManagement({ RelayList }){
     });
  
     return(
-        <ScrollView contentContainerStyle={[RelayStyles.inner]} >
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[RelayStyles.inner]} >
 
             <FlatList
                 data={RelayListState}

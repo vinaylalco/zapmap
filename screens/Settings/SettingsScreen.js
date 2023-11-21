@@ -42,6 +42,6 @@ const SettingsStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'rgba(42, 36, 36, 0.5)',
-        padding: '1em'
+        padding: '0.618em'
     },
 })

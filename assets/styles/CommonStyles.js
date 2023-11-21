@@ -46,7 +46,6 @@ export const CommonStyles = StyleSheet.create({
 		borderWidth: '1px',
 		borderRadius: '10px',
 		padding: '1em',
-		marginTop: '1em',
 		marginBottom: '1em',
 		width: '100%'
 	},
@@ -67,5 +66,49 @@ export const CommonStyles = StyleSheet.create({
 		marginBottom: '1em',
 		width: '100%',
 		textAlign: 'center'
-	}
+	},
+	TabWrapperDesktop:{
+        width: 'fit-content',
+        height: '100%',
+        backgroundColor: '#fff',
+        padding: '0.25em',
+        borderRightWidth: '1px',
+        borderRightColor: MapstrColors['lightGrey'],
+        display: 'flex',
+        flexDirection: 'col'
+    },
+    TabWrapperMobile:{
+        height: 'fit-content',
+        width: '100%',
+        backgroundColor: '#fff',
+        padding: '0.25em',
+        borderRightWidth: '1px',
+        borderRightColor: MapstrColors['lightGrey'],
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+    Icon: {
+        height: '2em', 
+        width: '2em',
+        marginTop: '0.5em'
+    },
+    TabOuterMobile:{
+    	display: 'flex', 
+		flexDirection: 'column-reverse',
+		height: '100%'
+    },
+    TabOuterDesktop:{
+    	display: 'flex', 
+		flexDirection: 'row', 
+		overflow: 'scroll', 
+		height: '100%'
+    },
+    SettingsTabBarMobile:{
+    	width: '96vw'
+    },
+    SettingsTabBarDesktop:{
+    	width: '25vw'
+    }
 })

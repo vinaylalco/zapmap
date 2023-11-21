@@ -1,7 +1,6 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import TabBar from './screens/home/TabBar'
 import tileLayer from "./screens/home/tileLayer"
 import { GetEvents, connectNDK } from "./api/api"
@@ -12,7 +11,7 @@ import LocationScreen from './screens/location/LocationScreen'
 import ZapFormScreen from './screens/zap/ZapFormScreen'
 import SettingsScreen from './screens/settings/SettingsScreen'
 import "./assets/styles/App.css"
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack'
 
 export default function App() {
 
@@ -20,7 +19,7 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator >
+            <Stack.Navigator>
                 <Stack.Screen 
                     name="Home" 
                     component={HomeScreen}

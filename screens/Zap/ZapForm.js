@@ -11,7 +11,8 @@ import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { generateInvoice } from "../../hooks/lightning"
- 
+import {CommonStyles} from '../../assets/styles/CommonStyles'
+
 export default function ZapForm({
     id,
     npub,
@@ -51,6 +52,7 @@ export default function ZapForm({
                     <Text
                         id="transition-modal-description"
                         sx={{ mt: 2 }}
+                        style={[CommonStyles.paragraph]}
                     >
                         {lnInvoice}
                     </Text>
@@ -58,8 +60,9 @@ export default function ZapForm({
                     <CopyToClipboard
                         text={lnInvoice}
                         onCopy={() => setLnInvoiceCopyText("Copied")}
+                        style={[CommonStyles.pressable]}
                     >
-                        <button>
+                        <button style={[CommonStyles.pressableInner]} >
                             {lnInvoiceCopyText}
                         </button>
                     </CopyToClipboard>
@@ -87,8 +90,8 @@ export default function ZapForm({
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={[zapFormStyles.inner]}
             >
-                <Text>Send BTC to the user who created this review or location directly.</Text>
-                <Text>Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
+                <Text style={[CommonStyles.paragraph]} >Send BTC to the user who created this review or location directly.</Text>
+                <Text style={[CommonStyles.paragraph]} >Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
                 <Formik
                     validationSchema={createValidationSchema}
                     initialValues={{
@@ -119,10 +122,10 @@ export default function ZapForm({
                         isValid,
                         resetForm
                     }) => (
-                        <View>
+                        <>
                             <TextInput
                                 keyboardType="numeric"
-                                // style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                                style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                                 name="amount"
                                 placeholder="Amount (Sats)"
                                 value={values.amount}
@@ -131,6 +134,7 @@ export default function ZapForm({
                             />
 
                             <TextInput
+                                style={ CommonStyles.inputField}
                                 multiline="true"
                                 rows={5}
                                 id="note"
@@ -141,14 +145,18 @@ export default function ZapForm({
                                 onBlur={handleBlur("note")}
                             />
 
-                            <Pressable onPress={handleSubmit} disabled={!isValid}>
-                                <Text>
+                            <Pressable 
+                                onPress={handleSubmit} 
+                                disabled={!isValid}
+                                style={[CommonStyles.submit]}
+                            >
+                                <Text style={[CommonStyles.submitInner]} >
                                     Get Lightning Invoice
                                 </Text>
                             </Pressable>
 
                             <InvoiceDetails />
-                        </View>
+                        </>
                     )}
                 </Formik>
             </ScrollView>
@@ -158,7 +166,7 @@ export default function ZapForm({
 
 const zapFormStyles = StyleSheet.create({
     wrapper:{
-        width: '100%',
+        width: '100vw',
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
@@ -170,6 +178,8 @@ const zapFormStyles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: '10px',
         padding: '1em',
-        marginTop: '25%'
+        marginTop: '25%',
+        width: '25vw',
+        height: '50vh'
     }
 })
