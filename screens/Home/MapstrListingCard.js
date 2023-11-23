@@ -174,7 +174,7 @@ export default function MapstrListingCard({
                     type !== "node" ?
                         <View style={[CardStyles.CTAWrapper]} >
                             <Pressable
-                                style={CardStyles.ctaButton}
+                                style={showLocationScreenButton ? CardStyles.ctaButton : CardStyles.ctaButtonWide}
                                 onPress={
                                     () =>   navigation.navigate('ZapFormScreen', {
                                                 screen: 'ZapFormScreen',
@@ -191,12 +191,16 @@ export default function MapstrListingCard({
                                     style={[CardStyles.ctaIcon]}
                                 />
                             </Pressable>
-                            <ShowLocationOnMapButton 
-                                map={map} 
-                                lat={lat} 
-                                lng={lng} 
-                                ScrollId={ScrollId}  
-                            />
+                            {
+                                showLocationScreenButton ?
+                                <ShowLocationOnMapButton 
+                                    map={map} 
+                                    lat={lat} 
+                                    lng={lng} 
+                                    ScrollId={ScrollId}  
+                                /> :
+                                null
+                            }
                         </View>
                     :
                         null
@@ -226,6 +230,16 @@ const CardStyles = StyleSheet.create({
     },
     date:{
         fontSize: '0.618em'
+    },
+    ctaButtonWide:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: '0.5em',
+        marginBottom: '0.5em',
+        padding: '0.5em',
+        borderRadius: '10px',
+        backgroundColor: MapstrColors['lightGrey'],
+        width: '100%'
     },
     ctaButton:{
         flexDirection: 'row',

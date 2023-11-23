@@ -59,16 +59,16 @@ export default function MapMarkers({
                     .then( (OSMResults) => {
                         const combinedResults = [...OSMResults, ...NostrResults];
                         setLocations(combinedResults)
-                        setLoadSite(false) // load the site
+                        setLoadSite(false)
                     }
                 ).catch((error) => {
                     setLocations(NostrResults)
-                    setLoadSite(true) // show loading screen
+                    setLoadSite(true)
                     console.log(error);
                 });
 
             }).catch((error) => {
-                setLoadSite(true) // show loading screen
+                setLoadSite(true)
                 console.log(error);
             });
 
@@ -97,16 +97,16 @@ export default function MapMarkers({
                         ).then( (OSMResults) => {
                             const combinedResults = [...OSMResults, ...NostrResults];
                             setLocations(combinedResults)
-                            setLoadSite(false) // load the site
+                            setLoadSite(false)
                         }
                     ).catch((error) => {
                         setLocations(NostrResults)
-                        setLoadSite(true) // show loading screen
+                        setLoadSite(true)
                         console.log(error);
                     });
 
                 }).catch((error) => {
-                    setLoadSite(true) // show loading screen
+                    setLoadSite(true)
                     console.log(error);
                 });
             })
