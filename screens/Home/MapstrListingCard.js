@@ -34,7 +34,7 @@ export default function MapstrListingCard({
             var circle = L.circle([lat,lng], {
                   color: "#1d1a1a",
                   fillOpacity: 0.2,
-                  radius: 5,
+                  radius: 40,
                   weight: 1 
               })
               circle.addTo(map)
