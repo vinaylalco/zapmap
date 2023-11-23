@@ -75,7 +75,6 @@ export default function MapMarkers({
         }else{
 
             const geoLocationID = Geolocation.getCurrentPosition((info) => {
-                
                 setCurrentLat(info.coords.latitude)
                 setCurrentLng(info.coords.longitude)
                 map.setView([info.coords.latitude,info.coords.longitude], zoom)

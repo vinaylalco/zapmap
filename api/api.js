@@ -8,11 +8,9 @@ import {preparelocationUniqueIdentifier} from '../hooks/common'
 
 export async function GetGlobalEvents(mapstrpublickey, ndk){
 
-    // let geohash = Geohash.encode(lat, lng, 4)
     const filter: NDKFilter = {
         kinds: [1],
         "#r": [mapstrpublickey],
-        // "#g": [geohash],
         limit: 500,
     };
 
@@ -248,7 +246,7 @@ export async function createReviewEvent(
         titleProp +
         ": " +
         formValues.content +
-        " || You can view this location at https://mapstr.xyz/?lat=" +
+        "       || Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
         lat +
         "&lng=" +
         lng +
@@ -262,9 +260,7 @@ export async function createReviewEvent(
         ["g", eventGeoHash],
         ["title", titleProp],
         ["r", mapstrpublickey],
-        ["t", "grownostr"],
         ["t", "mapstr"],
-        ["t", "plebchain"],
         ["l", "mapstrReviewEvent"],
         ["r", ScrollId]
     ];
@@ -365,7 +361,7 @@ export async function createEventMarker(
         formValues.title +
         ": " +
         formValues.content +
-        " || You can view at https://mapstr.xyz/?lat=" +
+        "       || Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
         lat +
         "&lng=" +
         lng +
@@ -380,9 +376,7 @@ export async function createEventMarker(
         ["title", formValues.title],
         ["r", mapstrpublickey],
         ["subject", formValues.category],
-        ["t", "grownostr"],
         ["t", "mapstr"],
-        ["t", "plebchain"],
         ["l", "mapstrLocationEvent"],
         ["r", ScrollId]
     ];
