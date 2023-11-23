@@ -7,6 +7,7 @@ import {
 } from "react-native"
 import CopyToClipboard from "react-copy-to-clipboard";
 import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function ProfileAndLogout({UserStateSettings, setUserStateSettings, UserStateNecSettings, nsec}) {
     
@@ -17,51 +18,42 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
     const [CopyPrivateKeyHex, setCopyPrivateKeyHex] = React.useState("Copy Private Key (Hex)");
 
     return (
-        <View style={[ProfileStyles.inner]}>
-                <Text style={[CommonStyles.paragraph]} >
-                    You're logged in with Public Key (npub):
-                </Text>
+        <>
+            <Text style={[CommonStyles.paragraph]} >
+                You're logged in with Public Key (npub):
+            </Text>
 
-                <Text style={[CommonStyles.paragraph]} >
-                    {UserStateSettings}
-                </Text>
-                
-                {
-                    nsec == "undefined" ?
-                    null :
-                    <CopyToClipboard
-                        text={UserStateNecSettings}
-                        onCopy={() => setCopyPrivateKeyHex("Copied")}
-                    >
-                        <button>
-                            {CopyPrivateKeyHex}
-                        </button>
-
-                    </CopyToClipboard>
-                }
-
-                <Pressable
-                    onPress={handleLogout}
-                    style={[CommonStyles.submit]}
+            <Text style={[CommonStyles.paragraph]} >
+                {UserStateSettings}
+            </Text>
+            
+            {
+                nsec == "undefined" ?
+                null :
+                <CopyToClipboard
+                    text={UserStateNecSettings}
+                    onCopy={() => setCopyPrivateKeyHex("Copied")}
+                    style={[CommonStyles.pressable]}
                 >
                     <Text
-                        style={[CommonStyles.submitInner]}
+                        style={[CommonStyles.pressableInner]}
                     >
-                        Logout
+                        {CopyPrivateKeyHex}
                     </Text>
-                </Pressable>
-        </View>
+
+                </CopyToClipboard>
+            }
+
+            <Pressable
+                onPress={handleLogout}
+                style={[CommonStyles.submit]}
+            >
+                <Text
+                    style={[CommonStyles.submitInner]}
+                >
+                    Logout
+                </Text>
+            </Pressable>
+        </>
     );
 }
-
-const ProfileStyles = StyleSheet.create({
-    inner:{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        padding: '1em',
-        height: '100vh',
-        width: '100%'
-    }
-})

@@ -3,7 +3,8 @@ import NDK, {
     NDKNip07Signer,
     NDKEvent,
 } from "@nostr-dev-kit/ndk";
-
+// import ndk from '../api/constants'
+// console.log(ndk)
 export function convertToMilliSats(amount) {
     // console.log( Number(amount)*1000 + ' in milliSatoshis' )
     return Number(amount) * 1000;
@@ -25,19 +26,20 @@ export async function generateInvoice(
     setShowInvoiceDetails,
     setLnInvoiceColor,
     RelayList,
-    nsecZapForm
+    nsecZapForm,
+    setSubmitMessage
 ) {
-    setLnInvoice("Retrieving invoice...");
+
     let signer = null
     if(nsecZapForm == "undefined"){
         signer = new NDKNip07Signer()
     }else{
         signer = new NDKPrivateKeySigner(nsecZapForm)
     }
- 
+
     const ndk2 = new NDK({
         explicitRelayUrls: RelayList,
-        signer: signer,
+        signer: signer
     });
     await ndk2.connect();
     const user = ndk2.getUser(npub);
@@ -46,21 +48,21 @@ export async function generateInvoice(
         signedEvent
             .sign(signer)
             .then((signerInstance) => {
-                
                 const amountinMilliSats = convertToMilliSats(formValues.amount);
                 const paymentNote = getPaymentNote(formValues.notes, id);
                 signedEvent
                     .zap(amountinMilliSats, paymentNote)
                     .then((result) => {
-                        setShowInvoiceDetails(true);
-                        setLnInvoice(result);
+                        setShowInvoiceDetails(true)
+                        setSubmitMessage('Get Lightning Invoice')
+                        setLnInvoice(result)
                     });
             })
             .catch((error) => {
-                setLnInvoiceColor("red");
-                setLnInvoice(
-                    "Signing Error. Check if you are logged in and then try again."
-                );
+                // setLnInvoiceColor("red");
+                // setLnInvoice(
+                //     "Signing Error. Check if you are logged in and then try again."
+                // );
                 console.log(error);
                 return false;
             });

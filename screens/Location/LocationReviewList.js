@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {Text,View } from "react-native"
+import {Text,View,ScrollView } from "react-native"
 import MapstrListingCard from "../home/MapstrListingCard.js"
 import { GetReviewEventsByLocation } from "../../api/api";
 import {CommonStyles} from '../../assets/styles/CommonStyles'
@@ -52,7 +52,7 @@ export default function LocationReviewList({
     });
 
     return(
-        <View>
+        <ScrollView showsVerticalScrollIndicator={false} >
             {
                 reviewListLoading ? 
                 <Text style={[CommonStyles.paragraph]} >Be the first to review this place!</Text> :
@@ -73,6 +73,6 @@ export default function LocationReviewList({
                     />
                 ))
             }
-        </View>
+        </ScrollView>
     )
 }

@@ -136,24 +136,18 @@ button .icon-menu{
 }
 
 .leaflet-touch .leaflet-geosearch-bar form {
-    /*background-color: rgba(42, 36, 36, 0.5);*/
     box-shadow: none;
-    /*color: #fff;*/
     padding: 0;
     border-radius:  61.68px;
+    max-width: 85%;
 }
 
 .leaflet-touch .leaflet-geosearch-bar form input {
   height: 2.5em;
-  /*background-color: rgba(42, 36, 36, 0.5);*/
-  /*color: #fff;*/
   text-align: center;
   border-radius: 50px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
 }
-/*.leaflet-touch .leaflet-geosearch-bar form input::placeholder{
-  color: #fff;
-}*/
 
 .leaflet-control-geosearch .results {
   background: #fff;

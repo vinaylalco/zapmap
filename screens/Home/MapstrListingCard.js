@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Pressable, View, Text, Image, StyleSheet } from "react-native";
 import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../../hooks/common";
 import {locationDetails} from "../../hooks/map"
-import locationPin from '../../assets/locationPin.svg'
+import osmPin from '../../assets/osmPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
 import MapstrColors from '../../assets/styles/MapstrColors'
 import {CommonStyles} from '../../assets/styles/CommonStyles'
@@ -45,10 +45,14 @@ export default function MapstrListingCard({
         return (
             <Pressable
                 onPress={onClick}
-            >
+                style={[CardStyles.ctaButton]}
+            >   
+                <Text style={CardStyles.ctaButtonInner}>View</Text>
                 <Image
-                    source={locationPin}
+                    style={[CardStyles.ctaIcon]}
+                    source={osmPin}
                 />
+                                
             </Pressable>
         )
     }
@@ -134,29 +138,27 @@ export default function MapstrListingCard({
                                     {userProfileDisplayName}
                                 </Text>
                                 was at 
+                                <Pressable
+                                    onPress={
+                                        () =>   navigation.navigate('LocationScreen', {
+                                                    screen: 'LocationScreen',
+                                                    params: { 
+                                                        title: title,
+                                                        tags: tags,
+                                                        content: content,
+                                                        lat: lat,
+                                                        lng: lng,
+                                                        id: id,
+                                                        npub: npub,
+                                                        dateCreated: dateCreated,
+                                                        ScrollId: ScrollId
+                                                    }
+                                                })
+                                    }
+                                >
+                                    <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
+                                </Pressable>
                             </Text>
-
-                            <Pressable
-                                onPress={
-                                    () =>   navigation.navigate('LocationScreen', {
-                                                screen: 'LocationScreen',
-                                                params: { 
-                                                    title: title,
-                                                    tags: tags,
-                                                    content: content,
-                                                    lat: lat,
-                                                    lng: lng,
-                                                    id: id,
-                                                    npub: npub,
-                                                    dateCreated: dateCreated,
-                                                    ScrollId: ScrollId
-                                                }
-                                            })
-                                }
-                            >
-                                <Text style={[CommonStyles.bolded600Text]} >{title}</Text>
-                            </Pressable>
-
                             <Text style={[CardStyles.date]} >{formatedDate}</Text>
                         </View>
                     </View>
@@ -170,39 +172,35 @@ export default function MapstrListingCard({
                 
                 {
                     type !== "node" ?
-                        <Pressable
-                            style={CardStyles.zapButton}
-                            onPress={
-                                () =>   navigation.navigate('ZapFormScreen', {
-                                            screen: 'ZapFormScreen',
-                                            params: {
-                                                id: id,
-                                                npub: npub
-                                            }
-                                        })
-                            }
-                        >
-                            <Text style={CardStyles.zapButtonInner}>Thanks</Text>
-                            <Image
-                                source={zap}
-                                style={[CardStyles.zapIcon]}
+                        <View style={[CardStyles.CTAWrapper]} >
+                            <Pressable
+                                style={CardStyles.ctaButton}
+                                onPress={
+                                    () =>   navigation.navigate('ZapFormScreen', {
+                                                screen: 'ZapFormScreen',
+                                                params: {
+                                                    id: id,
+                                                    npub: npub
+                                                }
+                                            })
+                                }
+                            >
+                                <Text style={CardStyles.ctaButtonInner}>Thanks</Text>
+                                <Image
+                                    source={zap}
+                                    style={[CardStyles.ctaIcon]}
+                                />
+                            </Pressable>
+                            <ShowLocationOnMapButton 
+                                map={map} 
+                                lat={lat} 
+                                lng={lng} 
+                                ScrollId={ScrollId}  
                             />
-                        </Pressable> 
+                        </View>
                     :
                         null
                 }
-                
-                {   showLocationScreenButton ?
-                        <ShowLocationOnMapButton 
-                            map={map} 
-                            lat={lat} 
-                            lng={lng} 
-                            ScrollId={ScrollId}  
-                        />
-                    :
-                        null
-                }
-
             </View>
         </View>
     );
@@ -211,8 +209,6 @@ export default function MapstrListingCard({
 const CardStyles = StyleSheet.create({
     cardOuter:{
         padding: '1em',
-        borderBottomWidth: '1px',
-        borderBottomColor: MapstrColors['lightGrey'],
         maxWidth: '100%'
     },
     cardUserMetaWrapper:{
@@ -231,16 +227,17 @@ const CardStyles = StyleSheet.create({
     date:{
         fontSize: '0.618em'
     },
-    zapButton:{
+    ctaButton:{
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: '0.5em',
         marginBottom: '0.5em',
         padding: '0.5em',
         borderRadius: '10px',
-        backgroundColor: MapstrColors['lightGrey']
+        backgroundColor: MapstrColors['lightGrey'],
+        width: '49%'
     },
-    zapButtonInner:{
+    ctaButtonInner:{
         textAlign: 'center',
         fontSize: '1em'
     },
@@ -251,11 +248,16 @@ const CardStyles = StyleSheet.create({
         color: MapstrColors['btc'],
         wordBreak: 'anywhere'
     },
-    zapIcon: {
+    ctaIcon: {
         height: '1em', 
         width: '1em',
         marginLeft: '1em',
         fontSize: '1.2em'
+    },
+    CTAWrapper:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     }
 })
 

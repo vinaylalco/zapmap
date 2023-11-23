@@ -5,28 +5,34 @@ import {
     Pressable,
     ScrollView,
     TextInput,
-    StyleSheet
+    StyleSheet,
+    ActivityIndicator,
+    Image
 } from "react-native";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { generateInvoice } from "../../hooks/lightning"
 import {CommonStyles} from '../../assets/styles/CommonStyles'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import MapstrColors from '../../assets/styles/MapstrColors'
+import backButton from '../../assets/backButton.svg'
 
 export default function ZapForm({
     id,
     npub,
     RelayList,
-    nsecZapForm
+    nsecZapForm,
+    navigation
 }) {
-
     // LN Invoice
     const [lnInvoice, setLnInvoice] = React.useState('');
     const [lnInvoiceColor, setLnInvoiceColor] = React.useState("green");
     const [lnInvoiceCopyText, setLnInvoiceCopyText] =
         React.useState("Copy LN Invoice");
-    const [showInvoiceDetails, setShowInvoiceDetails] = React.useState(false);
-
+    const [showInvoiceDetails, setShowInvoiceDetails] = React.useState(false)
+    const [SubmitMessage, setSubmitMessage] = React.useState('Get Lightning Invoice')
+    const [RelayListInState, setRelayListInState] = React.useState(RelayList);
     const createValidationSchema = yup.object().shape({
         amount: yup
             .string()
@@ -50,8 +56,6 @@ export default function ZapForm({
             return (
                 <>
                     <Text
-                        id="transition-modal-description"
-                        sx={{ mt: 2 }}
                         style={[CommonStyles.paragraph]}
                     >
                         {lnInvoice}
@@ -60,20 +64,18 @@ export default function ZapForm({
                     <CopyToClipboard
                         text={lnInvoice}
                         onCopy={() => setLnInvoiceCopyText("Copied")}
-                        style={[CommonStyles.pressable]}
+                        style={CommonStyles.pressable}
                     >
-                        <button style={[CommonStyles.pressableInner]} >
+                        <button style={CommonStyles.pressableInner} >
                             {lnInvoiceCopyText}
                         </button>
                     </CopyToClipboard>
                 </>
-            );
+            )
         } else {
             return (
                 <>
-                    <Text id="transition-modal-description"
-                        sx={{ mt: 2 }}
-                    >
+                    <Text>
                         {lnInvoice}
                     </Text>
                 </>
@@ -84,12 +86,27 @@ export default function ZapForm({
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={[zapFormStyles.wrapper]}
+            contentContainerStyle={[CommonStyles.wrapper]}
         >
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={[zapFormStyles.inner]}
+                contentContainerStyle=
+                    { 
+                        isMobile ? 
+                        [CommonStyles.innerMobile] : 
+                        [CommonStyles.inner] 
+                    }
             >
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={[CommonStyles.backButtonWrapper]}
+                >
+                    <Image
+                        source={backButton}
+                        style={[CommonStyles.backButtonIcon]}
+                    />
+                </Pressable>
+                <Text style={[CommonStyles.heading]}>Send BTC</Text>
                 <Text style={[CommonStyles.paragraph]} >Send BTC to the user who created this review or location directly.</Text>
                 <Text style={[CommonStyles.paragraph]} >Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
                 <Formik
@@ -100,6 +117,7 @@ export default function ZapForm({
                     }}
                     onSubmit={(values, { resetForm }) => {
                         setShowInvoiceDetails(false);
+                        setSubmitMessage(<ActivityIndicator size="small" color={MapstrColors['primary']} />)
                         generateInvoice(
                             id,
                             npub,
@@ -107,8 +125,10 @@ export default function ZapForm({
                             setLnInvoice,
                             setShowInvoiceDetails,
                             setLnInvoiceColor,
-                            RelayList,
-                            nsecZapForm
+                            RelayListInState,
+                            nsecZapForm,
+                            setSubmitMessage
+
                         );
                         resetForm();
                     }}
@@ -134,7 +154,7 @@ export default function ZapForm({
                             />
 
                             <TextInput
-                                style={ CommonStyles.inputField}
+                                style={CommonStyles.inputField}
                                 multiline="true"
                                 rows={5}
                                 id="note"
@@ -151,7 +171,7 @@ export default function ZapForm({
                                 style={[CommonStyles.submit]}
                             >
                                 <Text style={[CommonStyles.submitInner]} >
-                                    Get Lightning Invoice
+                                    {SubmitMessage}
                                 </Text>
                             </Pressable>
 
@@ -163,23 +183,3 @@ export default function ZapForm({
         </ScrollView>
     );
 }
-
-const zapFormStyles = StyleSheet.create({
-    wrapper:{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(42, 36, 36, 0.5)',
-        borderWidth: '1px'
-    },
-    inner:{
-        backgroundColor: '#fff',
-        borderRadius: '10px',
-        padding: '1em',
-        marginTop: '25%',
-        width: '25vw',
-        height: '50vh'
-    }
-})

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Text, View, Pressable, ScrollView, TextInput, StyleSheet } from "react-native";
+import { Text, View, Pressable, ScrollView, TextInput, StyleSheet, ActivityIndicator } from "react-native";
 import { Formik, Field, Form } from "formik";
 import { createReviewEvent } from "../../api/api";
 import NDK, { NDKPrivateKeySigner,NDKNip07Signer,NDKEvent } from "@nostr-dev-kit/ndk";
 import * as yup from "yup"
 import {CommonStyles} from '../../assets/styles/CommonStyles'
 import MapstrColors from '../../assets/styles/MapstrColors'
- 
+
 function LocationReviewForm({
     ndk,
     UserStateLocation,
@@ -17,8 +17,8 @@ function LocationReviewForm({
     nsecStateLocation
 }) {
     
-    const [reviewFormMessage, setReviewFormMessage] = React.useState(null);
-    const [reviewFormMessageColor, setReviewFormMessageColor] = React.useState(null);
+    const [reviewFormMessage, setReviewFormMessage] = React.useState("Add Review")
+    const [reviewFormMessageColor, setReviewFormMessageColor] = React.useState(null)
 
     let mapRef = React.useRef();
     const validationSchema = yup.object().shape({
@@ -29,9 +29,9 @@ function LocationReviewForm({
     });
 
     return (    
-        <ScrollView showsVerticalScrollIndicator={false} >
+        <View>
 
-            <Text style={[reviewStyles.heading]} >Write a Review</Text>
+            <Text style={[CommonStyles.heading]} >Write a Review</Text>
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{
@@ -39,16 +39,13 @@ function LocationReviewForm({
                 }}
                 onSubmit={(values, {resetForm}) => {
                     
-                    // const privadoLlave = localStorage.getItem("privado")
-                    // const signer = new NDKPrivateKeySigner(privadoLlave)
                     let signer = null
-                    setReviewFormMessage("Wait please...")
+                    setReviewFormMessage(<ActivityIndicator size="small" color={MapstrColors['primary']} />)
                     if(nsecStateLocation == "undefined"){
                         signer = new NDKNip07Signer()
                     }else{
                         signer = new NDKPrivateKeySigner(nsecStateLocation)
                     }
-
                     createReviewEvent(
                         ndk,
                         UserStateLocation,
@@ -93,39 +90,14 @@ function LocationReviewForm({
                             style={[CommonStyles.submit]}
                         >
                             <Text style={[CommonStyles.submitInner]} >
-                                Create
+                                {reviewFormMessage}
                             </Text>
                         </Pressable>
-
-                        <Text style={[reviewStyles.paragraph]} >
-                            {reviewFormMessage}
-                        </Text>
                     </View>
                 )}
             </Formik>
-        </ScrollView>
+        </View>
     );
 }
 
 export default LocationReviewForm;
-
-const reviewStyles = StyleSheet.create({
-    paragraph:{
-        fontSize: '1em',
-        margin: '0.168em',
-        padding: '0.168em',
-        overflowWrap: "break-word",
-        color: MapstrColors['darkGrey'],
-        textAlign: 'center'
-    },
-    heading:{
-        fontSize: '1.2em',
-        fontWeight: 600,
-        padding: '0.5em',
-        margin: '0.168em',
-        overflowWrap: "break-word",
-        color: MapstrColors['darkGrey'],
-        textAlign: 'center'
-    },
-})
-

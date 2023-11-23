@@ -26,12 +26,6 @@ export default function CreateNewAccount({ setUserStateSettings , setUserStateNe
             <Text style={[CommonStyles.heading]} >
                 Create a New Account
             </Text>
-            <Text style={[CommonStyles.paragraph]} >
-                If you are new to NOSTR you can create an account by hitting the button below which will also log you in to ZapMap.
-            </Text>
-            <Text style={[CommonStyles.paragraph]} >
-                <Text style={[CommonStyles.bolded600Text]} >IMPORTANT:</Text> The key pair (public and private key) created in this process should be kept someplace safe as the same pair of keys can be used in all NOSTR apps. One key pair, access to many apps. Once logged in you can see your public and private keys in the Login/Profile page.
-            </Text>
             <Pressable
                 style={[CommonStyles.submit]}
                 onPress={createNewUserKeys}

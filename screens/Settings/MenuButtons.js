@@ -9,6 +9,7 @@ import backButton from '../../assets/backButton.svg'
 import {setRelayListArray} from "../../api/api"
 import {mapstrpublickey,ndk} from '../../api/constants'
 import {CommonStyles} from '../../assets/styles/CommonStyles'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 const MenuStack = createBottomTabNavigator()
 
@@ -19,59 +20,84 @@ export default function MenuButtons({navigation}){
     const [UserStateSettings, setUserStateSettings] = React.useState(user)
     const [UserStateNecSettings, setUserStateNecSettings] = React.useState(nsec)
 
-    const Menu = () => {
+    const Menu = ({navigation}) => {
         return (
-            UserStateSettings ?
-            <View style={[MenuScreenStyles.inner]}>
-                
-                <Pressable
-                    style={[CommonStyles.pressable]}
-                    onPress={() => navigation.navigate('Create Location')}
-                >
-                    <Text
-                        style={[CommonStyles.pressableInner]}
-                    >
-                        Create a new location
-                    </Text>
-                </Pressable>
-                
-                <Pressable
-                    style={[CommonStyles.pressable]}
-                    onPress={() => navigation.navigate('User Profile')
+            <>
+                {
+                    UserStateSettings ?
+                    <View style={[MenuScreenStyles.inner]}>
+                        <Pressable
+                            onPress={
+                                () => navigation.navigate('Home', {
+                                    screen: 'HomeScreen'
+                                })
                             }
-                >
-                    <Text
-                        style={[CommonStyles.pressableInner]}
-                    >
-                        Login / Profile
-                    </Text>
-                </Pressable>
-                
-                <Pressable
-                    style={[CommonStyles.pressable]}
-                    onPress={() => navigation.navigate('Relays')}
-                >
-                    <Text
-                        style={[CommonStyles.pressableInner]}
-                    >
-                        Manage Relays
-                    </Text>
-                </Pressable>
+                            style={[CommonStyles.backButtonWrapper]}
+                        >
+                            <Image
+                                source={backButton}
+                                style={[CommonStyles.backButtonIcon]}
+                            />
+                        </Pressable>
+                        <Pressable
+                            style={[CommonStyles.pressable]}
+                            onPress={() => navigation.navigate('Create Location')}
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
+                                Create a new location
+                            </Text>
+                        </Pressable>
+                        
+                        <Pressable
+                            style={[CommonStyles.pressable]}
+                            onPress={() => navigation.navigate('User Profile')
+                                    }
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
+                                Login / Profile
+                            </Text>
+                        </Pressable>
+                        
+                        <Pressable
+                            style={[CommonStyles.pressable]}
+                            onPress={() => navigation.navigate('Relays')}
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
+                                Manage Relays
+                            </Text>
+                        </Pressable>
 
-            </View>
-            :
-            <View style={[MenuScreenStyles.inner]}>
-                <Pressable
-                    style={[CommonStyles.pressable]}
-                    onPress={() => navigation.navigate('User Profile')}
-                >
-                    <Text
-                        style={[CommonStyles.pressableInner]}
-                    >
-                        Login / Profile
-                    </Text>
-                </Pressable>
-            </View>
+                    </View>
+                    :
+                    <View style={[MenuScreenStyles.inner]}>
+                        <Pressable
+                            onPress={() => navigation.goBack()}
+                            style={[CommonStyles.backButtonWrapper]}
+                        >
+                            <Image
+                                source={backButton}
+                                style={[CommonStyles.backButtonIcon]}
+                            />
+                        </Pressable>
+                        <Pressable
+                            style={[CommonStyles.pressable]}
+                            onPress={() => navigation.navigate('User Profile')}
+                        >
+                            <Text
+                                style={[CommonStyles.pressableInner]}
+                            >
+                                Login / Profile
+                            </Text>
+                        </Pressable>
+                    </View>
+                }
+            </>
         )
     }
 
@@ -80,16 +106,7 @@ export default function MenuButtons({navigation}){
         return(
             <>
                 <Suspense fallback={<Text  >Loading...</Text>}>
-                    <Pressable
-                        onPress={() => navigation.navigate('Menu', {
-                                            screen: 'SettingsScreen'
-                                        })}
-                        
-                    >
-                        <Image
-                            source={backButton}
-                        />
-                    </Pressable>
+
                     <CreateLocationForm
                         name="CreateLocationForm"
                         ndk={ndk}
@@ -98,28 +115,25 @@ export default function MenuButtons({navigation}){
                         navigation={navigation}
                         nsec={nsec}
                     />
+
                 </Suspense>
             </>
         )
     }
 
-    const UserProfileScreen = () => {
+    const UserProfileScreen = ({navigation}) => {
 
         return(
             
-            <ScrollView showsVerticalScrollIndicator={false} >
+            <ScrollView 
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={ 
+                        isMobile ? 
+                        [CommonStyles.innerMobile] : 
+                        [CommonStyles.inner] 
+                    }
+            >
                 <Suspense fallback={<Text  >Loading...</Text>}>
-                    <Pressable
-                        onPress={() => navigation.navigate('Menu', {
-                                            screen: 'SettingsScreen'
-                                        })}
-                        
-                    >
-                        <Image
-                            source={backButton}
-                        />
-                    </Pressable>
-                        
                     <UserProfile 
                         UserStateSettings={UserStateSettings}
                         setUserStateSettings={setUserStateSettings}
@@ -128,13 +142,14 @@ export default function MenuButtons({navigation}){
                         mapstrpublickey={mapstrpublickey}
                         UserStateNecSettings={UserStateNecSettings}
                         nsec={nsec}
+                        navigation={navigation}
                     />
                 </Suspense>
             </ScrollView>
         )
     }
 
-    const MapstrRelays = () => {
+    const MapstrRelays = ({navigation}) => {
         return(
             <>
                 <Suspense fallback={<Text  >Loading...</Text>}>
@@ -148,7 +163,8 @@ export default function MenuButtons({navigation}){
                         />
                     </Pressable>
                     <RelayManagement 
-                        RelayList={setRelayListArray} 
+                        RelayList={setRelayListArray}
+                        navigation={navigation}
                     />
                 </Suspense>
             </>

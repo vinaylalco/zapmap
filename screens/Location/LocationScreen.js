@@ -6,6 +6,7 @@ import LocationReviewList from "./LocationReviewList"
 import backButton from '../../assets/backButton.svg'
 import {ndk, mapstrpublickey} from '../../api/constants'
 import {CommonStyles} from '../../assets/styles/CommonStyles'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function LocationScreen({ route, navigation }){
 
@@ -15,16 +16,29 @@ export default function LocationScreen({ route, navigation }){
     const [nsecStateLocation, setnsecStateLocation] = React.useState(nsecLocation)
     
     return(
-        <Suspense fallback={<Text  >Loading...</Text>}>
+        <Suspense fallback={<Text>Loading...</Text>}>
             <ScrollView 
                 showsVerticalScrollIndicator={false} 
-                contentContainerStyle={[LoadingScreenStyles.wrapper]}
+                contentContainerStyle={[CommonStyles.wrapper]}
             >
-                
                 <ScrollView 
-                    showsVerticalScrollIndicator={false} 
-                    contentContainerStyle={[LoadingScreenStyles.inner]}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle=
+                    { 
+                        isMobile ? 
+                        [CommonStyles.LocationInnerMobile] : 
+                        [CommonStyles.inner] 
+                    }
                 >
+                    <Pressable
+                        onPress={() => navigation.goBack()}
+                        style={[CommonStyles.backButtonWrapper]}
+                    >
+                        <Image
+                            source={backButton}
+                            style={[CommonStyles.backButtonIcon]}
+                        />
+                    </Pressable>
                     <Text style={[CommonStyles.heading]} >
                         {route.params.params.title} 
                     </Text>
@@ -37,11 +51,12 @@ export default function LocationScreen({ route, navigation }){
                     <Suspense fallback={<Text  >Loading...</Text>}>
                         <LocationReviewForm 
                             ndk={ndk}
-                            user={route.params.user}
+                            UserStateLocation={UserStateLocation}
                             mapstrpublickey={mapstrpublickey}
                             titleProp={route.params.params.title}
                             latProp={route.params.params.lat}
                             lngProp={route.params.params.lng}
+                            nsecStateLocation={nsecStateLocation}
                         />
                     </Suspense>
 
@@ -60,21 +75,3 @@ export default function LocationScreen({ route, navigation }){
         </Suspense>
     )    
 }
-
-const LoadingScreenStyles = StyleSheet.create({
-    wrapper:{
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(42, 36, 36, 0.5)'
-    },
-    inner:{
-        backgroundColor: '#fff',
-        borderRadius: '10px',
-        padding: '1em',
-        marginTop: '25%',
-        width: '25vw'
-    }
-})

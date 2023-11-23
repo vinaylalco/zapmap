@@ -2,7 +2,7 @@ import React from "react"
 import {Text,FlatList,View, StyleSheet,Image,ActivityIndicator} from "react-native"
 import {CommonStyles} from "../../assets/styles/CommonStyles"
 import loading from '../../assets/loading.svg'
- import MapstrColors from '../../assets/styles/MapstrColors'
+import MapstrColors from '../../assets/styles/MapstrColors'
 
 export default function LoadingText(){
 	return(

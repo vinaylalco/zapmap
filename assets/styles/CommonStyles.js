@@ -7,7 +7,7 @@ export const CommonStyles = StyleSheet.create({
         fontSize: '1em',
         padding: '0.168em',
         margin: '0.168em',
-        overflowWrap: "break-word"
+        overflowWrap: "anywhere"
     },
     list:{
 		padding: '0.618em'
@@ -16,7 +16,7 @@ export const CommonStyles = StyleSheet.create({
 		fontSize: '1em',
         margin: '0.168em',
 		padding: '0.168em',
-        overflowWrap: "break-word",
+        overflowWrap: "anywhere",
         color: MapstrColors['darkGrey']
 	},
 	heading:{
@@ -24,7 +24,7 @@ export const CommonStyles = StyleSheet.create({
 		fontWeight: 600,
 		padding: '0.5em',
         margin: '0.168em',
-        overflowWrap: "break-word",
+        overflowWrap: "anywhere",
         color: MapstrColors['darkGrey']
 	},
 	pressable:{
@@ -33,7 +33,8 @@ export const CommonStyles = StyleSheet.create({
 		padding: '1em',
 		marginTop: '1em',
 		marginBottom: '1em',
-		width: '100%'
+		width: '100%',
+		textAlign: 'center'
 	},
 	pressableInner:{
 		textAlign: 'center'
@@ -78,21 +79,31 @@ export const CommonStyles = StyleSheet.create({
         flexDirection: 'col'
     },
     TabWrapperMobile:{
-        height: 'fit-content',
-        width: '100%',
-        backgroundColor: '#fff',
-        padding: '0.25em',
-        borderRightWidth: '1px',
-        borderRightColor: MapstrColors['lightGrey'],
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
+    	display: 'none'
+    },
+    TabWrapperMobileShown:{
+    	position: 'absolute',
+    	top: '12px',
+    	right: '12px',
+        backgroundColor: MapstrColors['darkGrey'],
+        borderRadius: '50%',
+        zIndex: 10000000000
+    },
+    backButtonWrapper:{
+    	position: 'absolute',
+    	top: '24px',
+    	right: '24px',
+        borderRadius: '50%',
+        zIndex: 1000
+    },
+    backButtonIcon:{
+    	height: '40px',
+    	width: '40px'
     },
     Icon: {
-        height: '2em', 
-        width: '2em',
-        marginTop: '0.5em'
+        height: '1.818em', 
+        width: '1.818em',
+        margin: '4px'
     },
     TabOuterMobile:{
     	display: 'flex', 
@@ -106,9 +117,56 @@ export const CommonStyles = StyleSheet.create({
 		height: '100%'
     },
     SettingsTabBarMobile:{
-    	width: '96vw'
+    	width: '97vw'
     },
     SettingsTabBarDesktop:{
     	width: '25vw'
+    },
+    wrapper:{
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(42, 36, 36, 0.5)',
+        padding: '1em'
+    },
+    inner:{
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        height: '50vh',
+        width: '25vw',
+        flexGrow: 1, 
+        justifyContent: 'center'
+    },
+    innerMobile:{
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        height: '97vh',
+        width: '100%',
+        flexGrow: 1, 
+        justifyContent: 'center'
+    },
+    LocationInnerMobile:{
+    	backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        width: '96vw',
+        flexGrow: 1, 
+        justifyContent: 'center'
+    },
+    goToLocationButton:{
+    	position: 'absolute',
+    	zIndex: 10000000000000000,
+    	right: 0,
+    	bottom: '2em',
+    	height: '40px',
+    	width: '40px',
+    },
+    acceptBTC:{
+    	fontWeight: 600,
+    	color: MapstrColors['btc']
     }
 })

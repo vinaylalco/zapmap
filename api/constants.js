@@ -8,3 +8,4 @@ export const ndk = new NDK({
     explicitRelayUrls: RelayList
 });
 connectNDK(ndk)
+ 

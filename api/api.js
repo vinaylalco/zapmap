@@ -126,14 +126,12 @@ export function setRelayListArray(){
             "wss://relay.nostr.band",
             "wss://relayable.org",
             "wss://lightningrelay.com",
-            "wss://nostr.bongbong.com",
+            "wss://nostr.bongbong.com"
     ]
-
     if(AlteredRelayListLocal){
         let AlteredRelayListParseLocal = JSON.parse(AlteredRelayListLocal)
         RelayList = AlteredRelayListParseLocal
     }
-
     return RelayList
 }
 
@@ -277,7 +275,7 @@ export async function createReviewEvent(
                 .publish()
                 .then((publishingResult) => {
                     setReviewFormMessageColor("#FF9900");
-                    setReviewFormMessage("Review created sucessfully");
+                    setReviewFormMessage("Add Review");
                     Geolocation.getCurrentPosition((info) => {
                         GetEvents(
                             info.coords.latitude,
@@ -395,13 +393,13 @@ export async function createEventMarker(
             ndkEvent
                 .publish()
                 .then((publishingResult) => {
-                    setUserMessage("Marker created sucessfully")
+                    setUserMessage("Create")
                     return true;
                 })
                 .catch((error) => {
                     console.log(error);
                     setUserMessageColor("red");
-                    setUserMessage("Marker creation failed");
+                    setUserMessage("Create")
                     return false;
                 });
         } else {

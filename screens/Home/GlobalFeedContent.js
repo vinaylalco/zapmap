@@ -19,6 +19,7 @@ export default function GlobalFeedContent({
 	map,
 	HasNoListings,
 	setHasNoListings,
+	GlobalFeed,
 	setGlobalFeed
 }){
 	const [ListingsArray, setListingsArray] = React.useState([])
@@ -75,17 +76,6 @@ export default function GlobalFeedContent({
 	                    style={[CommonStyles.Icon]}
 	                />   
 	            </Pressable>
-	            
-	            <Pressable
-	                onPress={() => {
-	                    navigation.navigate('Home');
-	                }}
-	            >
-	                <Image
-	                    source={world}
-	                    style={[CommonStyles.Icon]}
-	                /> 
-	            </Pressable>
 	        </View>
 
 	        <ScrollView style={[GlobalStyles.LocationList]} showsVerticalScrollIndicator={false} >
@@ -95,7 +85,7 @@ export default function GlobalFeedContent({
 					<>
 						<View style={{flexDirection: 'row'}} >
 		                    <Pressable 
-		                        style={[GlobalStyles.feedButton]}
+		                        style={GlobalFeed ? [GlobalStyles.feedButtonActive] : [GlobalStyles.feedButton]}
 		                        onPress={PressedGlobalButton}
 		                    >
 		                        <Text 
@@ -104,8 +94,9 @@ export default function GlobalFeedContent({
 		                            Global
 		                        </Text>
 		                    </Pressable>
+
 		                    <Pressable 
-		                        style={[GlobalStyles.feedButton]}
+		                        style={GlobalFeed == false ? [GlobalStyles.feedButtonActive] : [GlobalStyles.feedButton]}
 		                        onPress={PressedLocalButton}
 		                    >
 		                        <Text
@@ -156,9 +147,13 @@ const GlobalStyles = StyleSheet.create({
 	},
 	feedButton:{
 		width:'50%',
+		padding: '1em'
+	},
+	feedButtonActive:{
+		width:'50%',
 		padding: '1em',
         borderBottomWidth: '1px',
-        borderBottomColor: MapstrColors['lightGrey']
+        borderBottomColor: MapstrColors['primary']
 	},
 	feedButtonInner:{
 		textAlign: 'center'

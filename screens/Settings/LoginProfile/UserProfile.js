@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
-import { View, Pressable, Text, ScrollView, ScrollIntoView, FlatList, StyleSheet } from "react-native";
+import { View, Pressable, Text, ScrollView, ScrollIntoView, FlatList, StyleSheet,Image} from "react-native";
 import LoginForm from "./LoginForm";
 import LoginWithExtension from "./LoginWithExtension";
 import CreateNewAccount from "./CreateNewAccount";
 import ProfileAndLogout from "./ProfileAndLogout.js"
 import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import backButton from '../../../assets/backButton.svg'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function UserProfile({ 
     UserStateSettings, 
@@ -13,7 +15,8 @@ export default function UserProfile({
     ndk, 
     mapstrpublickey,
     UserStateNecSettings,
-    nsec
+    nsec,
+    navigation
 }) {
     const dataPolicy = useRef(null)
     const scrollToDataPolicy = () => {
@@ -23,28 +26,38 @@ export default function UserProfile({
     if (UserStateSettings) {
         
         return (
-            <ScrollView 
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={[UserProfileStyles.inner]}
-            >
+            <>
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={[CommonStyles.backButtonWrapper]}
+                >
+                    <Image
+                        source={backButton}
+                        style={[CommonStyles.backButtonIcon]}
+                    />
+                </Pressable>
                 <ProfileAndLogout 
                     UserStateSettings={UserStateSettings}
                     setUserStateSettings={setUserStateSettings}
                     UserStateNecSettings={UserStateNecSettings}
                     nsec={nsec}
                 />
-            </ScrollView>
+            </>
         );
 
     } else {
-        // <Text style={[CommonStyles.heading]} >
-        //     What does ZapMap do with your data? <Text onClick={scrollToDataPolicy} >Read before logging in.</Text>
-        // </Text>
         return (
-            <ScrollView 
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={[UserProfileStyles.inner]}
-            >
+            <>
+                <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={[CommonStyles.backButtonWrapper]}
+                >
+                    <Image
+                        source={backButton}
+                        style={[CommonStyles.backButtonIcon]}
+                    />
+                </Pressable>
+                
                 <LoginWithExtension 
                     setUserStateSettings={setUserStateSettings}
                     setUserStateNecSettings={setUserStateNecSettings}
@@ -58,72 +71,7 @@ export default function UserProfile({
                     mapstrpublickey={mapstrpublickey}
                     setUserStateSettings={setUserStateSettings}
                 />
-
-                <Text style={[CommonStyles.heading]} ref={dataPolicy} >
-                    What do does ZapMap with location data?
-                </Text>
-                <Text style={[CommonStyles.paragraph]}>
-                    ZapMap uses your latitiude and longitude as below to allow its functionality.
-                </Text>
-                <Text style={[CommonStyles.paragraph]}>
-                    <Text style={[CommonStyles.bolded600Text]} >1. </Text>When you create a new location or review an existing location your latitude and logitude is saved to the NOSTR note (aka event) which is produced by ZapMap and saved to the various relays your account is connected to. You can manage the relays you are connected to from 'Manage Relays' once logged in.
-                </Text>
-                <Text style={[CommonStyles.paragraph]}>
-                    <Text style={[CommonStyles.bolded600Text]} >2. </Text>Your latitude and longitude is not saved locally or sent to any third party and is only stored on relays as described in point 1. At this point the code is not public but at some point it may be appropriate to release the code so that the descriptions above can be confirmed.
-                </Text>
-                <Text style={[CommonStyles.paragraph]}>
-                    <Text style={[CommonStyles.bolded600Text]} >3. </Text>While NOSTR can be used anonymously if you are concerned with associating location data with your public and private keys then ZapMap is potentially not for you. One way around this is to create a new and different set of keys that you use only with ZapMap and not with any of your other sets of keys used with other NOSTR clients.
-                </Text>
-                <Text style={[CommonStyles.paragraph]}>
-                    <Text style={[CommonStyles.bolded600Text]} >4. </Text>Your public key (npub) is also saved to the NOSTR note for any new location or review you make. Your private key (nSec) is not saved to these notes. See more below.
-                </Text>
-
-                <Text style={[CommonStyles.heading]} >
-                    What does ZapMap do with your keys?
-                </Text>
-
-                <Text style={[CommonStyles.paragraph]} >
-                    Best Practice login procedure with any NOSTR client, for eg ZapMap, 
-                    is to login with a Broswer Extension (like Alby or Nos2x). These extensions 
-                    mean that your public and private keys are not required to be saved to local 
-                    storage to interact with a NOSTR client. If you login with these there will 
-                    be no public or private key saved to the browser in local storage. If you haven't 
-                    already installed a browser extension then do so and then come back to this site 
-                    and login using that method.
-                </Text>
-
-                <Text style={[CommonStyles.paragraph]} >
-                    <Text style={[CommonStyles.bolded600Text]} >Public Key: </Text>Your Public Key (nPub) is, as stated above, saved to each new 
-                    location and review note (event) created via ZapMap. This is how you are 
-                    able to 'own' them and receive Zaps for your efforts. If you login with your 
-                    Private Key (as oppossed to Browser Extension) or create 
-                    a new NOSTR account via ZapMap then your Public Key is saved within the 
-                    browser in 'local storage'. When you logout this storage is cleared and 
-                    will only be added again if you choose to login again with your private 
-                    key or you create a new account.
-                </Text>
-
-                <Text style={[CommonStyles.paragraph]} >
-                    <Text style={[CommonStyles.bolded600Text]} >Private Key: </Text>Your Private Key (nSec) is treated in a similar way as your 
-                    Public Key except it IS NOT saved to the note (event) when you create a new 
-                    location or review. It IS saved to local storage if you login with your 
-                    private key or create a new account. If you logout the private key is 
-                    cleared from local storage and will only be saved again if you choose to 
-                    login with your private key again.
-                </Text>
-            </ScrollView>
+            </>
         );
     }
 }
-
-const UserProfileStyles = StyleSheet.create({
-    inner:{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        padding: '1em',
-        height: '100%',
-        width: '100%'
-    }
-})

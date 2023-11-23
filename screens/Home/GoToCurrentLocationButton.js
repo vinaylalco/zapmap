@@ -4,6 +4,7 @@ import {GetEvents} from '../../api/api'
 const queryOverpass = require('@derhuerst/query-overpass')
 import goToLocation from '../../assets/goToLocation.svg'
 import {useMap,useMapEvents} from "react-leaflet"
+import {CommonStyles} from '../../assets/styles/CommonStyles'
 
 export default function GoToCurrentLocationButton({ 
     CurrentLat, 
@@ -65,7 +66,7 @@ export default function GoToCurrentLocationButton({
                     onPress={onClick}
                 >
                 <Image
-                    // style={[CommonStyles.SVGImage]}
+                    style={[CommonStyles.goToLocationButton]}
                     source={goToLocation}
                 />
                 </Pressable>

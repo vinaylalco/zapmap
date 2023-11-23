@@ -15,8 +15,10 @@ import * as yup from "yup";
 import NDK from "@nostr-dev-kit/ndk";
 import {addRelay, removeRelay} from '../../../api/api'
 import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import backButton from '../../../assets/backButton.svg'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
-export default function RelayManagement({ RelayList }){
+export default function RelayManagement({ RelayList, navigation }){
 
     const [RelayListState, setRelayListState] = React.useState(RelayList)
 
@@ -49,66 +51,71 @@ export default function RelayManagement({ RelayList }){
     });
  
     return(
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[RelayStyles.inner]} >
-
-            <FlatList
-                data={RelayListState}
-                renderItem={({item}) => <Item title={item} />}
-                keyExtractor={item => Math.random()}
-            />
-            
-            <Formik
-                validationSchema={createValidationSchema}
-                initialValues={{
-                    newRelayName: "",
-                }}
-                onSubmit={(values, {resetForm}) => {
-                    addRelay(values.newRelayName, RelayListState, setRelayListState)
-                    resetForm();
-                }}
+        <>  
+            <Pressable
+                onPress={() => navigation.goBack()}
+                style={[CommonStyles.backButtonWrapper]}
             >
-                {({
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    values,
-                    errors,
-                    isValid,
-                }) => (
-                    <>
-                        <TextInput
-                            style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
-                            name="newRelayName"
-                            placeholder="URL eg wss://relay.address"
-                            value={values.newRelayName}
-                            onChangeText={handleChange("newRelayName")}
-                            onBlur={handleBlur("newRelayName")}
-                        />
+                <Image
+                    source={backButton}
+                    style={[CommonStyles.backButtonIcon]}
+                />
+            </Pressable>
+            <ScrollView 
+                showsVerticalScrollIndicator={false} 
+                contentContainerStyle={ 
+                    isMobile ? 
+                    [CommonStyles.innerMobile] : 
+                    [CommonStyles.inner] 
+                }
+            >
+                <FlatList
+                    contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+                    data={RelayListState}
+                    renderItem={({item}) => <Item title={item} />}
+                    keyExtractor={item => Math.random()}
+                />
+                <Formik
+                    validationSchema={createValidationSchema}
+                    initialValues={{
+                        newRelayName: "",
+                    }}
+                    onSubmit={(values, {resetForm}) => {
+                        addRelay(values.newRelayName, RelayListState, setRelayListState)
+                        resetForm();
+                    }}
+                >
+                    {({
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        values,
+                        errors,
+                        isValid,
+                    }) => (
+                        <>
+                            <TextInput
+                                style={ errors.newRelayName === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                                name="newRelayName"
+                                placeholder="URL eg wss://relay.address"
+                                value={values.newRelayName}
+                                onChangeText={handleChange("newRelayName")}
+                                onBlur={handleBlur("newRelayName")}
+                            />
 
-                        <Pressable 
-                            onPress={handleSubmit} 
-                            disabled={!isValid}
-                            style={[CommonStyles.submit]} 
-                        >
-                            <Text style={[CommonStyles.submitInner]} >
-                                Add New Relay
-                            </Text>
-                        </Pressable>
-                    </>
-                )}
-            </Formik>
-        </ScrollView>
+                            <Pressable 
+                                onPress={handleSubmit} 
+                                disabled={!isValid}
+                                style={[CommonStyles.submit]} 
+                            >
+                                <Text style={[CommonStyles.submitInner]} >
+                                    Add New Relay
+                                </Text>
+                            </Pressable>
+                        </>
+                    )}
+                </Formik>
+            </ScrollView>
+        </>
     )
 }
-
-const RelayStyles = StyleSheet.create({
-    inner:{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
-        padding: '1em',
-        height: '100%',
-        width: '100%'
-    }
-})

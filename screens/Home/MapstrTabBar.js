@@ -5,7 +5,6 @@ import moon from '../../assets/moon.svg'
 import MapstrColors from '../../assets/styles/MapstrColors'
 
 export default function MapstrTabBar({ route, navigation }) {
-
     return (
         <View 
             style={[TabStyles.TabWrapper]}

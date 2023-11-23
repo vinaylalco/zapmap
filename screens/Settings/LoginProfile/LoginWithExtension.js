@@ -31,10 +31,6 @@ export default function LoginWithExtension({ setUserStateSettings, setUserStateN
                 Login With Extension
             </Text>
 
-            <Text style={[CommonStyles.paragraph]} >
-                <Text>NB:</Text> Logging in with a browser extension is the safest way to login to ZapMap or any NOSTR client. If you don't already have an extension this option won't work for you yet. Install Alby or Nostr2x before attempting to login with this method.
-            </Text>
-
             <Pressable
                 style={[CommonStyles.submit]}
                 onPress={loginWithBrowserExtension}

@@ -10,6 +10,8 @@ import {CurrentLocation} from '../../hooks/map'
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import {HomeScreenStyles} from './HomeScreenStyles'
+import {CommonStyles} from '../../assets/styles/CommonStyles'
+import menu from '../../assets/menu.svg'
 
 export default function HomeScreen({route, navigation}) {
     
@@ -39,6 +41,26 @@ export default function HomeScreen({route, navigation}) {
                 [HomeScreenStyles.HomeWrapperDesktop] 
             }
         >
+            {
+                isMobile ?
+                <View
+                    style={[CommonStyles.TabWrapperMobileShown]}
+                >
+                    <Pressable
+                        onPress={() => {
+                                navigation.navigate('Settings');
+                            }}
+                    >
+                        <Image
+                            source={menu}
+                            style={[CommonStyles.Icon]}
+                        />   
+                    </Pressable>
+                </View>
+                :
+                null 
+            }
+
             <View 
                 showsVerticalScrollIndicator={false}
                 style=
@@ -62,7 +84,9 @@ export default function HomeScreen({route, navigation}) {
                         CurrentLng={CurrentLng}
                         HasNoListings={HasNoListings}
                         setHasNoListings={setHasNoListings}
+                        GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
+                        route={route}
                     />
                      :
                     <DrawerContent 
@@ -77,7 +101,9 @@ export default function HomeScreen({route, navigation}) {
                         CurrentLng={CurrentLng}
                         HasNoListings={HasNoListings}
                         setHasNoListings={setHasNoListings}
+                        GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
+                        route={route}
                     />
                 }
                 
@@ -145,7 +171,6 @@ export default function HomeScreen({route, navigation}) {
                             mapstrpublickey={mapstrpublickey}
                             ndk={ndk}
                             setLocations={setLocations}
-                            setLoadSite={setLoadSite}
                             radius={radius}
                             radiusOSM={radiusOSM}
                             HasNoListings={HasNoListings}

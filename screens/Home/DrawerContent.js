@@ -8,6 +8,7 @@ import LoadingText from "./LoadingText"
 import MapstrColors from '../../assets/styles/MapstrColors'
 import world from '../../assets/world.svg'
 import menu from '../../assets/menu.svg'
+import menuDesktop from '../../assets/menuDesktop.svg'
 import moon from '../../assets/moon.svg'
 import {CommonStyles} from '../../assets/styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
@@ -22,7 +23,9 @@ export default function DrawerContent({
 	map,
 	HasNoListings,
 	setHasNoListings,
-	setGlobalFeed
+	GlobalFeed,
+	setGlobalFeed,
+	route
 }){
 	const listingsArray = []
 	let LocalHasNoListings = false
@@ -82,26 +85,15 @@ export default function DrawerContent({
 	                [CommonStyles.TabWrapperDesktop] 
 	            }
 	        >
-	            <Pressable
+    			<Pressable
 	                onPress={() => {
 	                        navigation.navigate('Settings');
 	                    }}
 	            >
 	                <Image
-	                    source={menu}
+	                    source={isMobile ? menu : menuDesktop}
 	                    style={[CommonStyles.Icon]}
 	                />   
-	            </Pressable>
-	            
-	            <Pressable
-	                onPress={() => {
-	                    navigation.navigate('Home');
-	                }}
-	            >
-	                <Image
-	                    source={world}
-	                    style={[CommonStyles.Icon]}
-	                /> 
 	            </Pressable>
 	        </View>
 
@@ -112,8 +104,9 @@ export default function DrawerContent({
 					:
 					<>
 						<View style={{flexDirection: 'row'}} >
+		                    
 		                    <Pressable 
-		                        style={[DrawerStyles.feedButton]}
+		                        style={GlobalFeed ? [DrawerStyles.feedButtonActive] : [DrawerStyles.feedButton]}
 		                        onPress={PressedGlobalButton}
 		                    >
 		                        <Text 
@@ -122,8 +115,9 @@ export default function DrawerContent({
 		                            Global
 		                        </Text>
 		                    </Pressable>
+
 		                    <Pressable 
-		                        style={[DrawerStyles.feedButton]}
+		                        style={GlobalFeed == false ? [DrawerStyles.feedButtonActive] : [DrawerStyles.feedButton]}
 		                        onPress={PressedLocalButton}
 		                    >
 		                        <Text
@@ -132,6 +126,7 @@ export default function DrawerContent({
 		                            Local
 		                        </Text>
 		                    </Pressable>
+
 		                </View>
 
 		                <FlatList
@@ -178,9 +173,13 @@ const DrawerStyles = StyleSheet.create({
 	},
 	feedButton:{
 		width:'50%',
+		padding: '1em'
+	},
+	feedButtonActive:{
+		width:'50%',
 		padding: '1em',
         borderBottomWidth: '1px',
-        borderBottomColor: MapstrColors['lightGrey']
+        borderBottomColor: MapstrColors['primary']
 	},
 	feedButtonInner:{
 		textAlign: 'center'
