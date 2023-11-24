@@ -32,9 +32,9 @@ export default function MapstrListingCard({
         function onClick() {
 
             var circle = L.circle([lat,lng], {
-                  color: "#1d1a1a",
+                  color: MapstrColors['darkGrey'],
                   fillOpacity: 0.2,
-                  radius: 40,
+                  radius: 15,
                   weight: 1 
               })
               circle.addTo(map)

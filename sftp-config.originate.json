@@ -20,6 +20,7 @@
     //"port": "22",
     
     "remote_path": "/home3/ayahuat5/public_html/mapstr",
+    // "remote_path": "/home3/ayahuat5/zapmap.mapstr.xyz",
     "ignore_regexes": [
         "\\.sublime-(project|workspace)", "sftp-config(-alt\\d?)?\\.json",
         "sftp-settings\\.json", "/venv/", "\\.svn/", "\\.hg/", "\\.git/",
