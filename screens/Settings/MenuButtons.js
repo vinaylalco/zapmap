@@ -8,7 +8,7 @@ import SettingsTabBar from './SettingsTabBar'
 import backButton from '../../assets/backButton.svg'
 import {setRelayListArray} from "../../api/api"
 import {mapstrpublickey,ndk} from '../../api/constants'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 const MenuStack = createBottomTabNavigator()

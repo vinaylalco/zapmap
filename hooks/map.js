@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from "react-le
 import btcPin from '../assets/btcPin.svg'
 import nostrPin from '../assets/nostrPin.svg'
 import osmPin from '../assets/osmPin.svg'
-import {CommonStyles} from '../assets/styles/CommonStyles'
+import {CommonStyles} from '../styles/CommonStyles'
 
 export function locationDetails(content, subject, amenity){
     if( amenity ){

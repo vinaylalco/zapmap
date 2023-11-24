@@ -5,7 +5,7 @@ import {
     Text
 } from "react-native"
 import NDK, { NDKNip07Signer } from "@nostr-dev-kit/ndk"
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 
 export default function LoginWithExtension({ setUserStateSettings, setUserStateNecSettings }) { 
 

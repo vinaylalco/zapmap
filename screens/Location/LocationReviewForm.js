@@ -4,8 +4,8 @@ import { Formik, Field, Form } from "formik";
 import { createReviewEvent } from "../../api/api";
 import NDK, { NDKPrivateKeySigner,NDKNip07Signer,NDKEvent } from "@nostr-dev-kit/ndk";
 import * as yup from "yup"
-import {CommonStyles} from '../../assets/styles/CommonStyles'
-import MapstrColors from '../../assets/styles/MapstrColors'
+import {CommonStyles} from '../../styles/CommonStyles'
+import MapstrColors from '../../styles/MapstrColors'
 
 function LocationReviewForm({
     ndk,

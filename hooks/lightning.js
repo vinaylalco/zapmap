@@ -59,12 +59,7 @@ export async function generateInvoice(
                     });
             })
             .catch((error) => {
-                // setLnInvoiceColor("red");
-                // setLnInvoice(
-                //     "Signing Error. Check if you are logged in and then try again."
-                // );
-                console.log(error);
-                return false;
+                console.log('Signing error - set a message')
             });
     });
 }

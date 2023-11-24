@@ -1,8 +1,6 @@
 import {View, Text, Pressable, Image, StyleSheet} from 'react-native'
-import world from '../../assets/world.svg'
 import menu from '../../assets/menu.svg'
-import moon from '../../assets/moon.svg'
-import MapstrColors from '../../assets/styles/MapstrColors'
+import MapstrColors from '../../styles/MapstrColors'
 
 export default function MapstrTabBar({ route, navigation }) {
     return (

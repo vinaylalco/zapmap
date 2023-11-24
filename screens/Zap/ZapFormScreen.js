@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-nati
 import ZapForm from "./ZapForm"
 import {setRelayListArray} from '../../api/api'
 import backButton from '../../assets/backButton.svg'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 
 export default function ZapFormScreen( { route, navigation } ){
     

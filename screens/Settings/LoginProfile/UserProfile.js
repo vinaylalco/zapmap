@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm";
 import LoginWithExtension from "./LoginWithExtension";
 import CreateNewAccount from "./CreateNewAccount";
 import ProfileAndLogout from "./ProfileAndLogout.js"
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 import backButton from '../../../assets/backButton.svg'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 

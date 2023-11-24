@@ -1,5 +1,5 @@
 import {StyleSheet} from "react-native";
-import MapstrColors from '../assets/styles/MapstrColors'
+import MapstrColors from '../styles/MapstrColors'
 
 export const ListingsStyles = StyleSheet.create({
     Logo: {

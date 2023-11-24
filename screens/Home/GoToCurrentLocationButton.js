@@ -4,7 +4,7 @@ import {GetEvents} from '../../api/api'
 const queryOverpass = require('@derhuerst/query-overpass')
 import goToLocation from '../../assets/goToLocation.svg'
 import {useMap,useMapEvents} from "react-leaflet"
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 
 export default function GoToCurrentLocationButton({ 
     CurrentLat, 

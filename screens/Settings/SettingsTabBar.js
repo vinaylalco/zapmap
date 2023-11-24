@@ -1,6 +1,6 @@
 import React, {useState, Suspense} from "react";
 import { View, Text } from "react-native"
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function SettingsTabBar({ navigation }) {

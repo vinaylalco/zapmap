@@ -8,13 +8,12 @@ import {
     ScrollView,
     Image,
     StyleSheet
-} from "react-native";
-
-import { Formik, Field, Form } from "formik";
-import * as yup from "yup";
-import NDK from "@nostr-dev-kit/ndk";
+} from "react-native"
+import { Formik, Field, Form } from "formik"
+import * as yup from "yup"
+import NDK from "@nostr-dev-kit/ndk"
 import {addRelay, removeRelay} from '../../../api/api'
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 import backButton from '../../../assets/backButton.svg'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
@@ -25,7 +24,7 @@ export default function RelayManagement({ RelayList, navigation }){
     type ItemProps = {title: string};
     const Item = ({title}: ItemProps) => (
         
-        <View>
+        <View style={{display: 'flex', alignItems: 'center'}}>
             <Text style={[CommonStyles.paragraph]} >{title}</Text>
             <Text 
                 style={[CommonStyles.bolded600Text]} 
@@ -61,6 +60,7 @@ export default function RelayManagement({ RelayList, navigation }){
                     style={[CommonStyles.backButtonIcon]}
                 />
             </Pressable>
+
             <ScrollView 
                 showsVerticalScrollIndicator={false} 
                 contentContainerStyle={ 
@@ -70,7 +70,11 @@ export default function RelayManagement({ RelayList, navigation }){
                 }
             >
                 <FlatList
-                    contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+                    contentContainerStyle={{
+                        flexGrow: 1, 
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
                     data={RelayListState}
                     renderItem={({item}) => <Item title={item} />}
                     keyExtractor={item => Math.random()}

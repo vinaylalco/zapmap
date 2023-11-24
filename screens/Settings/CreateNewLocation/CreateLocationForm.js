@@ -15,9 +15,9 @@ import { createEventMarker } from "../../../api/api.js"
 import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
 import Geolocation from "@react-native-community/geolocation"
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 import backButton from '../../../assets/backButton.svg'
-import MapstrColors from '../../../assets/styles/MapstrColors'
+import MapstrColors from '../../../styles/MapstrColors'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 function CreateLocationForm({

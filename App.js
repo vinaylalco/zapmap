@@ -9,7 +9,7 @@ import HomeScreen from './screens/home/HomeScreen'
 import LocationScreen from './screens/location/LocationScreen'
 import ZapFormScreen from './screens/zap/ZapFormScreen'
 import SettingsScreen from './screens/settings/SettingsScreen'
-import "./assets/styles/App.css"
+import "./styles/App.css"
 import { createStackNavigator } from '@react-navigation/stack'
 
 export default function App() {

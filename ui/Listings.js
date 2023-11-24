@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {View, Text, ScrollView, StyleSheet, Pressable, Image, FlatList} from "react-native";
 import MapstrListingCard from "../screens/home/MapstrListingCard"
-import {CommonStyles} from '../assets/styles/CommonStyles'
+import {CommonStyles} from '../styles/CommonStyles'
 import {ListingsStyles} from './ListingsStyles'
 import {BrowserView, MobileView, isBrowser, isMobile} from 'react-device-detect'
 import menu from '../assets/menu.svg'

@@ -10,7 +10,7 @@ import {CurrentLocation} from '../../hooks/map'
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import {HomeScreenStyles} from './HomeScreenStyles'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import menu from '../../assets/menu.svg'
 
 export default function HomeScreen({route, navigation}) {

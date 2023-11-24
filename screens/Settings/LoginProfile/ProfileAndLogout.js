@@ -6,7 +6,7 @@ import {
     StyleSheet
 } from "react-native"
 import CopyToClipboard from "react-copy-to-clipboard";
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function ProfileAndLogout({UserStateSettings, setUserStateSettings, UserStateNecSettings, nsec}) {

@@ -10,7 +10,7 @@ import {
 
 import NDK from "@nostr-dev-kit/ndk";
 import * as yup from "yup"
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 
 function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
 

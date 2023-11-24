@@ -4,8 +4,8 @@ import MapstrListingCard from "./MapstrListingCard"
 import { preparelocationUniqueIdentifier } from "../../hooks/common.js"
 import { GetEvents } from "../../api/api.js"
 import Geohash from "latlon-geohash"
-import MapstrColors from '../../assets/styles/MapstrColors'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import MapstrColors from '../../styles/MapstrColors'
+import {CommonStyles} from '../../styles/CommonStyles'
 import Listings from '../../ui/Listings'
 
 export default function DrawerContent({ 

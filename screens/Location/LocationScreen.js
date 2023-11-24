@@ -5,7 +5,7 @@ import LocationReviewForm from "./LocationReviewForm"
 import LocationReviewList from "./LocationReviewList"
 import backButton from '../../assets/backButton.svg'
 import {ndk, mapstrpublickey} from '../../api/constants'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function LocationScreen({ route, navigation }){

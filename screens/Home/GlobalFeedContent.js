@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 import {View, StyleSheet, Text, Pressable, Image, ScrollView, FlatList} from "react-native"
 import MapstrListingCard from "./MapstrListingCard.js"
 import { GetGlobalEvents } from "../../api/api.js"
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import Geohash from "latlon-geohash"
-import MapstrColors from '../../assets/styles/MapstrColors'
+import MapstrColors from '../../styles/MapstrColors'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import Listings from '../../ui/Listings'
 

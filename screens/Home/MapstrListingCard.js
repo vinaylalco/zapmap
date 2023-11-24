@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Pressable, View, Text, Image, StyleSheet } from "react-native";
-import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../../hooks/common";
+import React, { useState } from "react"
+import { Pressable, View, Text, Image, StyleSheet } from "react-native"
+import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../../hooks/common"
 import {locationDetails} from "../../hooks/map"
 import osmPin from '../../assets/osmPin.svg'
 import lightningPayment from '../../assets/lightningPayment.svg'
-import MapstrColors from '../../assets/styles/MapstrColors'
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import MapstrColors from '../../styles/MapstrColors'
+import {CommonStyles} from '../../styles/CommonStyles'
 import zap from '../../assets/zap.svg'
 
 export default function MapstrListingCard({

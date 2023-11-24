@@ -5,7 +5,7 @@ import {
     Text
 } from "react-native"
 import { generatePrivateKey, getPublicKey } from "nostr-tools";
-import {CommonStyles} from '../../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../../styles/CommonStyles'
 
 export default function CreateNewAccount({ setUserStateSettings , setUserStateNecSettings}) { 
 

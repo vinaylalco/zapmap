@@ -13,9 +13,9 @@ import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { generateInvoice } from "../../hooks/lightning"
-import {CommonStyles} from '../../assets/styles/CommonStyles'
+import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
-import MapstrColors from '../../assets/styles/MapstrColors'
+import MapstrColors from '../../styles/MapstrColors'
 import backButton from '../../assets/backButton.svg'
 
 export default function ZapForm({

@@ -30,7 +30,6 @@ export async function GetGlobalEvents(mapstrpublickey, ndk){
                     lng = parseFloat(latLngString[1], 10);
                     title = event.tags[2][1];
 
-                    // Need some validation on the form to create events
                     if (
                         typeof(lat) === "number" && 
                         lat > 0 &&
@@ -46,8 +45,7 @@ export async function GetGlobalEvents(mapstrpublickey, ndk){
                             npub: event.pubkey,
                             title: title,
                             dateCreated: event.created_at,
-                            tags: event.tags,
-                            // locationUniqueIdentifier: preparelocationUniqueIdentifier(title, geohash)
+                            tags: event.tags
                         });
                     }
                 }
@@ -85,7 +83,6 @@ export async function GetEvents(lat, lng, mapstrpublickey, ndk, mapstrEventType)
                     lng = parseFloat(latLngString[1], 10);
                     title = event.tags[2][1];
 
-                    // Need some validation on the form to create events
                     if (
                         typeof(lat) === "number" && 
                         lat > 0 &&
@@ -190,7 +187,6 @@ export async function GetReviewEventsByLocation(mapstrpublickey, ndk, mapstrEven
                     lng = parseFloat(latLngString[1], 10);
                     title = event.tags[2][1];
 
-                    // Need some validation on the form to create events
                     if (
                         typeof(lat) === "number" && 
                         lat > 0 &&
@@ -246,7 +242,7 @@ export async function createReviewEvent(
         titleProp +
         ": " +
         formValues.content +
-        "       || Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
+        "       ||       Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
         lat +
         "&lng=" +
         lng +
@@ -330,6 +326,9 @@ export async function createReviewEvent(
             setReviewFormMessageColor("red");
             setReviewFormMessage("Review creation failed");
         }
+    })
+    .catch((error) => {
+        console.log('Signing error - set a message')
     });
 }
 
@@ -361,7 +360,7 @@ export async function createEventMarker(
         formValues.title +
         ": " +
         formValues.content +
-        "       || Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
+        "       ||       Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
         lat +
         "&lng=" +
         lng +
@@ -400,5 +399,8 @@ export async function createEventMarker(
             console.log("Dev Mode")
             console.log(ndkEvent)
         }
+    })
+    .catch((error) => {
+        console.log('Signing error - set a message')
     });
 }
