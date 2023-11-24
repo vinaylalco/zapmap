@@ -229,8 +229,7 @@ function SettingsScreen({route, navigation}) {
 }
 
 export default function App() {
-    // tabBar={props => <TabBar {...props} />}
-=======
+
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
 import tileLayer from "./screens/home/tileLayer"
