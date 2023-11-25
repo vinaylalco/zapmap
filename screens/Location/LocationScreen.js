@@ -26,7 +26,7 @@ export default function LocationScreen({ route, navigation }){
                     contentContainerStyle=
                     { 
                         isMobile ? 
-                        [CommonStyles.LocationInnerMobile] : 
+                        [CommonStyles.innerMobile] : 
                         [CommonStyles.inner] 
                     }
                 >

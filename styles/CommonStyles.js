@@ -149,14 +149,6 @@ export const CommonStyles = StyleSheet.create({
         flexGrow: 1, 
         justifyContent: 'center'
     },
-    LocationInnerMobile:{
-    	backgroundColor: '#fff',
-        borderRadius: '10px',
-        padding: '1em',
-        width: '96vw',
-        flexGrow: 1, 
-        justifyContent: 'center'
-    },
     goToLocationButton:{
     	position: 'absolute',
     	zIndex: 10000000000000000,

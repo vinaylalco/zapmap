@@ -64,15 +64,7 @@ export default function MenuButtons({navigation}){
                     </View>
                     :
                     <View style={[MenuScreenStyles.inner]}>
-                        <Pressable
-                            onPress={() => navigation.goBack()}
-                            style={[CommonStyles.backButtonWrapper]}
-                        >
-                            <Image
-                                source={backButton}
-                                style={[CommonStyles.backButtonIcon]}
-                            />
-                        </Pressable>
+                        <BackButton navigation={navigation} />
                         <Pressable
                             style={[CommonStyles.pressable]}
                             onPress={() => navigation.navigate('User Profile')}
@@ -141,15 +133,7 @@ export default function MenuButtons({navigation}){
         return(
             <>
                 <Suspense fallback={<Text  >Loading...</Text>}>
-                    <Pressable
-                        onPress={() => navigation.navigate('Menu', {
-                                            screen: 'SettingsScreen'
-                                        })}
-                    >
-                        <Image
-                            source={backButton}
-                        />
-                    </Pressable>
+                    <BackButton navigation={navigation} />
                     <RelayManagement 
                         RelayList={setRelayListArray}
                         navigation={navigation}
