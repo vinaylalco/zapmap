@@ -2,7 +2,6 @@ import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import ZapForm from "./ZapForm"
 import {setRelayListArray} from '../../api/api'
-import backButton from '../../assets/backButton.svg'
 import {CommonStyles} from '../../styles/CommonStyles'
 
 export default function ZapFormScreen( { route, navigation } ){

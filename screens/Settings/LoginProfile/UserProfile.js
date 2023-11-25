@@ -5,8 +5,8 @@ import LoginWithExtension from "./LoginWithExtension";
 import CreateNewAccount from "./CreateNewAccount";
 import ProfileAndLogout from "./ProfileAndLogout.js"
 import {CommonStyles} from '../../../styles/CommonStyles'
-import backButton from '../../../assets/backButton.svg'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import BackButton from '../../../ui/BackButton'
 
 export default function UserProfile({ 
     UserStateSettings, 
@@ -27,15 +27,7 @@ export default function UserProfile({
         
         return (
             <>
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={[CommonStyles.backButtonWrapper]}
-                >
-                    <Image
-                        source={backButton}
-                        style={[CommonStyles.backButtonIcon]}
-                    />
-                </Pressable>
+                <BackButton navigation={navigation} />
                 <ProfileAndLogout 
                     UserStateSettings={UserStateSettings}
                     setUserStateSettings={setUserStateSettings}
@@ -48,15 +40,7 @@ export default function UserProfile({
     } else {
         return (
             <>
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={[CommonStyles.backButtonWrapper]}
-                >
-                    <Image
-                        source={backButton}
-                        style={[CommonStyles.backButtonIcon]}
-                    />
-                </Pressable>
+                <BackButton navigation={navigation} />
                 
                 <LoginWithExtension 
                     setUserStateSettings={setUserStateSettings}

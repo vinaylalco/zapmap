@@ -4,7 +4,6 @@ import MenuButtons from './MenuButtons'
 import CreateLocationForm from './CreateNewLocation/CreateLocationForm'
 import UserProfile from './LoginProfile/UserProfile'
 import RelayManagement from './RelayManagement/RelayManagement.js'
-import backButton from '../../assets/backButton.svg'
 import {setRelayListArray} from "../../api/api"
 import {mapstrpublickey,ndk} from '../../api/constants'
 import { createStackNavigator } from '@react-navigation/stack'

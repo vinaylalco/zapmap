@@ -16,9 +16,9 @@ import NDK, { NDKPrivateKeySigner, NDKNip07Signer } from "@nostr-dev-kit/ndk"
 import * as yup from "yup"
 import Geolocation from "@react-native-community/geolocation"
 import {CommonStyles} from '../../../styles/CommonStyles'
-import backButton from '../../../assets/backButton.svg'
 import MapstrColors from '../../../styles/MapstrColors'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import BackButton from '../../../ui/BackButton'
 
 function CreateLocationForm({
     name,
@@ -113,15 +113,7 @@ function CreateLocationForm({
                 field
             }) => (
             <>
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={[CommonStyles.backButtonWrapper]}
-                >
-                    <Image
-                        source={backButton}
-                        style={[CommonStyles.backButtonIcon]}
-                    />
-                </Pressable>
+                <BackButton navigation={navigation} />
                 <View
                     style={ 
                         isMobile ? 

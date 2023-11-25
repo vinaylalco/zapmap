@@ -5,11 +5,11 @@ import CreateLocationForm from './CreateNewLocation/CreateLocationForm'
 import UserProfile from './LoginProfile/UserProfile'
 import RelayManagement from './RelayManagement/RelayManagement.js'
 import SettingsTabBar from './SettingsTabBar'
-import backButton from '../../assets/backButton.svg'
 import {setRelayListArray} from "../../api/api"
 import {mapstrpublickey,ndk} from '../../api/constants'
 import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import BackButton from '../../ui/BackButton'
 
 const MenuStack = createBottomTabNavigator()
 
@@ -26,19 +26,7 @@ export default function MenuButtons({navigation}){
                 {
                     UserStateSettings ?
                     <View style={[MenuScreenStyles.inner]}>
-                        <Pressable
-                            onPress={
-                                () => navigation.navigate('Home', {
-                                    screen: 'HomeScreen'
-                                })
-                            }
-                            style={[CommonStyles.backButtonWrapper]}
-                        >
-                            <Image
-                                source={backButton}
-                                style={[CommonStyles.backButtonIcon]}
-                            />
-                        </Pressable>
+                        <BackButton navigation={navigation} />
                         <Pressable
                             style={[CommonStyles.pressable]}
                             onPress={() => navigation.navigate('Create Location')}

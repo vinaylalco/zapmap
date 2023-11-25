@@ -3,10 +3,10 @@ import { Text, View, ScrollView, Pressable, Image, StyleSheet } from 'react-nati
 import {locationDetails} from '../../hooks/map'
 import LocationReviewForm from "./LocationReviewForm"
 import LocationReviewList from "./LocationReviewList"
-import backButton from '../../assets/backButton.svg'
 import {ndk, mapstrpublickey} from '../../api/constants'
 import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import BackButton from '../../ui/BackButton'
 
 export default function LocationScreen({ route, navigation }){
 
@@ -30,15 +30,7 @@ export default function LocationScreen({ route, navigation }){
                         [CommonStyles.inner] 
                     }
                 >
-                    <Pressable
-                        onPress={() => navigation.goBack()}
-                        style={[CommonStyles.backButtonWrapper]}
-                    >
-                        <Image
-                            source={backButton}
-                            style={[CommonStyles.backButtonIcon]}
-                        />
-                    </Pressable>
+                    <BackButton navigation={navigation} />
                     <Text style={[CommonStyles.heading]} >
                         {route.params.params.title} 
                     </Text>

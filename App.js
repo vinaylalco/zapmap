@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-nati
 import { NavigationContainer } from "@react-navigation/native"
 import { GetEvents, connectNDK } from "./api/api"
 import {mapstrpublickey,ndk} from './api/constants.js'
-import backButton from './assets/backButton.svg'
 import HomeScreen from './screens/home/HomeScreen'
 import LocationScreen from './screens/location/LocationScreen'
 import ZapFormScreen from './screens/zap/ZapFormScreen'

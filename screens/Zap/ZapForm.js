@@ -16,7 +16,7 @@ import { generateInvoice } from "../../hooks/lightning"
 import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import MapstrColors from '../../styles/MapstrColors'
-import backButton from '../../assets/backButton.svg'
+import BackButton from '../../ui/BackButton'
 
 export default function ZapForm({
     id,
@@ -97,15 +97,8 @@ export default function ZapForm({
                         [CommonStyles.inner] 
                     }
             >
-                <Pressable
-                    onPress={() => navigation.goBack()}
-                    style={[CommonStyles.backButtonWrapper]}
-                >
-                    <Image
-                        source={backButton}
-                        style={[CommonStyles.backButtonIcon]}
-                    />
-                </Pressable>
+                <BackButton navigation={navigation} />
+                
                 {
                     UserStateZapForm ?
                     <>
