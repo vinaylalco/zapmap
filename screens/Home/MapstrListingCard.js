@@ -27,7 +27,7 @@ export default function MapstrListingCard({
     currrentLng
 }) {
 
-    const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId } ) => {
+    const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type } ) => {
     
         function onClick() {
 
@@ -45,7 +45,7 @@ export default function MapstrListingCard({
         return (
             <Pressable
                 onPress={onClick}
-                style={[CardStyles.ctaButton]}
+                style={type == 'node' ? CardStyles.ctaButtonWide : CardStyles.ctaButton}
             >   
                 <Text style={CardStyles.ctaButtonInner}>View</Text>
                 <Image
@@ -198,12 +198,21 @@ export default function MapstrListingCard({
                                     lat={lat} 
                                     lng={lng} 
                                     ScrollId={ScrollId}  
+                                    type={type}
                                 /> :
                                 null
                             }
                         </View>
                     :
-                        null
+                        <View style={[CardStyles.CTAWrapper]} >
+                            <ShowLocationOnMapButton 
+                                map={map} 
+                                lat={lat} 
+                                lng={lng} 
+                                ScrollId={ScrollId}  
+                                type={type}
+                            />
+                        </View>
                 }
             </View>
         </View>
