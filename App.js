@@ -1,7 +1,6 @@
 import React, { useState,useEffect,Suspense } from "react"
 import { StyleSheet, Text, View, ScrollView, Pressable, Image } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native"
-import tileLayer from "./screens/home/tileLayer"
 import { GetEvents, connectNDK } from "./api/api"
 import {mapstrpublickey,ndk} from './api/constants.js'
 import backButton from './assets/backButton.svg'

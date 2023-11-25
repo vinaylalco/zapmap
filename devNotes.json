@@ -1,5 +1,0 @@
-- Zap really doesnt generate an invoice anymore
-- Set an error message for any forms which require login or there is an error in signing in. Reinstate usermessage basically.
-- Remove styles to project root
-- UI folder is here now so you can start to move components there as you notice that they need to be simplified.
-- Once that is done you can start to rebuild the user areas of the site more so that you can 

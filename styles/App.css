@@ -265,16 +265,3 @@ button .icon-menu{
     cursor: pointer;
     color:  #fff;
 }
-/*.locationCrosshairs .leaflet-control.leaflet-bar  {
-  margin: 0 auto;
-}
-
-.locationCrosshairs {
-    font-size: 1em;
-    top: 60%;
-    right: 1em;
-    margin-bottom: 1em;
-    position: absolute;
-    display: block;
-    border-radius: 61.8px;
-}*/
