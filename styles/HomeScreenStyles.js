@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native'
-import MapstrColors from '../../styles/MapstrColors'
+import MapstrColors from './MapstrColors'
 
 export const HomeScreenStyles = StyleSheet.create({
 	HomeWrapperDesktop:{
 		flexDirection: 'row', 
-		backgroundColor: '#fff',
-		// flexDirection: 'flex-start'
+		backgroundColor: '#fff'
 	},
 	HomeWrapperMobile:{
 		flexDirection: 'col', 

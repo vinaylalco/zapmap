@@ -9,7 +9,7 @@ import GlobalFeedContent from './GlobalFeedContent'
 import {CurrentLocation} from '../../hooks/map'
 import {mapstrpublickey,ndk} from '../../api/constants.js'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
-import {HomeScreenStyles} from './HomeScreenStyles'
+import {HomeScreenStyles} from '../../styles/HomeScreenStyles'
 import {CommonStyles} from '../../styles/CommonStyles'
 import menu from '../../assets/menu.svg'
 

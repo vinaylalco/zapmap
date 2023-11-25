@@ -4,7 +4,6 @@ import MapstrListingCard from "../home/MapstrListingCard.js"
 import { GetReviewEventsByLocation } from "../../api/api";
 import {CommonStyles} from '../../styles/CommonStyles'
 
-// todo: hook rules 
 export default function LocationReviewList({ 
     ScrollId,
     mapstrpublickey,
