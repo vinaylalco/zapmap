@@ -94,7 +94,7 @@ export default function MapstrListingCard({
         <View
             id={id}
             className={ScrollId}
-            style={[CardStyles.cardOuter]}
+            style={ showLocationScreenButton ? [CardStyles.cardOuter] : [CardStyles.cardOutercardOuterReviewListings]}
         >
             {
                 type === "node" ?
@@ -212,6 +212,12 @@ export default function MapstrListingCard({
 
 const CardStyles = StyleSheet.create({
     cardOuter:{
+        padding: '1em',
+        maxWidth: '100%',
+        borderBottomWidth: '1px',
+        borderBottomColor: MapstrColors['lightGrey']
+    },
+    cardOuterReviewListings:{
         padding: '1em',
         maxWidth: '100%'
     },

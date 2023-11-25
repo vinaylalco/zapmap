@@ -6,7 +6,7 @@ import {CommonStyles} from '../../styles/CommonStyles'
 import Geohash from "latlon-geohash"
 import MapstrColors from '../../styles/MapstrColors'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
-import Listings from '../../ui/Listings'
+import Listings from '../../ui/Listings/Listings'
 
 export default function GlobalFeedContent({ 
 	navigation, 

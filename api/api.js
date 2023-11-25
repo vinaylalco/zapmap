@@ -222,7 +222,6 @@ export async function createReviewEvent(
     signer,
     mapstrpublickey,
     setReviewFormMessage,
-    setReviewFormMessageColor,
     titleProp,
     latProp,
     lngProp
@@ -266,8 +265,7 @@ export async function createReviewEvent(
             ndkEvent
                 .publish()
                 .then((publishingResult) => {
-                    setReviewFormMessageColor("#FF9900");
-                    setReviewFormMessage("Add Review");
+                    setReviewFormMessage(null);
                     Geolocation.getCurrentPosition((info) => {
                         GetEvents(
                             info.coords.latitude,
@@ -314,22 +312,15 @@ export async function createReviewEvent(
                     return true;
                 })
                 .catch((error) => {
-                    console.log(error);
-                    setReviewFormMessageColor("red");
-                    setReviewFormMessage("Review creation failed");
-
+                    console.log(error)
+                    setReviewFormMessage("Review creation failed")
                     return false;
                 });
         } else {
             console.log("Dev Mode");
             console.log(ndkEvent.content)
-            setReviewFormMessageColor("red");
-            setReviewFormMessage("Review creation failed");
         }
     })
-    .catch((error) => {
-        console.log('Signing error - set a message')
-    });
 }
 
 export async function createEventMarker(
@@ -341,8 +332,7 @@ export async function createEventMarker(
     mapRef,
     setUserMessage,
     setMarkersProp,
-    setMapstrListingsProp,
-    setUserMessageColor
+    setMapstrListingsProp
 ) {
 
     const ndkEvent = new NDKEvent(ndk);
@@ -386,13 +376,12 @@ export async function createEventMarker(
             ndkEvent
                 .publish()
                 .then((publishingResult) => {
-                    setUserMessage("Create")
+                    setUserMessage(null)
                     return true;
                 })
                 .catch((error) => {
-                    console.log(error);
-                    setUserMessageColor("red");
-                    setUserMessage("Create")
+                    console.log(error)
+                    setUserMessage("There was an error while creating the location.")
                     return false;
                 });
         } else {
@@ -400,7 +389,4 @@ export async function createEventMarker(
             console.log(ndkEvent)
         }
     })
-    .catch((error) => {
-        console.log('Signing error - set a message')
-    });
 }

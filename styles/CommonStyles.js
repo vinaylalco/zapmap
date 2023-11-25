@@ -160,13 +160,29 @@ export const CommonStyles = StyleSheet.create({
     goToLocationButton:{
     	position: 'absolute',
     	zIndex: 10000000000000000,
-    	right: 0,
-    	bottom: '2em',
-    	height: '40px',
-    	width: '40px',
+    	right: '1em',
+    	bottom: '8em',
+    	height: '35px',
+    	width: '35px',
+    },
+    goToLocationButtonMobile:{
+        position: 'absolute',
+        zIndex: 10000000000000000,
+        right: 0,
+        bottom: '2em',
+        height: '35px',
+        width: '35px',
     },
     acceptBTC:{
     	fontWeight: 600,
     	color: MapstrColors['btc']
+    },
+    UserMessage:{
+        fontSize: '1em',
+        margin: '0.168em',
+        padding: '0.168em',
+        overflowWrap: "anywhere",
+        color: MapstrColors['darkGrey'],
+        textAlign: 'center'
     }
 })

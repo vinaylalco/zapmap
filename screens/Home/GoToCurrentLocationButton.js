@@ -5,6 +5,7 @@ const queryOverpass = require('@derhuerst/query-overpass')
 import goToLocation from '../../assets/goToLocation.svg'
 import {useMap,useMapEvents} from "react-leaflet"
 import {CommonStyles} from '../../styles/CommonStyles'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 
 export default function GoToCurrentLocationButton({ 
     CurrentLat, 
@@ -66,7 +67,7 @@ export default function GoToCurrentLocationButton({
                     onPress={onClick}
                 >
                 <Image
-                    style={[CommonStyles.goToLocationButton]}
+                    style={isMobile ? [CommonStyles.goToLocationButtonMobile] : [CommonStyles.goToLocationButton]}
                     source={goToLocation}
                 />
                 </Pressable>

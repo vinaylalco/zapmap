@@ -15,7 +15,7 @@ export default function ZapFormScreen( { route, navigation } ){
         <Suspense fallback={<Text  >Loading...</Text>}>
             <ZapForm
                 id={route.params.params.id}
-                npub={UserStateZapForm}
+                UserStateZapForm={UserStateZapForm}
                 RelayList={setRelayListArray}
                 nsecZapForm={nsecZapForm}
                 navigation={navigation}

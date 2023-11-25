@@ -3,8 +3,7 @@ import NDK, {
     NDKNip07Signer,
     NDKEvent,
 } from "@nostr-dev-kit/ndk";
-// import ndk from '../api/constants'
-// console.log(ndk)
+
 export function convertToMilliSats(amount) {
     // console.log( Number(amount)*1000 + ' in milliSatoshis' )
     return Number(amount) * 1000;
@@ -53,13 +52,14 @@ export async function generateInvoice(
                 signedEvent
                     .zap(amountinMilliSats, paymentNote)
                     .then((result) => {
+                        setSubmitMessage(null)
                         setShowInvoiceDetails(true)
-                        setSubmitMessage('Get Lightning Invoice')
                         setLnInvoice(result)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                        setSubmitMessage('There was an error creating the invoice.')
                     });
             })
-            .catch((error) => {
-                console.log('Signing error - set a message')
-            });
     });
 }

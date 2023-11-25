@@ -6,7 +6,7 @@ import { GetEvents } from "../../api/api.js"
 import Geohash from "latlon-geohash"
 import MapstrColors from '../../styles/MapstrColors'
 import {CommonStyles} from '../../styles/CommonStyles'
-import Listings from '../../ui/Listings'
+import Listings from '../../ui/Listings/Listings'
 
 export default function DrawerContent({ 
 	navigation, 

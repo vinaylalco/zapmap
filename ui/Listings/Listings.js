@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import {View, Text, ScrollView, StyleSheet, Pressable, Image, FlatList} from "react-native";
-import MapstrListingCard from "../screens/home/MapstrListingCard"
-import {CommonStyles} from '../styles/CommonStyles'
+import MapstrListingCard from "../../screens/home/MapstrListingCard"
+import {CommonStyles} from '../../styles/CommonStyles'
 import {ListingsStyles} from './ListingsStyles'
 import {BrowserView, MobileView, isBrowser, isMobile} from 'react-device-detect'
-import menu from '../assets/menu.svg'
-import menuDesktop from '../assets/menuDesktop.svg'
-import LoadingText from "../screens/home/LoadingText"
+import menu from '../../assets/menu.svg'
+import menuDesktop from '../../assets/menuDesktop.svg'
+import LoadingText from "../../screens/home/LoadingText"
 
 export default function Listings ({ navigation, HasNoListings, GlobalFeed, ListingsArray, ndk, currrentLat, currrentLng, map, setGlobalFeed }){
 

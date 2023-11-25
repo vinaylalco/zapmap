@@ -17,9 +17,7 @@ function LocationReviewForm({
     nsecStateLocation
 }) {
     
-    const [reviewFormMessage, setReviewFormMessage] = React.useState("Add Review")
-    const [reviewFormMessageColor, setReviewFormMessageColor] = React.useState(null)
-
+    const [reviewFormMessage, setReviewFormMessage] = React.useState(null)
     let mapRef = React.useRef();
     const validationSchema = yup.object().shape({
         content: yup
@@ -53,7 +51,6 @@ function LocationReviewForm({
                         signer,
                         mapstrpublickey,
                         setReviewFormMessage,
-                        setReviewFormMessageColor,
                         titleProp,
                         latProp,
                         lngProp
@@ -90,9 +87,12 @@ function LocationReviewForm({
                             style={[CommonStyles.submit]}
                         >
                             <Text style={[CommonStyles.submitInner]} >
-                                {reviewFormMessage}
+                                Add Review
                             </Text>
                         </Pressable>
+                        <Text style={[CommonStyles.UserMessage]} >
+                            {reviewFormMessage}
+                        </Text>
                     </View>
                 )}
             </Formik>

@@ -20,7 +20,7 @@ import backButton from '../../assets/backButton.svg'
 
 export default function ZapForm({
     id,
-    npub,
+    UserStateZapForm,
     RelayList,
     nsecZapForm,
     navigation
@@ -31,11 +31,11 @@ export default function ZapForm({
     const [lnInvoiceCopyText, setLnInvoiceCopyText] =
         React.useState("Copy LN Invoice");
     const [showInvoiceDetails, setShowInvoiceDetails] = React.useState(false)
-    const [SubmitMessage, setSubmitMessage] = React.useState('Get Lightning Invoice')
+    const [SubmitMessage, setSubmitMessage] = React.useState(null)
     const [RelayListInState, setRelayListInState] = React.useState(RelayList);
     const createValidationSchema = yup.object().shape({
         amount: yup
-            .string()
+            .number()
             .min(1, "Enter an amount in Sats")
             .required("true")
             .test({
@@ -106,79 +106,91 @@ export default function ZapForm({
                         style={[CommonStyles.backButtonIcon]}
                     />
                 </Pressable>
-                <Text style={[CommonStyles.heading]}>Send BTC</Text>
-                <Text style={[CommonStyles.paragraph]} >Send BTC to the user who created this review or location directly.</Text>
-                <Text style={[CommonStyles.paragraph]} >Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
-                <Formik
-                    validationSchema={createValidationSchema}
-                    initialValues={{
-                        amount: "",
-                        notes: "",
-                    }}
-                    onSubmit={(values, { resetForm }) => {
-                        setShowInvoiceDetails(false);
-                        setSubmitMessage(<ActivityIndicator size="small" color={MapstrColors['primary']} />)
-                        generateInvoice(
-                            id,
-                            npub,
-                            values,
-                            setLnInvoice,
-                            setShowInvoiceDetails,
-                            setLnInvoiceColor,
-                            RelayListInState,
-                            nsecZapForm,
-                            setSubmitMessage
+                {
+                    UserStateZapForm ?
+                    <>
+                        <Text style={[CommonStyles.heading]}>Send BTC</Text>
+                        <Text style={[CommonStyles.paragraph]} >Send BTC to the user who created this review or location directly.</Text>
+                        <Text style={[CommonStyles.paragraph]} >Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
+                        <Formik
+                            validationSchema={createValidationSchema}
+                            initialValues={{
+                                amount: "",
+                                notes: "",
+                            }}
+                            onSubmit={(values, { resetForm }) => {
+                                setShowInvoiceDetails(false);
+                                setSubmitMessage(<ActivityIndicator size="small" color={MapstrColors['primary']} />)
+                                generateInvoice(
+                                    id,
+                                    UserStateZapForm,
+                                    values,
+                                    setLnInvoice,
+                                    setShowInvoiceDetails,
+                                    setLnInvoiceColor,
+                                    RelayListInState,
+                                    nsecZapForm,
+                                    setSubmitMessage
 
-                        );
-                        resetForm();
-                    }}
-                >
-                    {({
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        values,
-                        errors,
-                        isValid,
-                        resetForm
-                    }) => (
-                        <>
-                            <TextInput
-                                keyboardType="numeric"
-                                style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
-                                name="amount"
-                                placeholder="Amount (Sats)"
-                                value={values.amount}
-                                onChangeText={handleChange("amount")}
-                                onBlur={handleBlur("amount")}
-                            />
+                                );
+                                resetForm();
+                            }}
+                        >
+                            {({
+                                handleChange,
+                                handleBlur,
+                                handleSubmit,
+                                values,
+                                errors,
+                                isValid,
+                                resetForm
+                            }) => (
+                                <>
+                                    <TextInput
+                                        keyboardType="numeric"
+                                        style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
+                                        name="amount"
+                                        placeholder="Amount (Sats)"
+                                        value={values.amount}
+                                        onChangeText={handleChange("amount")}
+                                        onBlur={handleBlur("amount")}
+                                    />
 
-                            <TextInput
-                                style={CommonStyles.inputField}
-                                multiline="true"
-                                rows={5}
-                                id="note"
-                                name="note"
-                                placeholder="Notes (optional)"
-                                value={values.note}
-                                onChangeText={handleChange("note")}
-                                onBlur={handleBlur("note")}
-                            />
+                                    <TextInput
+                                        style={CommonStyles.inputField}
+                                        multiline="true"
+                                        rows={5}
+                                        id="note"
+                                        name="note"
+                                        placeholder="Notes (optional)"
+                                        value={values.note}
+                                        onChangeText={handleChange("note")}
+                                        onBlur={handleBlur("note")}
+                                    />
 
-                            <Pressable 
-                                onPress={handleSubmit} 
-                                disabled={!isValid}
-                                style={[CommonStyles.submit]}
-                            >
-                                <Text style={[CommonStyles.submitInner]} >
-                                    {SubmitMessage}
-                                </Text>
-                            </Pressable>
+                                    <Pressable 
+                                        onPress={handleSubmit} 
+                                        disabled={!isValid}
+                                        style={[CommonStyles.submit]}
+                                    >
+                                        <Text style={[CommonStyles.submitInner]} >
+                                            Get Lightning Invoice
+                                        </Text>
+                                    </Pressable>
 
-                            <InvoiceDetails />
-                        </>
-                    )}
-                </Formik>
+                                    <Text style={[CommonStyles.UserMessage]} >
+                                        {SubmitMessage}
+                                    </Text>
+
+                                    <InvoiceDetails />
+                                </>
+                            )}
+                        </Formik>
+                    </> 
+                    :
+                    <Text style={[CommonStyles.paragraph]} >You must login or create an account first before being able to send BTC to someone.</Text>
+                }
+                
             </ScrollView>
         </ScrollView>
     );

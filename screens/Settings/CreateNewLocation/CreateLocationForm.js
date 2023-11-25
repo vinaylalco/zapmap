@@ -31,8 +31,7 @@ function CreateLocationForm({
     navigation,
     nsec
 }) {
-    const [userMessage, setUserMessage] = React.useState('Create')
-    const [userMessageColor, setUserMessageColor] = React.useState(null)
+    const [userMessage, setUserMessage] = React.useState(null)
     let mapRef = React.useRef()
     const [dynamicCoords, setDynamicCoords] = React.useState('')
     const [FindingCoords, setFindingCoords] = React.useState(false)
@@ -99,8 +98,7 @@ function CreateLocationForm({
                     mapRef,
                     setUserMessage,
                     setMarkersProp,
-                    setMapstrListingsProp,
-                    setUserMessageColor
+                    setMapstrListingsProp
                 );
                 resetForm();
             }}
@@ -244,9 +242,13 @@ function CreateLocationForm({
                         <Text
                             style={[CommonStyles.submitInner]}
                         >
-                            {userMessage}
+                            Create
                         </Text>
                     </Pressable>
+
+                    <Text style={[CommonStyles.UserMessage]} >
+                        {userMessage}
+                    </Text>
                 </View>
             </>
             )}
