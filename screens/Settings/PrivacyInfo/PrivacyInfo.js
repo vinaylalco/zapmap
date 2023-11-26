@@ -34,17 +34,17 @@ export default function PrivacyInfo({navigation }){
                         means your latitude and longitude coordinates.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
-                        <Text style={[CommonStyles.bolded600Text]} >2.</Text> The App uses this data to position the Map to your current location. The App will them 
+                        <Text style={[CommonStyles.bolded600Text]} >2.</Text> The App uses this data to position the map to your current location. The App will then 
                         present reviews and location markers from nearby your location so you can find places of 
-                        interest and make reviews yourself.
+                        interest and make reviews.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
-                        <Text style={[CommonStyles.bolded600Text]} >3.</Text> This information is not shared with third parties or stored anyplace except with the following caveats.
+                        <Text style={[CommonStyles.bolded600Text]} >3.</Text> This information is not shared with third parties or stored any place except on Relays as described below.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
-                        <Text style={[CommonStyles.bolded600Text]} >a)</Text> When you create a new location to be mapped we require the coordinates of the location.
-                        These coorinates are then saved to the NOSTR event (aka Note) which has copies of it made to each and every 
-                        Relay that your account is connected to. You can view this list, once logged in, by going to Menu -> Relay Management.
+                        <Text style={[CommonStyles.bolded600Text]} >a)</Text> When you create a new location to be mapped we require the coordinates of the location so it can be mapped for other users.
+                        These coorinates are then saved to the Nostr event (aka Note) which has copies of it made to each and every 
+                        Relay that your account is connected to. You can view the list of ocnnected Relays, once logged in, by going to Menu -> Relay Management.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
                         <Text style={[CommonStyles.bolded600Text]} >b)</Text> Your location data is not used or saved at any other time while using this App. You can view the source code which 
@@ -58,14 +58,13 @@ export default function PrivacyInfo({navigation }){
                         locations without fear of the App having your personal details to associate with your identity.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
-                        <Text style={[CommonStyles.bolded600Text]} >2.</Text> As your keys are used to Login to this App and you cant create reviews or locations until you are logged 
-                        in it's important to understand the various login methods.
+                        <Text style={[CommonStyles.bolded600Text]} >2.</Text> As your keys are used to Login and use the App it's important to understand the various login methods.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
                         <Text style={[CommonStyles.bolded600Text]} >a)</Text> Best practice to login to this or any Nostr based App is to use a Browser Extension like Alby or Nos2x. 
                         You can search them in order to install them before logging into this App. Once logged in using one of these Nostr
                         Browser Extensions will mean that your keys are not shared with this App so you don't have to worry about 
-                        this or any Nostr App using your keys in ways you wouldn;t agree with.
+                        this or any Nostr App using your keys in ways you wouldn't agree with.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
                         <Text style={[CommonStyles.bolded600Text]} >b)</Text> If you login with your private key then the key is used to sign various events around the App like creating a new location or review. 
@@ -73,8 +72,8 @@ export default function PrivacyInfo({navigation }){
                         the Login/Profile area.
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >
-                        <Text style={[CommonStyles.bolded600Text]} >c)</Text> If you are a new user and create an account then a set of keys (ie public and private) will be created for you and you
-                        in terms of your keys they are also stored in local storage and can be cleared when you logout.
+                        <Text style={[CommonStyles.bolded600Text]} >c)</Text> If you are a new user and create an account then a set of keys (ie public and private) will be created for you.
+                        With this method your keys they are also stored in local storage and are cleared when you logout.
                         At this point you could copy the private and public password from your Login/Profile area and set up a Browser Extension as per above
                         or continue to use the App while logged in with your private key - as you wish.
                     </Text>
