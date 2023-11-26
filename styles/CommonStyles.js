@@ -135,7 +135,7 @@ export const CommonStyles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: '10px',
         padding: '1em',
-        height: '50vh',
+        // height: '50vh',
         width: '25vw',
         flexGrow: 1, 
         justifyContent: 'center'
@@ -144,8 +144,8 @@ export const CommonStyles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: '10px',
         padding: '1em',
-        height: '97vh',
-        width: '100%',
+        // height: '97vh',
+        // width: '100%',
         flexGrow: 1, 
         justifyContent: 'center'
     },

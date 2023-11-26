@@ -10,6 +10,8 @@ import {mapstrpublickey,ndk} from '../../api/constants'
 import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import BackButton from '../../ui/BackButton'
+import PrivacyInfo from './PrivacyInfo/PrivacyInfo'
+import PrivacyButton from '../../ui/PrivacyButton'
 
 const MenuStack = createBottomTabNavigator()
 
@@ -26,7 +28,9 @@ export default function MenuButtons({navigation}){
                 {
                     UserStateSettings ?
                     <View style={[MenuScreenStyles.inner]}>
+
                         <BackButton navigation={navigation} />
+
                         <Pressable
                             style={[CommonStyles.pressable]}
                             onPress={() => navigation.navigate('Create Location')}
@@ -61,10 +65,14 @@ export default function MenuButtons({navigation}){
                             </Text>
                         </Pressable>
 
+                        <PrivacyButton navigation={navigation} />
+
                     </View>
                     :
                     <View style={[MenuScreenStyles.inner]}>
+
                         <BackButton navigation={navigation} />
+
                         <Pressable
                             style={[CommonStyles.pressable]}
                             onPress={() => navigation.navigate('User Profile')}
@@ -75,6 +83,9 @@ export default function MenuButtons({navigation}){
                                 Login / Profile
                             </Text>
                         </Pressable>
+
+                        <PrivacyButton navigation={navigation} />
+
                     </View>
                 }
             </>
@@ -143,6 +154,16 @@ export default function MenuButtons({navigation}){
         )
     }
 
+    const Privacy = ({navigation}) => {
+        return(
+            <>
+                <Suspense fallback={<Text  >Loading...</Text>}>
+                    <PrivacyInfo navigation={navigation} />
+                </Suspense>
+            </>
+        )
+    }
+
     return (
         <MenuStack.Navigator 
             tabBar={props => <SettingsTabBar {...props} />}
@@ -174,6 +195,14 @@ export default function MenuButtons({navigation}){
             <MenuStack.Screen
                 name="Relays"
                 component={MapstrRelays}
+                options={{ 
+                    title: '',
+                    headerShown: false  
+                }}
+            />
+            <MenuStack.Screen
+                name="Privacy"
+                component={Privacy}
                 options={{ 
                     title: '',
                     headerShown: false  

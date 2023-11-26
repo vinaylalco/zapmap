@@ -14,7 +14,7 @@ import * as yup from "yup"
 import NDK from "@nostr-dev-kit/ndk"
 import {addRelay, removeRelay} from '../../../api/api'
 import {CommonStyles} from '../../../styles/CommonStyles'
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 import BackButton from '../../../ui/BackButton'
 
 export default function RelayManagement({ RelayList, navigation }){
