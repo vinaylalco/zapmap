@@ -34,17 +34,18 @@ export const CommonStyles = StyleSheet.create({
 		marginTop: '1em',
 		marginBottom: '1em',
 		width: '100%',
-		textAlign: 'center'
+		textAlign: 'center',
+        borderWidth: 0
 	},
 	pressableInner:{
 		textAlign: 'center'
 	},
 	submitInner:{
-		textAlign: 'center'
+		textAlign: 'center',
+        color: '#fff'
 	},
 	submit:{
-		borderColor: MapstrColors['primary'],
-		borderWidth: '1px',
+		backgroundColor: MapstrColors['primary'],
 		borderRadius: '10px',
 		padding: '1em',
 		marginBottom: '1em',
@@ -175,6 +176,9 @@ export const CommonStyles = StyleSheet.create({
         padding: '0.168em',
         overflowWrap: "anywhere",
         color: MapstrColors['darkGrey'],
+        textAlign: 'center'
+    },
+    centerAlignText:{
         textAlign: 'center'
     }
 })

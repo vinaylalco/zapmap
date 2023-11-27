@@ -6,6 +6,25 @@ import Geolocation from "@react-native-community/geolocation"
 import MapstrListingCard from "../screens/home/MapstrListingCard"
 import {preparelocationUniqueIdentifier} from '../hooks/common'
 
+export async function getUserReviewCount(mapstrpublickey, ndk, authorPublicKey){
+
+    const filter: NDKFilter = {
+        kinds: [1],
+        "#r": [mapstrpublickey],
+        authors: [authorPublicKey]
+    };
+
+    let count = 0
+    let events = await ndk.fetchEvents(filter).then((response) => {
+            Array.from(response).map((event) => {
+                count++
+            })
+    }).catch((error) => {
+        console.log(error);
+    })
+    return count;
+}
+
 export async function GetGlobalEvents(mapstrpublickey, ndk){
 
     const filter: NDKFilter = {

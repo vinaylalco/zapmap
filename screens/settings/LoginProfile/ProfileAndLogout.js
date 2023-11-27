@@ -8,6 +8,7 @@ import {
 import CopyToClipboard from "react-copy-to-clipboard";
 import {CommonStyles} from '../../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
+import UserInfo from '../../../ui/UserInfo/UserInfo'
 
 export default function ProfileAndLogout({UserStateSettings, setUserStateSettings, UserStateNecSettings, nsec}) {
     
@@ -19,11 +20,12 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
 
     return (
         <>
-            <Text style={[CommonStyles.paragraph]} >
+            <UserInfo publicKey={UserStateSettings} />
+            <Text style={[CommonStyles.paragraph, CommonStyles.centerAlignText]} >
                 You're logged in with Public Key (npub):
             </Text>
 
-            <Text style={[CommonStyles.paragraph]} >
+            <Text style={[CommonStyles.paragraph, CommonStyles.centerAlignText]} >
                 {UserStateSettings}
             </Text>
             

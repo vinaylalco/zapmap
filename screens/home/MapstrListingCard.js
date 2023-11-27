@@ -26,7 +26,6 @@ export default function MapstrListingCard({
     currrentLat,
     currrentLng
 }) {
-
     const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type } ) => {
     
         function onClick() {
@@ -62,9 +61,8 @@ export default function MapstrListingCard({
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     // User Profile
-    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/mapstr.png")
-    const [userProfileDisplayName, setUserProfileDisplayName] =
-        React.useState("");
+    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/"+randomNumberInRange(1, 50)+".png")
+    const [userProfileDisplayName, setUserProfileDisplayName] = React.useState("");
     const userProfile = mapstrGetUserProfile(npub, ndk).then((profile) => {
         if(profile != null){
             setUserProfileImage(profile.image);
@@ -94,7 +92,10 @@ export default function MapstrListingCard({
         <View
             id={id}
             className={ScrollId}
-            style={ showLocationScreenButton ? [CardStyles.cardOuter] : [CardStyles.cardOutercardOuterReviewListings]}
+            style={ 
+                showLocationScreenButton ? 
+                [CardStyles.cardOuter] : 
+                [CardStyles.cardOutercardOuterReviewListings]}
         >
             {
                 type === "node" ?
@@ -289,4 +290,3 @@ const CardStyles = StyleSheet.create({
         justifyContent: 'space-evenly'
     }
 })
-

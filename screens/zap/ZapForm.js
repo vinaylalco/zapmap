@@ -17,6 +17,8 @@ import {CommonStyles} from '../../styles/CommonStyles'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect'
 import MapstrColors from '../../styles/MapstrColors'
 import BackButton from '../../ui/BackButton'
+import {ndk, mapstrpublickey} from '../../api/constants'
+import UserInfo from '../../ui/UserInfo/UserInfo'
 
 export default function ZapForm({
     id,
@@ -26,13 +28,14 @@ export default function ZapForm({
     navigation
 }) {
     // LN Invoice
-    const [lnInvoice, setLnInvoice] = React.useState('');
-    const [lnInvoiceColor, setLnInvoiceColor] = React.useState("green");
-    const [lnInvoiceCopyText, setLnInvoiceCopyText] =
-        React.useState("Copy LN Invoice");
+    const [lnInvoice, setLnInvoice] = React.useState('')
+    const [lnInvoiceColor, setLnInvoiceColor] = React.useState("green")
+    const [lnInvoiceCopyText, setLnInvoiceCopyText] = React.useState("Copy LN Invoice")
     const [showInvoiceDetails, setShowInvoiceDetails] = React.useState(false)
     const [SubmitMessage, setSubmitMessage] = React.useState(null)
-    const [RelayListInState, setRelayListInState] = React.useState(RelayList);
+    const [RelayListInState, setRelayListInState] = React.useState(RelayList)
+    const [userProfileDisplayName, setuserProfileDisplayName] = React.useState(null)
+    const [IsZapForm, setIsZapForm] = React.useState(true)
     const createValidationSchema = yup.object().shape({
         amount: yup
             .number()
@@ -93,7 +96,7 @@ export default function ZapForm({
                 contentContainerStyle=
                     { 
                         isMobile ? 
-                        [CommonStyles.innerMobile] : 
+                        [ZapFormStyles.innerMobile] : 
                         [CommonStyles.inner] 
                     }
             >
@@ -102,9 +105,6 @@ export default function ZapForm({
                 {
                     UserStateZapForm ?
                     <>
-                        <Text style={[CommonStyles.heading]}>Send BTC</Text>
-                        <Text style={[CommonStyles.paragraph]} >Send BTC to the user who created this review or location directly.</Text>
-                        <Text style={[CommonStyles.paragraph]} >Once you have created the invoice, copy it and use it in your Lightning wallet of choice to send Sats to the content creator.</Text>
                         <Formik
                             validationSchema={createValidationSchema}
                             initialValues={{
@@ -138,12 +138,22 @@ export default function ZapForm({
                                 isValid,
                                 resetForm
                             }) => (
-                                <>
+                                <View>
+                                    <UserInfo 
+                                        publicKey={UserStateZapForm}
+                                        userProfileDisplayName={userProfileDisplayName} 
+                                        setuserProfileDisplayName={setuserProfileDisplayName}
+                                        IsZapForm={IsZapForm}
+                                    />
+                                    <Text style={[CommonStyles.paragraph,CommonStyles.centerAlignText]} >
+                                        Say thanks to <Text style={[CommonStyles.bolded600Text]} >{userProfileDisplayName}</Text>
+                                        by sending some BTC.
+                                    </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={ errors.amount === "true" ? CommonStyles.inputFieldError : CommonStyles.inputField }
                                         name="amount"
-                                        placeholder="Amount (Sats)"
+                                        placeholder="sats"
                                         value={values.amount}
                                         onChangeText={handleChange("amount")}
                                         onBlur={handleBlur("amount")}
@@ -155,7 +165,7 @@ export default function ZapForm({
                                         rows={5}
                                         id="note"
                                         name="note"
-                                        placeholder="Notes (optional)"
+                                        placeholder="Optional note"
                                         value={values.note}
                                         onChangeText={handleChange("note")}
                                         onBlur={handleBlur("note")}
@@ -170,21 +180,47 @@ export default function ZapForm({
                                             Get Lightning Invoice
                                         </Text>
                                     </Pressable>
-
+                                    <Text style={[CommonStyles.paragraph,CommonStyles.centerAlignText]} >
+                                        Copy the generated invoice and use your Lightning Wallet to pay it.
+                                    </Text>
                                     <Text style={[CommonStyles.UserMessage]} >
                                         {SubmitMessage}
                                     </Text>
 
                                     <InvoiceDetails />
-                                </>
+                                </View>
                             )}
                         </Formik>
                     </> 
                     :
-                    <Text style={[CommonStyles.paragraph]} >You must login or create an account first before being able to send BTC to someone.</Text>
+                    <Text style={[CommonStyles.paragraph]} >
+                        You must login or create an account first before being able to send BTC to someone.
+                    </Text>
                 }
                 
             </ScrollView>
         </ScrollView>
     );
 }
+
+const ZapFormStyles = StyleSheet.create({
+    userWrapper:{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '1em'
+    },
+    profileImage:{
+        height: '6em',
+        width: '6em',
+        borderRadius: '50%',
+        marginBottom: '2em'
+    },
+    innerMobile:{
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        padding: '1em',
+        width: '97vw',
+        flexGrow: 1, 
+        justifyContent: 'center'
+    }
+})

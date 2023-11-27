@@ -19,10 +19,10 @@ export async function mapstrGetUserProfile(publicKey, ndk) {
     if(publicKey == null){return null}
     const user = ndk.getUser({
         hexpubkey: publicKey,
-    });
-    await user.fetchProfile();
-    const userFullProfile = user.profile;
-    return userFullProfile;
+    })
+    await user.fetchProfile()
+    const userFullProfile = user.profile
+    return userFullProfile
 }
 
 export const randomNumberInRange = (min, max) => {

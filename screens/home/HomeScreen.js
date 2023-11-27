@@ -27,7 +27,7 @@ export default function HomeScreen({route, navigation}) {
     const [map, setMap] = React.useState()
     const [thirdPartyLink, setThirdPartyLink] = React.useState(null)
     const [HasNoListings, setHasNoListings] = React.useState(null)
-    const [GlobalFeed, setGlobalFeed] = React.useState(false)
+    const [GlobalFeed, setGlobalFeed] = React.useState(true)
     const [GlobalButtonBck, setGlobalButtonBck] = React.useState('#1d1a1a')
     const [LocalButtonBck, setLocalButtonBck] = React.useState(null)
 

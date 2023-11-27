@@ -17,7 +17,7 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
     function PressedLocalButton(){
         setGlobalFeed(false)
     }
-
+    
 	return(
 		<View 
 			style={ 
