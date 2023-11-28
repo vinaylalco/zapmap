@@ -8,7 +8,6 @@ import LocationScreen from './screens/location/LocationScreen'
 import ZapFormScreen from './screens/zap/ZapFormScreen'
 import ContentCreatorScreen from './screens/contentCreator/ContentCreatorScreen'
 import SettingsScreen from './screens/settings/SettingsScreen'
-import "./styles/App.css"
 import { createStackNavigator } from '@react-navigation/stack'
 
 export default function App() {

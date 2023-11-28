@@ -23,6 +23,7 @@
     "latlon-geohash": "^2.0.0",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^3.10.2",
+    "metro-minify-terser": "^0.80.1",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",

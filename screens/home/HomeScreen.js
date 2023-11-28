@@ -12,6 +12,7 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 import {HomeScreenStyles} from '../../styles/HomeScreenStyles'
 import {CommonStyles} from '../../styles/CommonStyles'
 import menu from '../../assets/menu.svg'
+import "../../styles/App.css"
 
 export default function HomeScreen({route, navigation}) {
     

@@ -3,7 +3,6 @@ import { Pressable, View, Text, Image, StyleSheet } from "react-native"
 import { mapstrGetUserProfile, formatNoteContent, randomNumberInRange } from "../../hooks/common"
 import {locationDetails} from "../../hooks/map"
 import osmPin from '../../assets/osmPin.svg'
-import lightningPayment from '../../assets/lightningPayment.svg'
 import MapstrColors from '../../styles/MapstrColors'
 import {CommonStyles} from '../../styles/CommonStyles'
 import zap from '../../assets/zap.svg'
@@ -62,7 +61,7 @@ export default function MapstrListingCard({
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     // User Profile
-    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/"+randomNumberInRange(1, 50)+".png")
+    const [userProfileImage, setUserProfileImage] = React.useState(null)
     const [userProfileDisplayName, setUserProfileDisplayName] = React.useState("");
     const userProfile = mapstrGetUserProfile(npub, ndk).then((profile) => {
         if(profile != null){

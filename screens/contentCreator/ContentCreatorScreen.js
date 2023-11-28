@@ -10,13 +10,13 @@ import UserInfo from '../../ui/UserInfo/UserInfo'
 export default function ContentCreatorScreen( { route, navigation } ){
 
     const [UserProfileDisplayName, setUserProfileDisplayName] = React.useState(null)
-    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/"+randomNumberInRange(1, 50)+".png")
+    const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/"+randomNumberInRange(1, 50)+".png?size=96x96")
     const userProfile = mapstrGetUserProfile(route.params.params.contentCreatorNpub, ndk).then((profile) => {
         if(profile != null){
-            setUserProfileImage(profile.image);
+            setUserProfileImage(profile.image)
             setUserProfileDisplayName(
                 profile.displayName ? profile.displayName : profile.username
-            );
+            )
         }else{
             return null
         }
