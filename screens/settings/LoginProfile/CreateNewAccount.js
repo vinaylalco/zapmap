@@ -23,7 +23,7 @@ export default function CreateNewAccount({ setUserStateSettings , setUserStateNe
     return (
         <>
 
-            <Text style={[CommonStyles.heading]} >
+            <Text style={[CommonStyles.heading, CommonStyles.centerAlignText]} >
                 Create a New Account
             </Text>
             <Pressable

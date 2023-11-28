@@ -29,7 +29,7 @@ function LocationReviewForm({
     return (    
         <View>
 
-            <Text style={[CommonStyles.heading]} >Write a Review</Text>
+            <Text style={[CommonStyles.heading, CommonStyles.centerAlignText]} >Write a Review</Text>
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{

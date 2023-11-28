@@ -27,7 +27,7 @@ export default function LoginWithExtension({ setUserStateSettings, setUserStateN
 
     return (
         <View>
-            <Text style={[CommonStyles.heading]} >
+            <Text style={[CommonStyles.heading, CommonStyles.centerAlignText]} >
                 Login With Extension
             </Text>
 

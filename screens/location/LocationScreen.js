@@ -31,7 +31,7 @@ export default function LocationScreen({ route, navigation }){
                     }
                 >
                     <BackButton navigation={navigation} />
-                    <Text style={[CommonStyles.heading]} >
+                    <Text style={[CommonStyles.heading, CommonStyles.centerAlignText]} >
                         {route.params.params.title} 
                     </Text>
                     <Text style={[CommonStyles.paragraph]} >

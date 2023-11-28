@@ -63,7 +63,7 @@ function LoginForm({ ndk, mapstrpublickey, setUserStateSettings }) {
                     isValid,
                 }) => (
                     <>
-                        <Text style={[CommonStyles.heading]} >
+                        <Text style={[CommonStyles.heading, CommonStyles.centerAlignText]} >
                             Login With Private Key
                         </Text>
                         
