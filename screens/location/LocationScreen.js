@@ -40,17 +40,22 @@ export default function LocationScreen({ route, navigation }){
                     <Text style={[CommonStyles.paragraph]} >
                         {route.params.params.tags.subject ? route.params.params.tags.subject : ''}
                     </Text>
-                    <Suspense fallback={<Text  >Loading...</Text>}>
-                        <LocationReviewForm 
-                            ndk={ndk}
-                            UserStateLocation={UserStateLocation}
-                            mapstrpublickey={mapstrpublickey}
-                            titleProp={route.params.params.title}
-                            latProp={route.params.params.lat}
-                            lngProp={route.params.params.lng}
-                            nsecStateLocation={nsecStateLocation}
-                        />
-                    </Suspense>
+                    {
+                        UserStateLocation ?
+                        <Suspense fallback={<Text  >Loading...</Text>}>
+                            <LocationReviewForm 
+                                ndk={ndk}
+                                UserStateLocation={UserStateLocation}
+                                mapstrpublickey={mapstrpublickey}
+                                titleProp={route.params.params.title}
+                                latProp={route.params.params.lat}
+                                lngProp={route.params.params.lng}
+                                nsecStateLocation={nsecStateLocation}
+                            />
+                        </Suspense>
+                        :
+                        <Text style={[CommonStyles.bolded600Text, CommonStyles.centerAlignText]}>Please login to add your own review</Text>
+                    }
 
                     <Suspense fallback={<Text  >Loading...</Text>}>
                         <LocationReviewList

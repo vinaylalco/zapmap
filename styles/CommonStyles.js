@@ -146,7 +146,7 @@ export const CommonStyles = StyleSheet.create({
         borderRadius: '10px',
         padding: '1em',
         // height: '97vh',
-        // width: '100%',
+        width: '97vw',
         flexGrow: 1, 
         justifyContent: 'center'
     },

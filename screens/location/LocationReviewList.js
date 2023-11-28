@@ -54,7 +54,7 @@ export default function LocationReviewList({
         <ScrollView showsVerticalScrollIndicator={false} >
             {
                 reviewListLoading ? 
-                <Text style={[CommonStyles.paragraph]} >Be the first to review this place!</Text> :
+                <Text style={[CommonStyles.paragraph, CommonStyles.centerAlignText]} >Nobody has reviews this location yet. You could be the first.</Text> :
                 SpecificReviews.map((card, index) => ( 
                     <MapstrListingCard
                         title={card.title}
