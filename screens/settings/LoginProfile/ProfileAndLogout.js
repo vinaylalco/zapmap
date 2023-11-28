@@ -19,7 +19,7 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
     const [CopyPrivateKeyHex, setCopyPrivateKeyHex] = React.useState("Copy Private Key (Hex)");
 
     return (
-        <>
+        <View>
             <UserInfo publicKey={UserStateSettings} />
             <Text style={[CommonStyles.paragraph, CommonStyles.centerAlignText]} >
                 You're logged in with Public Key (npub):
@@ -56,6 +56,6 @@ export default function ProfileAndLogout({UserStateSettings, setUserStateSetting
                     Logout
                 </Text>
             </Pressable>
-        </>
+        </View>
     );
 }

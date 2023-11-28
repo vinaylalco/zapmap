@@ -6,6 +6,56 @@ import Geolocation from "@react-native-community/geolocation"
 import MapstrListingCard from "../screens/home/MapstrListingCard"
 import {preparelocationUniqueIdentifier} from '../hooks/common'
 
+export async function getUserReviews(mapstrpublickey, ndk, authorPublicKey){
+
+    const filter: NDKFilter = {
+        kinds: [1],
+        "#r": [mapstrpublickey],
+        authors: [authorPublicKey],
+        limit: 500
+    };
+
+    let reviews = []
+    let events = await ndk.fetchEvents(filter).then((response) => {
+            Array.from(response).map((event) => {
+                let latLngString = "";
+                let lat = 0;
+                let lng = 0;
+                let title = "";
+                let contentString = "";
+                if (event.tags[0] != undefined) {
+                    contentString = event.content.split("||");
+                    latLngString = event.tags[0][1].split(",");
+                    lat = parseFloat(latLngString[0], 10);
+                    lng = parseFloat(latLngString[1], 10);
+                    title = event.tags[2][1];
+
+                    if (
+                        typeof(lat) === "number" && 
+                        lat > 0 &&
+                        typeof(lng) === "number" && 
+                        lng > 0
+                    ) {
+                        reviews.unshift({
+                            type: 'nostr',
+                            lat: lat,
+                            lng: lng,
+                            content: contentString[0],
+                            id: event.id,
+                            npub: event.pubkey,
+                            title: title,
+                            dateCreated: event.created_at,
+                            tags: event.tags
+                        });
+                    }
+                }
+            });
+    }).catch((error) => {
+        console.log(error);
+    })
+    return reviews;
+}
+
 export async function getUserReviewCount(mapstrpublickey, ndk, authorPublicKey){
 
     const filter: NDKFilter = {

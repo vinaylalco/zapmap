@@ -1,29 +1,21 @@
 import React, { useState } from "react"
-import { Pressable, View, Text, Image, StyleSheet } from "react-native"
+import { Pressable, View, Text, Image, StyleSheet,ScrollView } from "react-native"
 import ReviewCount from '../ReviewCount'
 import {CommonStyles} from '../../styles/CommonStyles'
 import { mapstrGetUserProfile, randomNumberInRange } from '../../hooks/common'
 import {ndk} from '../../api/constants'
+import AllReviews from '../AllReviews'
 
 export default function UserInfo({
-    publicKey, 
-    userProfileDisplayName, 
-    setuserProfileDisplayName,
-    IsZapForm
+    CreatorPublicKey, 
+    UserProfileDisplayName, 
+    setUserProfileDisplayName,
+    ShowExtra
 }){
 
-    function Follow(){
-        ndk.subscribe({ kinds: [1], authors: [publicKey] }).then( (response) => {
-            console.log(response)
-        })
-    }
-
-    // function UnFollow(){
-        // ndk.subscribe({ kinds: [1], authors: ["..."] }, { closeOnEose: false })
-    // }
-
+    const [Followed, setFollowed] = React.useState(false)
     const [userProfileImage, setUserProfileImage] = React.useState("https://robohash.org/"+randomNumberInRange(1, 50)+".png")
-    const userProfile = mapstrGetUserProfile(publicKey, ndk).then((profile) => {
+    const userProfile = mapstrGetUserProfile(CreatorPublicKey, ndk).then((profile) => {
         if(profile != null){
             setUserProfileImage(profile.image);
             setUserProfileDisplayName(
@@ -34,21 +26,46 @@ export default function UserInfo({
         }
     })
 
+    function Follow(){
+        const Follow = ndk.subscribe({ kinds: [1], authors: [CreatorPublicKey] })
+        setFollowed(true)
+    }
+
+    function UnFollow(){
+        const UnFollow = ndk.subscribe({ kinds: [1], authors: [CreatorPublicKey] }, { closeOnEose: false })
+        setFollowed(false)
+    }
+
     return (
-        <View style={[UserInfoStyles.userWrapper]} >
+        <ScrollView 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={UserInfoStyles.userWrapper}
+        >
             <Image
                 source={userProfileImage}
                 style={[UserInfoStyles.profileImage]}
             />
-            <ReviewCount publicKey={publicKey} />
-        </View>
+            
+            <ReviewCount publicKey={CreatorPublicKey} />
+            
+            {
+                ShowExtra ?
+                <>
+                    <AllReviews publicKey={CreatorPublicKey} />
+                </>
+                :
+                null
+            }
+            
+        </ScrollView>
     )
 }
 
 const UserInfoStyles = StyleSheet.create({
     userWrapper:{
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     profileImage:{
         height: '6em',
@@ -57,3 +74,24 @@ const UserInfoStyles = StyleSheet.create({
         marginBottom: '2em'
     }
 })
+
+// {
+// Followed ?
+// <Pressable 
+//     onPress={UnFollow} 
+//     style={[CommonStyles.pressable]}
+// >
+//     <Text style={[CommonStyles.pressableInner]} >
+//         Unfollow <Text style={[CommonStyles.bolded600Text]} >{UserProfileDisplayName}</Text>
+//     </Text>
+// </Pressable>
+// :
+// <Pressable 
+//     onPress={Follow} 
+//     style={[CommonStyles.pressable]}
+// >
+//     <Text style={[CommonStyles.pressableInner]} >
+//         Follow <Text style={[CommonStyles.bolded600Text]} >{UserProfileDisplayName}</Text>
+//     </Text>
+// </Pressable>
+// }

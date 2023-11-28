@@ -24,7 +24,8 @@ export default function MapstrListingCard({
     type,
     map,
     currrentLat,
-    currrentLng
+    currrentLng,
+    UserProfile
 }) {
     const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type } ) => {
     
@@ -129,10 +130,21 @@ export default function MapstrListingCard({
                     </View>
                 :
                     <View style={[CardStyles.cardUserMetaWrapper]} >
-                        <Image
-                            source={userProfileImage}
-                            style={[CardStyles.profileImage]}
-                        />
+                        <Pressable
+                            onPress={
+                                () =>   navigation.navigate('ContentCreatorScreen', {
+                                            screen: 'ContentCreatorScreen',
+                                            params: { 
+                                                contentCreatorNpub: npub
+                                            }
+                                        })
+                            }
+                        >
+                            <Image
+                                source={userProfileImage}
+                                style={[CardStyles.profileImage]}
+                            />
+                        </Pressable>
                         <View style={[CardStyles.cardUserMeta]} >
                             <Text style={{overflowWrap: "break-word"}} >
                                 <Text style={[CommonStyles.bolded600Text]} >
@@ -168,54 +180,57 @@ export default function MapstrListingCard({
             <Text>
                 { locationDetails(content, tags.subject, tags.amenity) }
             </Text>
-            
-            <View>
+            {
+                UserProfile ?
+                null :
+                <View>
                 
-                {
-                    type !== "node" ?
-                        <View style={[CardStyles.CTAWrapper]} >
-                            <Pressable
-                                style={showLocationScreenButton ? CardStyles.ctaButton : CardStyles.ctaButtonWide}
-                                onPress={
-                                    () =>   navigation.navigate('ZapFormScreen', {
-                                                screen: 'ZapFormScreen',
-                                                params: {
-                                                    id: id,
-                                                    npub: npub
-                                                }
-                                            })
+                    {
+                        type !== "node" ?
+                            <View style={[CardStyles.CTAWrapper]} >
+                                <Pressable
+                                    style={showLocationScreenButton ? CardStyles.ctaButton : CardStyles.ctaButtonWide}
+                                    onPress={
+                                        () =>   navigation.navigate('ZapFormScreen', {
+                                                    screen: 'ZapFormScreen',
+                                                    params: {
+                                                        id: id,
+                                                        npub: npub
+                                                    }
+                                                })
+                                    }
+                                >
+                                    <Text style={CardStyles.ctaButtonInner}>Thanks</Text>
+                                    <Image
+                                        source={zap}
+                                        style={[CardStyles.ctaIcon]}
+                                    />
+                                </Pressable>
+                                {
+                                    showLocationScreenButton ?
+                                    <ShowLocationOnMapButton 
+                                        map={map} 
+                                        lat={lat} 
+                                        lng={lng} 
+                                        ScrollId={ScrollId}  
+                                        type={type}
+                                    /> :
+                                    null
                                 }
-                            >
-                                <Text style={CardStyles.ctaButtonInner}>Thanks</Text>
-                                <Image
-                                    source={zap}
-                                    style={[CardStyles.ctaIcon]}
-                                />
-                            </Pressable>
-                            {
-                                showLocationScreenButton ?
+                            </View>
+                        :
+                            <View style={[CardStyles.CTAWrapper]} >
                                 <ShowLocationOnMapButton 
                                     map={map} 
                                     lat={lat} 
                                     lng={lng} 
                                     ScrollId={ScrollId}  
                                     type={type}
-                                /> :
-                                null
-                            }
-                        </View>
-                    :
-                        <View style={[CardStyles.CTAWrapper]} >
-                            <ShowLocationOnMapButton 
-                                map={map} 
-                                lat={lat} 
-                                lng={lng} 
-                                ScrollId={ScrollId}  
-                                type={type}
-                            />
-                        </View>
-                }
-            </View>
+                                />
+                            </View>
+                    }
+                </View>
+            }
         </View>
     );
 }

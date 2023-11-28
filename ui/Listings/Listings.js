@@ -19,8 +19,9 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
     }
     
 	return(
-		<View 
-			style={ 
+		<ScrollView 
+			showsVerticalScrollIndicator={false}
+			contentContainerStyle={ 
                 isMobile ? 
                 [CommonStyles.TabOuterMobile] : 
                 [CommonStyles.TabOuterDesktop] 
@@ -35,7 +36,7 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 	        >
     			<Pressable
 	                onPress={() => {
-	                        navigation.navigate('Settings');
+	                        navigation.navigate('Settings')
 	                    }}
 	            >
 	                <Image
@@ -45,7 +46,7 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 	            </Pressable>
 	        </View>
 
-	        <ScrollView style={[ListingsStyles.LocationList]} showsVerticalScrollIndicator={false} >
+	        <ScrollView contentContainerStyle={[ListingsStyles.LocationList]} showsVerticalScrollIndicator={false} >
 		        {
 					HasNoListings ? 
 						<LoadingText />
@@ -99,6 +100,7 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 							                    currrentLat={currrentLat}
 							                    currrentLng={currrentLng}
 							                    map={map}
+							                    UserProfile={false}
 							                />
 			                }
 			                keyExtractor={item => Math.random()}
@@ -106,6 +108,6 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 					</>
 				}
 			</ScrollView>
-		</View>
+		</ScrollView>
 	)
 }

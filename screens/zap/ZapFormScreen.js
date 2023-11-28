@@ -10,7 +10,6 @@ export default function ZapFormScreen( { route, navigation } ){
     const [UserStateZapForm, setUserStateZapForm] = React.useState(user)
     const nsecZapForm = localStorage.getItem("privado")
     const [nsecStateZapForm, setnnsecStateZapForm] = React.useState(nsecZapForm)
-    // const [ContentCreatorNpub, setContentCreatorNpub] = React.useState(route.params.params.npub)
  
     return(
         <Suspense fallback={<Text  >Loading...</Text>}>

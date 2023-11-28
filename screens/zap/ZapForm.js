@@ -34,7 +34,7 @@ export default function ZapForm({
     const [showInvoiceDetails, setShowInvoiceDetails] = React.useState(false)
     const [SubmitMessage, setSubmitMessage] = React.useState(null)
     const [RelayListInState, setRelayListInState] = React.useState(RelayList)
-    const [userProfileDisplayName, setuserProfileDisplayName] = React.useState(null)
+    const [UserProfileDisplayName, setUserProfileDisplayName] = React.useState(null)
     const [IsZapForm, setIsZapForm] = React.useState(true)
     const createValidationSchema = yup.object().shape({
         amount: yup
@@ -141,12 +141,12 @@ export default function ZapForm({
                                 <View>
                                     <UserInfo 
                                         publicKey={UserStateZapForm}
-                                        userProfileDisplayName={userProfileDisplayName} 
-                                        setuserProfileDisplayName={setuserProfileDisplayName}
+                                        UserProfileDisplayName={UserProfileDisplayName} 
+                                        setUserProfileDisplayName={setUserProfileDisplayName}
                                         IsZapForm={IsZapForm}
                                     />
                                     <Text style={[CommonStyles.paragraph,CommonStyles.centerAlignText]} >
-                                        Say thanks to <Text style={[CommonStyles.bolded600Text]} >{userProfileDisplayName}</Text>
+                                        Say thanks to <Text style={[CommonStyles.bolded600Text]} >{UserProfileDisplayName}</Text>
                                         by sending some BTC.
                                     </Text>
                                     <TextInput
