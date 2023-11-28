@@ -310,7 +310,7 @@ export async function createReviewEvent(
         titleProp +
         ": " +
         formValues.content +
-        "       ||       Earn Sats by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
+        "       ||       Earn Bitcoin by creating your own locations and reviews of your favorite local spots at https://mapstr.xyz/. View this location at https://mapstr.xyz/?lat=" +
         lat +
         "&lng=" +
         lng +
