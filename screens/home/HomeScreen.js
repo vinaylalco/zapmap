@@ -1,5 +1,5 @@
 import React, { useState,useEffect,Suspense } from "react"
-import { Text, View, Pressable, Image } from 'react-native'
+import { Text, View, Pressable, Image, StyleSheet } from 'react-native'
 import {MapContainer,TileLayer,Circle, LayerGroup} from "react-leaflet"
 import MapMarkers from './MapMarkers' 
 import GeolocationSearch from './GeolocationSearch'
@@ -88,6 +88,7 @@ export default function HomeScreen({route, navigation}) {
                         GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
                         route={route}
+                        zoom={zoom}
                     />
                      :
                     <DrawerContent 
@@ -105,6 +106,7 @@ export default function HomeScreen({route, navigation}) {
                         GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
                         route={route}
+                        zoom={zoom}
                     />
                 }
                 
@@ -183,3 +185,12 @@ export default function HomeScreen({route, navigation}) {
         </View>
     );
 }
+
+// const HomeScreenStyles = StyleSheet.create({
+//     IconMenu { 
+//       marginTop:'1em'
+//     },
+//     .LeafletTop.LeafletLeft{
+//       display: 'none'
+//     }
+// })

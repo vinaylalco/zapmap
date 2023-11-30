@@ -18,7 +18,8 @@ export default function GlobalFeedContent({
 	HasNoListings,
 	setHasNoListings,
 	GlobalFeed,
-	setGlobalFeed
+	setGlobalFeed,
+	zoom
 }){
 	const [ListingsArray, setListingsArray] = React.useState([])
 	const [GlobalHasNoListings, setGlobalHasNoListings] = React.useState([])
@@ -52,6 +53,7 @@ export default function GlobalFeedContent({
 			currrentLng={currrentLng}
 			map={map}
 			setGlobalFeed={setGlobalFeed}
+			zoom={zoom}
 		/>
     )
 }

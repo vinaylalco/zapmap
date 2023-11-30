@@ -8,7 +8,7 @@ import menu from '../../assets/menu.svg'
 import menuDesktop from '../../assets/menuDesktop.svg'
 import LoadingText from "../../screens/home/LoadingText"
 
-export default function Listings ({ navigation, HasNoListings, GlobalFeed, ListingsArray, ndk, currrentLat, currrentLng, map, setGlobalFeed }){
+export default function Listings ({ navigation, HasNoListings, GlobalFeed, ListingsArray, ndk, currrentLat, currrentLng, map, setGlobalFeed, zoom }){
 
 	function PressedGlobalButton(){
         setGlobalFeed(true)
@@ -101,6 +101,7 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 							                    currrentLng={currrentLng}
 							                    map={map}
 							                    UserProfile={false}
+							                    zoom={zoom}
 							                />
 			                }
 			                keyExtractor={item => Math.random()}

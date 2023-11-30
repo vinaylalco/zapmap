@@ -20,7 +20,8 @@ export default function DrawerContent({
 	setHasNoListings,
 	GlobalFeed,
 	setGlobalFeed,
-	route
+	route,
+	zoom
 }){
 	const ListingsArray = []
 	let LocalHasNoListings = false
@@ -69,6 +70,7 @@ export default function DrawerContent({
 			currrentLng={currrentLng}
 			map={map}
 			setGlobalFeed={setGlobalFeed}
+			zoom={zoom}
 		/>
     )
 }

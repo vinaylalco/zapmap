@@ -24,9 +24,10 @@ export default function MapstrListingCard({
     map,
     currrentLat,
     currrentLng,
-    UserProfile
+    UserProfile,
+    zoom
 }) {
-    const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type } ) => {
+    const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type, zoom } ) => {
     
         function onClick() {
 
@@ -37,7 +38,7 @@ export default function MapstrListingCard({
                   weight: 1 
               })
               circle.addTo(map)
-
+            map.setZoom(zoom)
             map.setView([lat,lng])
         }
         
