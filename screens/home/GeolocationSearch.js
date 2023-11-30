@@ -5,8 +5,7 @@ import Geohash from "latlon-geohash";
 import {GetEvents} from '../../api/api'
 const queryOverpass = require('@derhuerst/query-overpass')
 
-// todo: this shouldn't be resetting setLoadSite as that would pop the black screen. Should pop the HasNoListings state that affects the drawer contents.
-export default function GeolocationSearch({setLocations, setLoadSite, mapstrpublickey, ndk, radius, radiusOSM}){
+export default function GeolocationSearch({setLocations, mapstrpublickey, ndk, radius, radiusOSM}){
 
 	const map = useMap()
     useEffect(() => {
@@ -33,29 +32,8 @@ export default function GeolocationSearch({setLocations, setLoadSite, mapstrpubl
 		            ndk,
 		            'mapstrLocationEvent'
 		        ).then((NostrResults) => {
-
 		        	setLocations(NostrResults)
-		            const overpassLocales = queryOverpass(
-                        '[out:json];'+
-                        '('+
-							'node["amenity"~"cafe|restaurant|bar"][name](around:'+radiusOSM+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
-                        	'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
-                            'node[name]["currency:XBT"="yes"](around:'+radius+','+e.location.raw.lat+', '+e.location.raw.lon+');'+
-                        ')'+
-                        ';out center;')
-		                .then( (OSMResults) => {
-		                    const combinedResults = [...OSMResults, ...NostrResults];
-		                    setLocations(combinedResults)
-		                    setLoadSite(false) // load the site
-		                }
-		            ).catch((error) => {
-		            	setLocations(NostrResults)
-		                setLoadSite(true) // show loading screen
-		                console.log(error);
-		            });
-
 		        }).catch((error) => {
-		        	setLoadSite(true) // show loading screen
 		            console.log(error);
 		        });
 

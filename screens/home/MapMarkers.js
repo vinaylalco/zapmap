@@ -46,27 +46,8 @@ export default function MapMarkers({
                 ndk,
                 'mapstrLocationEvent'
             ).then((NostrResults) => {
-                
                 setLocations(NostrResults)
-                const overpassLocales = queryOverpass(
-                        '[out:json];'+
-                        '('+
-                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radiusOSM+','+lat+', '+lng+');'+
-                            'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+lat+', '+lng+');'+
-                            'node[name]["currency:XBT"="yes"](around:'+radius+','+lat+', '+lng+');'+
-                        ')'+
-                        ';out center;')
-                    .then( (OSMResults) => {
-                        const combinedResults = [...OSMResults, ...NostrResults];
-                        setLocations(combinedResults)
-                        setLoadSite(false)
-                    }
-                ).catch((error) => {
-                    setLocations(NostrResults)
-                    setLoadSite(true)
-                    console.log(error);
-                });
-
+                setLoadSite(false)
             }).catch((error) => {
                 setLoadSite(true)
                 console.log(error);
@@ -86,25 +67,7 @@ export default function MapMarkers({
                     'mapstrLocationEvent'
                 ).then((NostrResults) => {
                     setLocations(NostrResults)
-                    const overpassLocales = queryOverpass(
-                        '[out:json];'+
-                        '('+
-                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
-                            'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
-                            'node[name]["currency:XBT"="yes"](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
-                        ')'+
-                        ';out center;'
-                        ).then( (OSMResults) => {
-                            const combinedResults = [...OSMResults, ...NostrResults];
-                            setLocations(combinedResults)
-                            setLoadSite(false)
-                        }
-                    ).catch((error) => {
-                        setLocations(NostrResults)
-                        setLoadSite(true)
-                        console.log(error);
-                    });
-
+                    setLoadSite(false)
                 }).catch((error) => {
                     setLoadSite(true)
                     console.log(error);

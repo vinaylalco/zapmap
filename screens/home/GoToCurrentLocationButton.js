@@ -32,28 +32,7 @@ export default function GoToCurrentLocationButton({
             ndk,
             'mapstrLocationEvent'
         ).then((NostrResults) => {
-
-            const overpassLocales = queryOverpass(
-                        '[out:json];'+
-                        '('+
-                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radiusOSM+','+CurrentLat+', '+CurrentLng+');'+
-                            'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radiusOSM+','+CurrentLat+', '+CurrentLng+');'+
-                            'node[name]["currency:XBT"="yes"](around:'+radius+','+CurrentLat+', '+CurrentLng+');'+
-                        ')'+
-                        ';out center;')
-                .then( (OSMResults) => {
-                    
-                    let tempLocations = [...OSMResults, ...NostrResults]
-                    setLocations(tempLocations)
-                    if( tempLocations == null || tempLocations == undefined || tempLocations.length == 0 ){
-                        setHasNoListings(true)
-                    }
-                }
-            ).catch((error) => {
-                setLocations(tempLocations)
-                console.log(error);
-            });
-
+            setLocations(NostrResults)
         }).catch((error) => {
             console.log(error);
         });

@@ -77,9 +77,6 @@ export default function HomeScreen({route, navigation}) {
                         navigation={navigation}
                         ndk={ndk}
                         mapstrpublickey={mapstrpublickey}
-                        loadSite={loadSite}
-                        setLoadSite={setLoadSite}
-                        locations={locations}
                         map={map}
                         CurrentLat={CurrentLat}
                         CurrentLng={CurrentLng}
@@ -87,7 +84,6 @@ export default function HomeScreen({route, navigation}) {
                         setHasNoListings={setHasNoListings}
                         GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
-                        route={route}
                         zoom={zoom}
                     />
                      :
@@ -95,8 +91,6 @@ export default function HomeScreen({route, navigation}) {
                         navigation={navigation}
                         ndk={ndk}
                         mapstrpublickey={mapstrpublickey}
-                        loadSite={loadSite}
-                        setLoadSite={setLoadSite}
                         locations={locations}
                         map={map}
                         CurrentLat={CurrentLat}
