@@ -156,7 +156,7 @@ export default function HomeScreen({route, navigation}) {
                             mapstrpublickey={mapstrpublickey}
                             ndk={ndk}
                             radius={radius}
-                            radiusOSM={radiusOSM}
+                            setGlobalFeed={setGlobalFeed}
                         />
                     </Suspense>
 
@@ -172,6 +172,7 @@ export default function HomeScreen({route, navigation}) {
                             radiusOSM={radiusOSM}
                             HasNoListings={HasNoListings}
                             setHasNoListings={setHasNoListings}
+                            setGlobalFeed={setGlobalFeed}
                         />
                     </Suspense>
                 </MapContainer>
@@ -179,12 +180,3 @@ export default function HomeScreen({route, navigation}) {
         </View>
     );
 }
-
-// const HomeScreenStyles = StyleSheet.create({
-//     IconMenu { 
-//       marginTop:'1em'
-//     },
-//     .LeafletTop.LeafletLeft{
-//       display: 'none'
-//     }
-// })

@@ -5,7 +5,7 @@ import Geohash from "latlon-geohash";
 import {GetEvents} from '../../api/api'
 const queryOverpass = require('@derhuerst/query-overpass')
 
-export default function GeolocationSearch({setLocations, mapstrpublickey, ndk, radius, radiusOSM}){
+export default function GeolocationSearch({setLocations, mapstrpublickey, ndk, radius, setGlobalFeed}){
 
 	const map = useMap()
     useEffect(() => {
@@ -33,6 +33,7 @@ export default function GeolocationSearch({setLocations, mapstrpublickey, ndk, r
 		            'mapstrLocationEvent'
 		        ).then((NostrResults) => {
 		        	setLocations(NostrResults)
+		        	setGlobalFeed(false)
 		        }).catch((error) => {
 		            console.log(error);
 		        });

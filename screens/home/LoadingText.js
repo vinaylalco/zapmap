@@ -7,13 +7,11 @@ export default function LoadingText(){
 	return(
         
         <View style={[LoadingStyles.Outer]} >
-        
             <ActivityIndicator size="large" color={MapstrColors['primary']} />
-
         </View>
 	)
 }
-
+// <Text src={[CommonStyles.paragraph]} ></Text>
 const LoadingStyles = StyleSheet.create({
     Outer: {
         padding: '1em',

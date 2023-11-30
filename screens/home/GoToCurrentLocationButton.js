@@ -17,7 +17,8 @@ export default function GoToCurrentLocationButton({
     HasNoListings,
     setHasNoListings,
     radius,
-    radiusOSM
+    radiusOSM,
+    setGlobalFeed
 }) {     
 
     const map = useMap()
@@ -33,6 +34,7 @@ export default function GoToCurrentLocationButton({
             'mapstrLocationEvent'
         ).then((NostrResults) => {
             setLocations(NostrResults)
+            setGlobalFeed(false)
         }).catch((error) => {
             console.log(error);
         });

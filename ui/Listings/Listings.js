@@ -47,67 +47,66 @@ export default function Listings ({ navigation, HasNoListings, GlobalFeed, Listi
 	        </View>
 
 	        <ScrollView contentContainerStyle={[ListingsStyles.LocationList]} showsVerticalScrollIndicator={false} >
-		        {
-					HasNoListings ? 
-						<LoadingText />
-					:
-					<>
-						<View style={{flexDirection: 'row'}} >
+		        
+		        <View style={{flexDirection: 'row'}} >
 		                    
-		                    <Pressable 
-		                        style={GlobalFeed ? [ListingsStyles.feedButtonActive] : [ListingsStyles.feedButton]}
-		                        onPress={PressedGlobalButton}
-		                    >
-		                        <Text 
-		                            style={[ListingsStyles.feedButtonInner]} 
-		                        >
-		                            Global
-		                        </Text>
-		                    </Pressable>
+                    <Pressable 
+                        style={GlobalFeed ? [ListingsStyles.feedButtonActive] : [ListingsStyles.feedButton]}
+                        onPress={PressedGlobalButton}
+                    >
+                        <Text 
+                            style={[ListingsStyles.feedButtonInner]} 
+                        >
+                            Global
+                        </Text>
+                    </Pressable>
 
-		                    <Pressable 
-		                        style={GlobalFeed == false ? [ListingsStyles.feedButtonActive] : [ListingsStyles.feedButton]}
-		                        onPress={PressedLocalButton}
-		                    >
-		                        <Text
-		                            style={[ListingsStyles.feedButtonInner]} 
-		                        >
-		                            Local
-		                        </Text>
-		                    </Pressable>
+                    <Pressable 
+                        style={GlobalFeed == false ? [ListingsStyles.feedButtonActive] : [ListingsStyles.feedButton]}
+                        onPress={PressedLocalButton}
+                    >
+                        <Text
+                            style={[ListingsStyles.feedButtonInner]} 
+                        >
+                            Local
+                        </Text>
+                    </Pressable>
 
-		                </View>
+                </View>
 
-		                <FlatList
-				        	style={[ListingsStyles.LocationList]}
-			                data={ListingsArray}
-			                renderItem={
-			                	({item, index}) => <MapstrListingCard
-							                    tags={item.tags}
-							                    key={index}
-							                    title={item.title}
-							                    content={item.content}
-							                    lat={item.lat}
-							                    lng={item.lng}
-							                    id={item.id}
-							                    npub={item.npub}
-							                    dateCreated={item.dateCreated}
-							                    ndk={ndk}
-							                    ScrollId={item.locationUniqueIdentifier}
-							                    navigation={navigation}
-							                    showLocationScreenButton={true}
-							                    type={item.type}
-							                    currrentLat={currrentLat}
-							                    currrentLng={currrentLng}
-							                    map={map}
-							                    UserProfile={false}
-							                    zoom={zoom}
-							                />
-			                }
-			                keyExtractor={item => Math.random()}
-			            />
-					</>
-				}
+                {
+                	HasNoListings && GlobalFeed === false ?
+	                <Text style={[CommonStyles.paragraph, CommonStyles.centerAlignText]} >No local listings. Why not create the first one?</Text> :
+	                <FlatList
+			        	style={[ListingsStyles.LocationList]}
+		                data={ListingsArray}
+		                renderItem={
+		                	({item, index}) => <MapstrListingCard
+						                    tags={item.tags}
+						                    key={index}
+						                    title={item.title}
+						                    content={item.content}
+						                    lat={item.lat}
+						                    lng={item.lng}
+						                    id={item.id}
+						                    npub={item.npub}
+						                    dateCreated={item.dateCreated}
+						                    ndk={ndk}
+						                    ScrollId={item.locationUniqueIdentifier}
+						                    navigation={navigation}
+						                    showLocationScreenButton={true}
+						                    type={item.type}
+						                    currrentLat={currrentLat}
+						                    currrentLng={currrentLng}
+						                    map={map}
+						                    UserProfile={false}
+						                    zoom={zoom}
+						                />
+		                }
+		                keyExtractor={item => Math.random()}
+		            />
+                }
+
 			</ScrollView>
 		</ScrollView>
 	)
