@@ -11,7 +11,7 @@ export default function LoadingText(){
         </View>
 	)
 }
-// <Text src={[CommonStyles.paragraph]} ></Text>
+
 const LoadingStyles = StyleSheet.create({
     Outer: {
         padding: '1em',

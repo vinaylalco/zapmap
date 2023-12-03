@@ -84,6 +84,7 @@ export default function HomeScreen({route, navigation}) {
                         setHasNoListings={setHasNoListings}
                         GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
+                        setLocations={setLocations}
                         zoom={zoom}
                     />
                      :
@@ -99,6 +100,7 @@ export default function HomeScreen({route, navigation}) {
                         setHasNoListings={setHasNoListings}
                         GlobalFeed={GlobalFeed}
                         setGlobalFeed={setGlobalFeed}
+                        setLocations={setLocations}
                         route={route}
                         zoom={zoom}
                     />
@@ -111,71 +113,64 @@ export default function HomeScreen({route, navigation}) {
                     [HomeScreenStyles.mapOuterMobile] : 
                     [HomeScreenStyles.mapOuterDesktop] 
                 } 
-            >
-                <MapContainer 
-                    center={[MapLatitude,MapLongitude]} 
-                    zoom={zoom} 
-                    scrollWheelZoom={false}
-                    style={ 
-                        isMobile ? 
-                        HomeScreenStyles.mapInnerMobile : 
-                        HomeScreenStyles.mapInnerDesktop 
-                    }
-                >
-                    <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Suspense fallback={<Text>Loading...</Text>}>
-                        <CurrentLocation CurrentLat={CurrentLat} CurrentLng={CurrentLng} />
-                    </Suspense>
-                    <Suspense fallback={<Text>Loading...</Text>}>
-                        <MapMarkers
-                            setThirdPartyLink={setThirdPartyLink}
-                            thirdPartyLink={thirdPartyLink}
-                            navigation={navigation}
-                            loading={loadSite}
-                            setLoading={setLoadSite}
-                            localPoints={locations}
-                            mapstrpublickey={mapstrpublickey}
-                            zoom={zoom}
-                            radius={radius}
-                            radiusOSM={radiusOSM}
-                            setLocations={setLocations}
-                            setLoadSite={setLoadSite}
-                            ndk={ndk}
-                            setMap={setMap}
-                            setCurrentLat={setCurrentLat}
-                            setCurrentLng={setCurrentLng}
+            >   
+                <Suspense fallback={<Text>Loading...</Text>}>
+                    <MapContainer 
+                        center={[MapLatitude,MapLongitude]} 
+                        zoom={zoom} 
+                        scrollWheelZoom={false}
+                        style={ 
+                            isMobile ? 
+                            HomeScreenStyles.mapInnerMobile : 
+                            HomeScreenStyles.mapInnerDesktop 
+                        }
+                    >
+                        <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                    </Suspense>
-                    <Suspense fallback={<Text>Loading...</Text>}>
-                        <GeolocationSearch 
-                            setLocations={setLocations} 
-                            setLoadSite={setLoadSite} 
-                            mapstrpublickey={mapstrpublickey}
-                            ndk={ndk}
-                            radius={radius}
-                            setGlobalFeed={setGlobalFeed}
-                        />
-                    </Suspense>
-
-                    <Suspense fallback={<Text>Loading...</Text>}>
-                        <GoToCurrentLocationButton 
-                            CurrentLat={CurrentLat} 
-                            CurrentLng={CurrentLng}
-                            zoom={zoom}
-                            mapstrpublickey={mapstrpublickey}
-                            ndk={ndk}
-                            setLocations={setLocations}
-                            radius={radius}
-                            radiusOSM={radiusOSM}
-                            HasNoListings={HasNoListings}
-                            setHasNoListings={setHasNoListings}
-                            setGlobalFeed={setGlobalFeed}
-                        />
-                    </Suspense>
-                </MapContainer>
+                            <CurrentLocation CurrentLat={CurrentLat} CurrentLng={CurrentLng} />
+                            <MapMarkers
+                                setThirdPartyLink={setThirdPartyLink}
+                                thirdPartyLink={thirdPartyLink}
+                                navigation={navigation}
+                                loading={loadSite}
+                                setLoading={setLoadSite}
+                                localPoints={locations}
+                                mapstrpublickey={mapstrpublickey}
+                                zoom={zoom}
+                                radius={radius}
+                                radiusOSM={radiusOSM}
+                                setLocations={setLocations}
+                                setLoadSite={setLoadSite}
+                                ndk={ndk}
+                                setMap={setMap}
+                                setCurrentLat={setCurrentLat}
+                                setCurrentLng={setCurrentLng}
+                            />
+                            <GeolocationSearch 
+                                setLocations={setLocations} 
+                                setLoadSite={setLoadSite} 
+                                mapstrpublickey={mapstrpublickey}
+                                ndk={ndk}
+                                radius={radius}
+                                setGlobalFeed={setGlobalFeed}
+                            />
+                            <GoToCurrentLocationButton 
+                                CurrentLat={CurrentLat} 
+                                CurrentLng={CurrentLng}
+                                zoom={zoom}
+                                mapstrpublickey={mapstrpublickey}
+                                ndk={ndk}
+                                setLocations={setLocations}
+                                radius={radius}
+                                radiusOSM={radiusOSM}
+                                HasNoListings={HasNoListings}
+                                setHasNoListings={setHasNoListings}
+                                setGlobalFeed={setGlobalFeed}
+                            />
+                    </MapContainer>
+                </Suspense>
             </View>
         </View>
     );

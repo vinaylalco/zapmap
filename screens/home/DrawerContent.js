@@ -21,7 +21,8 @@ export default function DrawerContent({
 	GlobalFeed,
 	setGlobalFeed,
 	route,
-	zoom
+	zoom,
+	setLocations
 }){
 	const ListingsArray = []
 	let LocalHasNoListings = false
@@ -71,6 +72,7 @@ export default function DrawerContent({
 			map={map}
 			setGlobalFeed={setGlobalFeed}
 			zoom={zoom}
+			setLocations={setLocations}
 		/>
     )
 }

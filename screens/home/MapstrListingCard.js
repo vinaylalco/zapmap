@@ -6,6 +6,8 @@ import osmPin from '../../assets/osmPin.svg'
 import MapstrColors from '../../styles/MapstrColors'
 import {CommonStyles} from '../../styles/CommonStyles'
 import zap from '../../assets/zap.svg'
+import {GetEvents} from '../../api/api'
+import {mapstrpublickey} from '../../api/constants'
 
 export default function MapstrListingCard({
     title,
@@ -25,7 +27,9 @@ export default function MapstrListingCard({
     currrentLat,
     currrentLng,
     UserProfile,
-    zoom
+    zoom,
+    setLocations,
+    setGlobalFeed
 }) {
     const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type, zoom } ) => {
     
@@ -37,9 +41,22 @@ export default function MapstrListingCard({
                   radius: 15,
                   weight: 1 
               })
-              circle.addTo(map)
+            circle.addTo(map)
             map.setZoom(zoom)
             map.setView([lat,lng])
+
+            GetEvents(
+                lat,
+                lng,
+                mapstrpublickey,
+                ndk,
+                'mapstrLocationEvent'
+            ).then((NostrResults) => {
+                setLocations(NostrResults)
+                setGlobalFeed(false)
+            }).catch((error) => {
+                console.log(error);
+            });
         }
         
         return (
