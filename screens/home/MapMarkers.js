@@ -39,6 +39,7 @@ export default function MapMarkers({
             setCurrentLat(lat)
             setCurrentLng(lng)
             map.setView([lat,lng], zoom)
+            
             GetEvents(
                 lat,
                 lng,
@@ -46,8 +47,26 @@ export default function MapMarkers({
                 ndk,
                 'mapstrLocationEvent'
             ).then((NostrResults) => {
-                setLocations(NostrResults)
-                setLoadSite(false)
+
+                const overpassLocales = queryOverpass(
+                    '[out:json];'+
+                    '('+
+                        'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+lat+', '+lng+');'+
+                        'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+lat+', '+lng+');'+
+                        'node[name]["currency:XBT"="yes"](around:'+radius+','+lat+', '+lng+');'+
+                    ')'+
+                    ';out center;'
+                    ).then( (OSMResults) => {
+                        const combinedResults = [...OSMResults, ...NostrResults];
+                        setLocations(combinedResults)
+                        setLoadSite(false)
+                    }
+                ).catch((error) => {
+                    setLocations(NostrResults)
+                    setLoadSite(true)
+                    console.log(error);
+                });
+                                    
             }).catch((error) => {
                 setLoadSite(true)
                 console.log(error);
@@ -66,8 +85,26 @@ export default function MapMarkers({
                     ndk,
                     'mapstrLocationEvent'
                 ).then((NostrResults) => {
-                    setLocations(NostrResults)
-                    setLoadSite(false)
+
+                    const overpassLocales = queryOverpass(
+                        '[out:json];'+
+                        '('+
+                            'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                            'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                            'node[name]["currency:XBT"="yes"](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                        ')'+
+                        ';out center;'
+                        ).then( (OSMResults) => {
+                            const combinedResults = [...OSMResults, ...NostrResults];
+                            setLocations(combinedResults)
+                            setLoadSite(false)
+                        }
+                    ).catch((error) => {
+                        setLocations(NostrResults)
+                        setLoadSite(true)
+                        console.log(error);
+                    });
+
                 }).catch((error) => {
                     setLoadSite(true)
                     console.log(error);

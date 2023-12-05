@@ -33,11 +33,43 @@ export default function GoToCurrentLocationButton({
             ndk,
             'mapstrLocationEvent'
         ).then((NostrResults) => {
-            setLocations(NostrResults)
-            setGlobalFeed(false)
+
+            const overpassLocales = queryOverpass(
+                '[out:json];'+
+                '('+
+                    'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                    'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                    'node[name]["currency:XBT"="yes"](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                ')'+
+                ';out center;'
+                ).then( (OSMResults) => {
+                    const combinedResults = [...OSMResults, ...NostrResults];
+                    setLocations(combinedResults)
+                    setGlobalFeed(false)
+                }
+            ).catch((error) => {
+                setLocations(NostrResults)
+                setGlobalFeed(true)
+                console.log(error);
+            });
+                                
         }).catch((error) => {
+            // setLoadSite(true)
             console.log(error);
         });
+
+        // GetEvents(
+        //     CurrentLat,
+        //     CurrentLng,
+        //     mapstrpublickey,
+        //     ndk,
+        //     'mapstrLocationEvent'
+        // ).then((NostrResults) => {
+        //     setLocations(NostrResults)
+        //     setGlobalFeed(false)
+        // }).catch((error) => {
+        //     console.log(error);
+        // });
 
     }, [map, CurrentLat, CurrentLng, mapstrpublickey, ndk, radius, radiusOSM, zoom])
 

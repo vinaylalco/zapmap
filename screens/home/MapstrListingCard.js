@@ -52,11 +52,43 @@ export default function MapstrListingCard({
                 ndk,
                 'mapstrLocationEvent'
             ).then((NostrResults) => {
-                setLocations(NostrResults)
-                setGlobalFeed(false)
+
+                const overpassLocales = queryOverpass(
+                    '[out:json];'+
+                    '('+
+                        'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+lat+', '+lng+');'+
+                        'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+lat+', '+lng+');'+
+                        'node[name]["currency:XBT"="yes"](around:'+radius+','+lat+', '+lng+');'+
+                    ')'+
+                    ';out center;'
+                    ).then( (OSMResults) => {
+                        const combinedResults = [...OSMResults, ...NostrResults];
+                        setLocations(combinedResults)
+                        setGlobalFeed(false)
+                    }
+                ).catch((error) => {
+                    setLocations(NostrResults)
+                    setGlobalFeed(true)
+                    console.log(error);
+                });
+                                    
             }).catch((error) => {
+                // setLoadSite(true)
                 console.log(error);
             });
+
+            // GetEvents(
+            //     lat,
+            //     lng,
+            //     mapstrpublickey,
+            //     ndk,
+            //     'mapstrLocationEvent'
+            // ).then((NostrResults) => {
+            //     setLocations(NostrResults)
+            //     setGlobalFeed(false)
+            // }).catch((error) => {
+            //     console.log(error);
+            // });
         }
         
         return (
