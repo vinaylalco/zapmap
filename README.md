@@ -1,3 +1,5 @@
+For latest updates repository has been moved to https://bitbucket.org/vinaylal/arc-mapstr/src/master/
+
 # zapmap
 A map application which allows you to create NOSTR notes as map locations. Built on REACT Native Web and Expo and interacts with various API's like NOSTR, Open Street Maps etc.
 
