@@ -39,7 +39,7 @@ export default function GoToCurrentLocationButton({
                 '('+
                     'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
                     'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
-                    'node[name]["currency:XBT"="yes"](around:'+radius+','+info.coords.latitude+', '+info.coords.longitude+');'+
+                    'node[name]["currency:XBT"="yes"](around:'+radiusOSM+','+info.coords.latitude+', '+info.coords.longitude+');'+
                 ')'+
                 ';out center;'
                 ).then( (OSMResults) => {

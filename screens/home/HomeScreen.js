@@ -86,6 +86,8 @@ export default function HomeScreen({route, navigation}) {
                         setGlobalFeed={setGlobalFeed}
                         setLocations={setLocations}
                         zoom={zoom}
+                        radius={radius}
+                        radiusOSM={radiusOSM}
                     />
                      :
                     <DrawerContent 
@@ -103,6 +105,8 @@ export default function HomeScreen({route, navigation}) {
                         setLocations={setLocations}
                         route={route}
                         zoom={zoom}
+                        radius={radius}
+                        radiusOSM={radiusOSM}
                     />
                 }
                 
@@ -154,6 +158,7 @@ export default function HomeScreen({route, navigation}) {
                                 mapstrpublickey={mapstrpublickey}
                                 ndk={ndk}
                                 radius={radius}
+                                radiusOSM={radiusOSM}
                                 setGlobalFeed={setGlobalFeed}
                             />
                             <GoToCurrentLocationButton 

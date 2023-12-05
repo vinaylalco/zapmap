@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import {View, Text, ScrollView, StyleSheet, Pressable, Image, FlatList} from "react-native"
-import MapstrListingCard from "./MapstrListingCard"
 import { preparelocationUniqueIdentifier } from "../../hooks/common.js"
 import { GetEvents } from "../../api/api.js"
 import Geohash from "latlon-geohash"
@@ -22,7 +21,9 @@ export default function DrawerContent({
 	setGlobalFeed,
 	route,
 	zoom,
-	setLocations
+	setLocations,
+	radius,
+	radiusOSM
 }){
 	const ListingsArray = []
 	let LocalHasNoListings = false
@@ -73,6 +74,8 @@ export default function DrawerContent({
 			setGlobalFeed={setGlobalFeed}
 			zoom={zoom}
 			setLocations={setLocations}
+			radius={radius}
+            radiusOSM={radiusOSM}
 		/>
     )
 }

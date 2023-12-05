@@ -29,7 +29,9 @@ export default function MapstrListingCard({
     UserProfile,
     zoom,
     setLocations,
-    setGlobalFeed
+    setGlobalFeed,
+    radius,
+    radiusOSM
 }) {
     const ShowLocationOnMapButton = ( { map, lat, lng, ScrollId, type, zoom } ) => {
     
@@ -58,7 +60,7 @@ export default function MapstrListingCard({
                     '('+
                         'node["amenity"~"cafe|restaurant|bar"][name](around:'+radius+','+lat+', '+lng+');'+
                         'node["tourism"~"museum|gallery|artwork|attraction|information|viewpoint"][name](around:'+radius+','+lat+', '+lng+');'+
-                        'node[name]["currency:XBT"="yes"](around:'+radius+','+lat+', '+lng+');'+
+                        'node[name]["currency:XBT"="yes"](around:'+radiusOSM+','+lat+', '+lng+');'+
                     ')'+
                     ';out center;'
                     ).then( (OSMResults) => {
@@ -73,7 +75,7 @@ export default function MapstrListingCard({
                 });
                                     
             }).catch((error) => {
-                // setLoadSite(true)
+                setGlobalFeed(true)
                 console.log(error);
             });
 

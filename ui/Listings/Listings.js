@@ -19,7 +19,9 @@ export default function Listings ({
 	map, 
 	setGlobalFeed, 
 	zoom,
-	setLocations
+	setLocations,
+	radius,
+	radiusOSM
 }){
 
 	function PressedGlobalButton(){
@@ -115,6 +117,8 @@ export default function Listings ({
 						                    zoom={zoom}
 										    setLocations={setLocations}
 										    setGlobalFeed={setGlobalFeed}
+										    radius={radius}
+                                			radiusOSM={radiusOSM}
 						                />
 		                }
 		                keyExtractor={item => Math.random()}

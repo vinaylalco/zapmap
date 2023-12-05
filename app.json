@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mapstrRevisited",
-    "slug": "mapstrRevisited",
+    "name": "mapstr",
+    "slug": "mapstr",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
