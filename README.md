@@ -1,7 +1,7 @@
 # zapmap
 A map application which allows you to create NOSTR notes as map locations. Built on REACT Native Web and Expo and interacts with various API's like NOSTR, Open Street Maps etc.
 
-Demo Site at https://zapmap.mapstr.xyz
+Demo Site at https://mapstr.xyz
 
 # Install:
 Clone repository into a local or development server using GIT eg git clone https://github.com/vinaylalco/zapmap.git
